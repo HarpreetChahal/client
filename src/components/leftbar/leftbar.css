@@ -1,0 +1,52 @@
+.leftbar
+{
+    flex: 3;
+    height: calc(100vh - 80px);
+    background-color: blue;
+    
+}
+
+.leftbarWrapper
+{
+    padding: 20px;
+    background-color: aqua;
+}
+
+.leftbarList
+{
+   padding: 0;
+   margin: 0;
+   list-style: none; 
+}
+
+.leftbarListItem
+{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px ;
+}
+
+.leftbarIcon
+{
+    margin-right: 15px ;
+}
+
+.leftbarButton
+{
+    width: 150px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.leftbarLogoutButton
+{
+    width: 150px;
+    border: none;
+    padding: 10px;
+    margin: 25px;
+    border-radius: 5px;
+    align-items:flex-end;
+    font-weight: 500;
+}
