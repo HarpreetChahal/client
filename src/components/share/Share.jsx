@@ -17,10 +17,6 @@ export default function Share()
                     <div className="shareOption">
                         <InsertPhoto htmlColor="blue" className="ShareIcon"/>
                         <span className="shareOptionText">Photo</span>
-                <div className="shareOption">
-                    <EmojiEmotions htmlColor="green" className="shareIcon"/>
-                    <span className="shareOptionText">Emotions</span>
-                </div>
                     </div>
                     <button className="shareButton">Post</button>
                 </div>
