@@ -66,6 +66,22 @@
 
 .postCommentText{
     cursor: pointer;
+    border-bottom: 1px  gray;
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+.postLikeText{
+    cursor: pointer;
     border-bottom: 1px gray;
     font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.postDislikeText{
+    cursor: pointer;
+    border-bottom: 1px gray;
+    font-size: 15px;
+    margin-left: 5px;
 }

@@ -17,6 +17,7 @@ export default function Topbar()
           />
         </div>
       </div>
+      
       <div className="topbarRight">
         <img src="/assets/person/1.jpg" alt="" className="topbarImg"/>
       </div>

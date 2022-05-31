@@ -1,6 +1,6 @@
 import React from "react";
 import "./post.css"
-import { ArrowUpward,ArrowDownward, MoreVertOutlined } from "@mui/icons-material";
+import { ThumbDownOffAlt, MoreVertOutlined, FavoriteBorder } from "@mui/icons-material";
 
 
 export default function Post() {
@@ -23,8 +23,10 @@ export default function Post() {
                 </div>
                 <div className="postBottom">
                 <div className="postBottomLeft">
-                    <ArrowUpward/>
-                    <ArrowDownward/>
+                    <FavoriteBorder/>
+                    <span className="postLikeText">2 Likes </span>
+                    <ThumbDownOffAlt/>
+                    <span className="postDislikeText">1 Dislike </span>
                 </div>
                     <div className="postBottomRight">
                         <span className="postCommentText"> 10 Comments</span>
