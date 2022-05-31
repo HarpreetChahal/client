@@ -5,7 +5,8 @@ import Register from "./pages/register/Register"
 
 
 function App() {
-  return <Register/>
+  // return <Register/>
+return <Login/>
 }
 
 export default App;
