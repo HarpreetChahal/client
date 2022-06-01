@@ -7,11 +7,11 @@ export default function Comment()
     return(
         <>
         <div className="viewComments">
-        <span>View All Comments</span>
+        <span>View more replies</span>
     </div>
     <div className="profileComment">
 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
-<span className="postCommentText">My first comment..</span>
+<span className="postCommentText">Its been a heavenly experience..</span>
     </div>
     </>
     )
