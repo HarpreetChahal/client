@@ -59,6 +59,11 @@
     color: white;
   }
   
+  .helloUser
+  {
+    margin-right: 10px;
+    font-size: larger;
+  }
   
   .topbarImg {
     width: 40px;
@@ -68,3 +73,8 @@
     object-fit: cover;
     cursor: pointer;
   }
+
+  /* .logout
+  {
+    align-items: flex-end;
+  } */

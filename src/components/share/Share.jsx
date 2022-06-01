@@ -1,27 +1,30 @@
 import React from "react";
-import {InsertPhoto,Label,Room,EmojiEmotions} from "@mui/icons-material";
+import {UploadFile } from "@mui/icons-material";
+import Button from '@mui/material/Button';
 import "./share.css"
 
 
-export default function Share()
-{
-    return(
+export default function Share() {
+    return (
         <div className="share">
             <div className="shareWrapper">
                 <div className="shareTop">
-                    <img className="shareProfileImg" src="/assets/person/1.jpg" alt=""/>
-                    <input placeholder="What's on your mind?" className="shareInput"/>
+                    <img className="shareProfileImg" src="/assets/person/1.jpg" alt="" />
+                    <input placeholder="What's Happening?" className="shareInput" />
                 </div>
-                <hr className="shareHr"/>
+                <hr className="shareHr" />
                 <div className="shareBottom">
                     <div className="shareOption">
-                        <InsertPhoto htmlColor="blue" className="ShareIcon"/>
-                        <span className="shareOptionText">Photo</span>
+                    <Button variant="contained" color="success" startIcon={<UploadFile />}>
+                       Upload Image
+                    </Button>
                     </div>
-                    <button className="shareButton">Post</button>
+                    <Button variant="contained" >
+                        Create Post
+                    </Button>
                 </div>
             </div>
-           
+
         </div>
     )
 }

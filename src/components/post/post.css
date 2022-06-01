@@ -85,3 +85,71 @@
     font-size: 15px;
     margin-left: 5px;
 }
+
+.writeComment {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin-top: 20px;
+}
+
+.commentProfileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px;
+  
+}
+
+.commentInput {
+  border: none;
+  width: 80%;
+  margin-left: 5px;
+}
+
+.commentInput:focus {
+  outline: none;
+}
+
+.sendButton
+{
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.viewComments
+{
+  text-align: center;
+  margin-top: 15px;
+  
+}
+
+.profileComment {
+  width: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin-top: 15px;
+}
+
+.profilePommentProfileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px;
+  
+}
+
+.postCommentText
+{
+  border: none;
+  width: 80%;
+  margin-left: 5px;
+  margin-right: 10px;
+}

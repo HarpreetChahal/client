@@ -1,5 +1,6 @@
 import "./topbar.css";
-import { Search } from "@mui/icons-material";
+import { Logout, Search, UploadFile } from "@mui/icons-material";
+import Button from '@mui/material/Button';
 
 export default function Topbar() 
 {
@@ -18,9 +19,24 @@ export default function Topbar()
         </div>
       </div>
       
+      
       <div className="topbarRight">
+      <span className="helloUser">Hello, User</span>
         <img src="/assets/person/1.jpg" alt="" className="topbarImg"/>
+        {/* <div className="logout">
+                    <Button variant="contained" color="success" endIcon={<UploadFile />}>
+                       Logout
+                    </Button>
+                    </div> */}
+                    {/* <div className="logoutButton">
+                    <Logout  sx={{ 
+                        color: "#1877f2", 
+                        backgroundColor: "#fefeff",
+                        borderRadius: "8px",
+                         }}/>
+                    </div> */}
       </div>
+    
     </div>
   );
 }

@@ -11,14 +11,13 @@ export default function Leftbar()
                 <ul className="leftbarList">
                     <li className="leftbarListItem">
                         <Home className="leftbarIcon"/>
-                        <span className="leftbarListItemText">Home</span>
+                        <span className="leftbarListItemText">Feed</span>
                     </li>
                     <li className="leftbarListItem">
                         <Person className="leftbarIcon"/>
                         <span className="leftbarListItemText">Profile</span>
                     </li>
                 </ul>
-                <button className="leftbarButton">Show</button>
             </div>
             <button className="leftbarLogoutButton">Logout</button>
         </div>
