@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-
+import commonApi from "../../api/common";
 import "./register.css";
+import { useNavigate } from "react-router";
+
 import { Button, InputAdornment, TextField } from "@mui/material";
 import {
   AccountCircle,
@@ -20,15 +22,22 @@ export default function Register() {
     dob: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormData({
-      email: "",
-      firstName: "",
-      lastName: "",
-      dob: "",
-      password: "",
+
+    await commonApi({
+      action: "register",
+      data: formData,
+    }).then(({ DATA = {} }) => {
+      setFormData({
+        email: "",
+        firstName: "",
+        lastName: "",
+        dob: "",
+        password: "",
+      });
+      navigate("/");
     });
   };
   return (
@@ -141,7 +150,7 @@ export default function Register() {
                   ),
                 }}
               />
-             
+
               <Button
                 type="submit"
                 fullWidth
@@ -151,7 +160,7 @@ export default function Register() {
                 Sign Up
               </Button>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to={"/"} variant="body2">
                   {"Already have an account? Sign In"}
                 </Link>
               </Grid>
