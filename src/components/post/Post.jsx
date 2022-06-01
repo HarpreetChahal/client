@@ -18,13 +18,13 @@ export default function Post() {
                 </div>
                 <div className="postCenter">
                     <span className="postText">This is my first post</span>
-                    <img className="postImg" src="assets/post/1.jpg" alt=""/>
+                    <img className="postImg" src="assets/post/2.jpg" alt=""/>
                 </div>
                 <div className="postBottom">
                 <div className="postBottomLeft">
-                    <FavoriteBorder/>
+                    <FavoriteBorder cursor="pointer"/>
                     <span className="postLikeText">2 Like </span>
-                    <ThumbDownOffAlt/>
+                    <ThumbDownOffAlt cursor="pointer"/>
                     <span className="postDislikeText">1 Dislike </span>
                 </div>
                     <div className="postBottomRight">
@@ -44,7 +44,7 @@ export default function Post() {
 
                     </div>
                     <div className="viewComments">
-                        <span>View Comments</span>
+                        <span>View All Comments</span>
                     </div>
                     <div className="profileComment">
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>

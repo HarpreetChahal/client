@@ -10,11 +10,11 @@ export default function Leftbar()
             <div className="leftbarWrapper">
                 <ul className="leftbarList">
                     <li className="leftbarListItem">
-                        <Home className="leftbarIcon"/>
+                        <Home className="leftbarIcon" cursor="pointer"/>
                         <span className="leftbarListItemText">Feed</span>
                     </li>
                     <li className="leftbarListItem">
-                        <Person className="leftbarIcon"/>
+                        <Person className="leftbarIcon" cursor="pointer"/>
                         <span className="leftbarListItemText">Profile</span>
                     </li>
                 </ul>
