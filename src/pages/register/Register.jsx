@@ -122,6 +122,7 @@ export default function Register() {
               <TextField
                 label="date of birth"
                 margin="normal"
+                type={"date"}
                 value={formData.dob}
                 onChange={(e) =>
                   setFormData({ ...formData, dob: e.target.value })

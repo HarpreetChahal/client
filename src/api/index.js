@@ -1,6 +1,6 @@
-
 import axios from "axios";
 import qs from "qs";
+import Toast from "./toast";
 
 const baseUrl = "http://localhost:5000/";
 const GET = "GET";
@@ -52,11 +52,14 @@ function setHeaders({ contentType }) {
 }
 
 function handleError(error) {
-  console.error(error);
+  const { response = {} } = error || {};
+
+  const { MESSAGE } = response.data || {};
+
+  MESSAGE && Toast.error(MESSAGE);
+
   return Promise.reject(error);
 }
-
-
 const fetchUrl = ({ type, url, data = {}, config = {}, hash = "" }) => {
   setHeaders(config);
   const handler = ACTION_HANDLERS[type.toUpperCase()];

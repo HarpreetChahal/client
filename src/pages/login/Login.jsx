@@ -1,30 +1,42 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-
+import 'react-notifications-component/dist/theme.css'
 import "./login.css";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import {
-  AccountCircle,
+  // AccountCircle,
   Email,
-  CalendarToday,
+  // CalendarToday,
   Key,
-  Face,
+  // Face,
 } from "@mui/icons-material";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { useNavigate } from "react-router";
 
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import commonApi from "../../api/common";
 export default function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormData({
-      email: "",
-      password: "",
+    await commonApi({
+      action: "login",
+      data: formData,
+    }).then(({ DATA = {} }) => {
+      console.log("DATA",DATA)
+      navigate("/");
+  
+      setFormData({
+        email: "",
+        password: "",
+      });
     });
+   
   };
   return (
     <div>
@@ -112,7 +124,7 @@ export default function Login() {
                 </Grid>
               </Grid> */}
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
