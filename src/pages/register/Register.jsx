@@ -160,7 +160,7 @@ export default function Register() {
                 Sign Up
               </Button>
               <Grid item>
-                <Link to={"/"} variant="body2">
+                <Link href="/login" style={{cursor:"pointer"}}variant="body2">
                   {"Already have an account? Sign In"}
                 </Link>
               </Grid>
