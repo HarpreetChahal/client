@@ -5,6 +5,7 @@
     background-color: F1F2F4;
     
     
+    
 }
 
 .leftbarWrapper
@@ -12,6 +13,7 @@
     /* padding: 30px; */
     background-color: F1F2F4;
     margin: 20px;
+    
 }
 
 .leftbarList
@@ -22,6 +24,7 @@
    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
    margin-top: 10px;
+   
 }
 
 .leftbarListItem
@@ -58,13 +61,13 @@
 .leftbarLogoutButton
 {
     width: 150px;
-    border: none;
-    padding: 10px;
-    margin: 25px;
-    color: #ffffff;
-    background-color: #1877f2;
+    border: none; 
+    margin: 20px;
+   
+    /* background-color: #1877f2; */
     border-radius: 5px;
     align-items:flex-end;
     font-weight: 600;
     cursor: pointer;
+    
 }
