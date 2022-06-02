@@ -9,10 +9,8 @@
     width: 100%;
     height: 200px;
     
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
-   
+    
+    
 }
 
 /*.leftbarTop
@@ -56,9 +54,6 @@
     padding: 30px; 
     background-color: F1F2F4;
     margin: 20px;
-    position:fixed; 
-   flex-direction: column; 
-    
     
 }
 
@@ -72,7 +67,6 @@
    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
    margin-top: 10px;
-   position: fixed;
    
 }
 
@@ -109,24 +103,14 @@
 
 /* .leftbarLogoutButton
 {
-    
-    /* flex-direction: column; */
-    /* width: 150px; */
-    /* border: none;  */
-   
-    /* float: left; */
-    /* display: flex; */
+    width: 150px;
+    border: none; 
+    margin: 20px;
    
     /* background-color: #1877f2; */
-    /* border-radius: 5px; */
-    /* align-items:flex-end; */
-    /* font-weight: 600;
-    cursor: pointer; */
-    /* position:fixed; */
-    /* margin-top: 200px; */
+    border-radius: 5px;
+    align-items:flex-end;
+    font-weight: 600;
+    cursor: pointer;
     
-    /* border-radius: 10px;
-   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
-    
-/* } */ 
+}

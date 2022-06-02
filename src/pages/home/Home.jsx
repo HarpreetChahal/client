@@ -6,8 +6,6 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import Profile from "../../components/profile/Profile";
 import "./home.css";
 
-
-
 export default function Home()
 {
     return(
