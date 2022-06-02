@@ -6,8 +6,6 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import Comment from "../../components/comment/Comment";
 import "./home.css";
 
-
-
 export default function Home()
 {
     return(

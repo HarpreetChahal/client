@@ -5,6 +5,7 @@ import "./register.css";
 import { Context } from "../../components/context/Context";
 
 import { useNavigate } from "react-router";
+import Toast from "../../api/toast";
 
 import { Button, InputAdornment, TextField } from "@mui/material";
 import {
@@ -33,8 +34,9 @@ export default function Register() {
       action: "register",
       data: formData,
     })
-      .then(({ DATA = {} }) => {
+      .then(({ DATA = {}, MESSAGE }) => {
         dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
+        Toast.success(MESSAGE);
         setFormData({
           email: "",
           firstName: "",
@@ -42,6 +44,7 @@ export default function Register() {
           dob: "",
           password: "",
         });
+      
         navigate("/");
       })
       .catch((error) => {

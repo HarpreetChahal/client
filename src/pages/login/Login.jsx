@@ -1,9 +1,10 @@
-import React, { useState ,useContext} from "react";
+import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
-import 'react-notifications-component/dist/theme.css'
+import "react-notifications-component/dist/theme.css";
 import "./login.css";
 import { Context } from "../../components/context/Context";
 import { Button, InputAdornment, TextField } from "@mui/material";
+import Toast from "../../api/toast";
 import {
   // AccountCircle,
   Email,
@@ -29,18 +30,20 @@ export default function Login() {
     await commonApi({
       action: "login",
       data: formData,
-    }).then(({ DATA = {} }) => {
-      dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
-      navigate("/");
-      setFormData({
-        email: "",
-        password: "",
-      });
-    }).catch((error)=>{
-      dispatch({ type: "LOGIN_FAILURE" });
-      console.error(error);
     })
-   
+      .then(({ DATA = {}, MESSAGE }) => {
+        dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
+        Toast.success(MESSAGE);
+        setFormData({
+          email: "",
+          password: "",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        dispatch({ type: "LOGIN_FAILURE" });
+        console.error(error);
+      });
   };
   return (
     <div>
