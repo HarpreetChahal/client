@@ -10,7 +10,6 @@ import { Context } from "./components/context/Context";
 
 function App() {
   const { user } = useContext(Context);
-  console.log("user",user)
   return (
     <div>
       <ReactNotifications />
