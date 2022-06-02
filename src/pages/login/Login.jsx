@@ -89,7 +89,7 @@ export default function Login() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Email color="primary" />
+                      <Email color="primary" sx={{ mr: 1 }}/>
                     </InputAdornment>
                   ),
                 }}
@@ -106,7 +106,7 @@ export default function Login() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Key color="primary" />
+                      <Key color="primary" sx={{ mr: 1 }}/>
                     </InputAdornment>
                   ),
                 }}
