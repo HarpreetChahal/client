@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState ,useContext} from "react";
 import Grid from "@mui/material/Grid";
 import 'react-notifications-component/dist/theme.css'
 import "./login.css";
+import { Context } from "../../components/context/Context";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import {
   // AccountCircle,
@@ -17,6 +18,7 @@ import { useNavigate } from "react-router";
 import Link from "@mui/material/Link";
 import commonApi from "../../api/common";
 export default function Login() {
+  const { dispatch, isFetching } = useContext(Context);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,14 +30,16 @@ export default function Login() {
       action: "login",
       data: formData,
     }).then(({ DATA = {} }) => {
-      console.log("DATA",DATA)
+      dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
       navigate("/");
-  
       setFormData({
         email: "",
         password: "",
       });
-    });
+    }).catch((error)=>{
+      dispatch({ type: "LOGIN_FAILURE" });
+      console.error(error);
+    })
    
   };
   return (
@@ -113,6 +117,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
+                disabled={isFetching}
               >
                 Sign In
               </Button>
