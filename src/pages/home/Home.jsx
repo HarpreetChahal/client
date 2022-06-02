@@ -3,7 +3,7 @@ import Topbar from "../../components/topbar/Topbar";
 import Leftbar from "../../components/leftbar/Leftbar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
-import Comment from "../../components/comment/Comment";
+import Profile from "../../components/profile/Profile";
 import "./home.css";
 
 

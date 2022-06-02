@@ -1,5 +1,6 @@
 import React from "react";
 import "./post.css"
+import Comment from "../comment/Comment";
 import { ThumbDownOffAlt, MoreVertOutlined, FavoriteBorder, Send } from "@mui/icons-material";
 
 export default function Post() {
@@ -43,13 +44,14 @@ export default function Post() {
                     
 
                     </div>
-                    <div className="viewComments">
+                    {/* <div className="viewComments">
                         <span>View All Comments</span>
                     </div>
                     <div className="profileComment">
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
                 <span className="postCommentText">My first comment..</span>
-                    </div>
+                    </div> */}
+                    <Comment/>
             </div>
         </div>
     )
