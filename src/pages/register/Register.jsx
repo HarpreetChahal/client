@@ -96,7 +96,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <AccountCircle color="primary" />
+                      <AccountCircle color="primary" sx={{ mr: 1 }}/>
                     </InputAdornment>
                   ),
                 }}
@@ -111,7 +111,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Face color="primary" />
+                      <Face color="primary" sx={{ mr: 1 }}/>
                     </InputAdornment>
                   ),
                 }}
@@ -126,7 +126,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Email color="primary" />
+                      <Email color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
@@ -142,7 +142,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <CalendarToday color="primary" />
+                      <CalendarToday color="primary" sx={{ mr: 1 }}/>
                     </InputAdornment>
                   ),
                 }}
@@ -158,7 +158,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Key color="primary" />
+                      <Key color="primary" sx={{ mr: 1 }}/>
                     </InputAdornment>
                   ),
                 }}
