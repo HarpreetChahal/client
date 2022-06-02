@@ -1,12 +1,18 @@
 const apiList = {
   // Authentication APIs
   register: {
-    url: () => 'auth/register',
-    method: 'post',
+    url: () => "auth/register",
+    method: "post",
   },
   login: {
-    url: () => 'auth/login',
-    method: 'post',
+    url: () => "auth/login",
+    method: "post",
   },
-}
-export default apiList
+
+  // Posts APIs
+  createPost: {
+    url: () => "post/add",
+    method: "post",
+  },
+};
+export default apiList;
