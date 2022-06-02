@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import commonApi from "../../api/common";
 import "./register.css";
+import { Context } from "../../components/context/Context";
+
 import { useNavigate } from "react-router";
 
 import { Button, InputAdornment, TextField } from "@mui/material";
@@ -15,6 +17,7 @@ import {
 import Link from "@mui/material/Link";
 
 export default function Register() {
+  const { dispatch, isFetching } = useContext(Context);
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -29,16 +32,22 @@ export default function Register() {
     await commonApi({
       action: "register",
       data: formData,
-    }).then(({ DATA = {} }) => {
-      setFormData({
-        email: "",
-        firstName: "",
-        lastName: "",
-        dob: "",
-        password: "",
+    })
+      .then(({ DATA = {} }) => {
+        dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
+        setFormData({
+          email: "",
+          firstName: "",
+          lastName: "",
+          dob: "",
+          password: "",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        dispatch({ type: "LOGIN_FAILURE" });
+        console.error(error);
       });
-      navigate("/");
-    });
   };
   return (
     <div>
@@ -157,11 +166,16 @@ export default function Register() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
+                disabled={isFetching}
               >
                 Sign Up
               </Button>
               <Grid item>
-                <Link href="/login" style={{cursor:"pointer"}}variant="body2">
+                <Link
+                  href="/login"
+                  style={{ cursor: "pointer" }}
+                  variant="body2"
+                >
                   {"Already have an account? Sign In"}
                 </Link>
               </Grid>
