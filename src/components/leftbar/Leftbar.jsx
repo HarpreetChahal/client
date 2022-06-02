@@ -104,8 +104,8 @@ export default function Leftbar() {
           </DialogContentText>
         </DialogContent> */}
         <DialogActions>
-          <Button variant="contained" color="success" onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" color="error" onClick={handleClose}>Log out</Button>
+          <Button variant="contained" size="small" color="success" onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" size="small" color="error" onClick={handleClose}>Log out</Button>
         </DialogActions>
       </Dialog>
     </div>
