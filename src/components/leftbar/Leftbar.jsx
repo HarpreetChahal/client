@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import "./leftbar.css";
 
 
-
-
 import { Home, FavoriteBorder, Person, PersonAdd } from "@mui/icons-material";
 
 import Button from '@mui/material/Button';
@@ -22,52 +20,42 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
-import DraftsIcon from '@mui/icons-material/Drafts';
+
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-
-import { shadows } from '@mui/system';
-//import { Box, ThemeProvider, createTheme } from '@mui/system';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
-
 export default function Leftbar() {
-  const [value, setValue] = React.useState('recents');
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
   return (
     <div className="leftbar">
-
-      {/* <Box variant="contained" sx={{ border: 1, borderRadius: 2,
-          width: '100%', 
-          maxWidth: 360, 
-          bgcolor: 'background.paper',
-          mt:3,
-          ml:2, 
-          position:'fixed'}}> */}
       <Box
         sx={{
           border: 2,
           borderRadius: 2,
           boxShadow: 3,
           borderColor: 'background.paper',
-          mt: 2.5, ml: 1,
-          width: '100%',
+          // mt: 2.5, ml: 1,
+          width: '50%',
           maxWidth: 360,
           bgcolor: 'background.paper',
           position: 'fixed',
+          top: 100,
+          left: '1%',
         }}>
         <nav aria-label="main list">
           <List>
@@ -94,7 +82,32 @@ export default function Leftbar() {
 
       </Box>
 
-
+      <Button variant="contained" onClick={handleClickOpen}
+        sx={{
+          position: 'fixed',
+          bottom: 10,
+          left: '1%',
+        }}>
+        Logout
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Are you sure you want to logout?"}</DialogTitle>
+        {/* <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            You will have to login again
+          </DialogContentText>
+        </DialogContent> */}
+        <DialogActions>
+          <Button variant="contained" color="success" onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" color="error" onClick={handleClose}>Log out</Button>
+        </DialogActions>
+      </Dialog>
     </div>
 
   )
