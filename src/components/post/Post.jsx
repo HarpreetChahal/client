@@ -8,6 +8,7 @@ import {
   FavoriteBorder,
   Send,
 } from "@mui/icons-material";
+import CommentIcon from '@mui/icons-material/Comment';
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
 
@@ -63,7 +64,8 @@ export default function Post(props) {
             <span className="postDislikeText">1 Dislike </span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText"> {comments.length}</span>
+          <CommentIcon cursor="pointer" />
+            <span className="postCommentText"> {comments.length} Comments</span>
           </div>
         </div>
 

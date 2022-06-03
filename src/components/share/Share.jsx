@@ -69,27 +69,28 @@ export default function Share({ fetchPosts }) {
           <hr className="shareHr" />
           <div className="shareBottom">
             <div className="shareOption">
-              {/* <Button variant="contained" color="success" startIcon={<UploadFile />}>
-                       Upload Image
-                    </Button> */}
               <Stack direction="row" alignItems="center" spacing={2}>
                 <label htmlFor="contained-button-file">
-                  <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                  {/* <Button variant="contained" component="span">
-          Upload
-        </Button> */}
+                  <Input accept="image/*"
+                    id="contained-button-file"
+                    multiple type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    />
+                  <Button variant="contained" 
+                  type="file"
+                    id="fileInput" 
+                    color="success" 
+                    component="span" 
+                    startIcon={<PhotoCamera />} 
+                    >
+                    Upload
+                  </Button>
 
-                  <input
+                  {/* <input
                     type="file"
                     id="fileInput"
                     onChange={(e) => setFile(e.target.files[0])}
-                  />
-                </label>
-                <label htmlFor="icon-button-file">
-                  <Input accept="image/*" id="icon-button-file" type="file" />
-                  <IconButton color="primary" aria-label="upload picture" component="span">
-                    <PhotoCamera />
-                  </IconButton>
+                  /> */}
                 </label>
               </Stack>
             </div>
