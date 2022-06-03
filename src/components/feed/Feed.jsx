@@ -44,8 +44,9 @@ export default function Feed() {
               date={post.createdAt}
               key={post._id}
               postId={post._id}
-              userName={post.userId.fullName}
+              userName={post.userId ?post.userId.fullName : "John Doe"}
               comments={post.comments}
+              images={post.images}
             />
           );
         })}

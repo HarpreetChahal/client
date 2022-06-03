@@ -5,23 +5,42 @@ import "./share.css";
 
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
-export default function Share({fetchPosts}) {
+export default function Share({ fetchPosts }) {
   const [desc, setDesc] = useState("");
+
+  const [file, setFile] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await commonApi({
-      action: "createPost",
-      data: { desc: desc },
-      config: {
-        authToken: true,
-      },
-    }).then(({ DATA = {}, MESSAGE }) => {
-      Toast.success(MESSAGE);
-      fetchPosts();
-      setDesc("")
-    });
+    let data = { desc: desc };
+    if (file) {
+      const fileData = new FormData()
+      const fileName = Date.now() + file.name;
+      fileData.append('name', fileName)
+      fileData.append('file', file)
+      await commonApi({
+        action: "upload",
+        data: fileData,
+      }).then(async ({ MESSAGE }) => {
+        data.images = [fileName];
+        await commonApi({
+          action: "createPost",
+          data: data,
+          config: {
+            authToken: true,
+          },
+        }).then(({ DATA = {}, MESSAGE }) => {
+          Toast.success(MESSAGE);
+          fetchPosts();
+          setDesc("");
+          setFile(null);
+        });
+      });
+    }
   };
+
   return (
+    <form encType="multipart/form-data">
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
@@ -36,21 +55,29 @@ export default function Share({fetchPosts}) {
           />
         </div>
         <hr className="shareHr" />
+
         <div className="shareBottom">
           <div className="shareOption">
-            <Button
-              variant="contained"
-              color="success"
-              startIcon={<UploadFile />}
-            >
-              Upload Image
-            </Button>
+            {/* <Button
+                variant="contained"
+                color="success"
+                startIcon={<UploadFile />}
+             
+              > 
+                Upload Image
+              </Button> */}
+            <input
+              type="file"
+              id="fileInput"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
           </div>
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button variant="contained" type="submit" onClick={handleSubmit}>
             Create Post
           </Button>
         </div>
       </div>
     </div>
+    </form>
   );
 }

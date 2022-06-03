@@ -12,7 +12,13 @@ import commonApi from "../../api/common";
 import Toast from "../../api/toast";
 
 export default function Post(props) {
-  const { desc, date, userName, comments, postId } = props;
+  const PF="http://localhost:5000/assets/"
+  const { desc, date, userName, comments, postId ,images} = props;
+  let imgPath="assets/post/2.jpg"  
+  if(images.length!==0)
+  {
+    imgPath=PF+images[0]
+  }
   const [comment, setComment] = useState("");
 
   const createComment = async (e) => {
@@ -37,7 +43,7 @@ export default function Post(props) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img className="postProfileImg" src="/assets/person/1.jpg" alt="" />
+            <img className="postProfileImg" src="/assets/person/1.jpg" alt="/assets/person/1.jpg"  />
             <span className="postUsername">{userName}</span>
             <span className="postDate">{moment(date).fromNow()}</span>
           </div>
@@ -47,7 +53,7 @@ export default function Post(props) {
         </div>
         <div className="postCenter">
           <span className="postText">{desc}</span>
-          <img className="postImg" src="assets/post/2.jpg" alt="" />
+          <img className="postImg" src={imgPath} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

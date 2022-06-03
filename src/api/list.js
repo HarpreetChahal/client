@@ -23,6 +23,12 @@ const apiList = {
   createComment:{
     url:()=>"comment/add",
     method:"post"
-  }
+  },
+
+  // upload file 
+    upload:{
+      url:()=>"upload",
+      method:"post"
+    }
 };
 export default apiList;
