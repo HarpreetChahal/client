@@ -23,7 +23,7 @@ import { useNavigate } from "react-router";
 
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-
+import {Context} from "../../components/context/Context"
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -31,10 +31,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Leftbar() {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const {  dispatch } = useContext(Context);
+
   const handleLogout = async (e) => {
     localStorage.clear();
     e.preventDefault();
     setOpen(false);
+    dispatch({ type: "LOGOUT" });
     navigate("/login");
   };
   const handleClickOpen = () => {
