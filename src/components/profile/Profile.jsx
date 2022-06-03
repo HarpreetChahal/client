@@ -12,7 +12,7 @@ export default function Profile() {
         <>
             <Topbar />
             <div className="profile">
-                <Leftbar />
+            <Leftbar />
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileCover">
@@ -27,10 +27,11 @@ export default function Profile() {
                         </div>
                         <div className="profileInfo">
                             <h4 className="profileInfoName">John Doe</h4>
-                            <span className="profileInfoDesc">It's a good day..!</span>
+                            {/* <span className="profileInfoDesc">It's a good day..!</span> */}
                         </div>
                     </div>
                     <div className="profileRightBottom">
+                        {/* <Leftbar /> */}
                         <Feed />
                         <Rightbar profile/>
                     </div>
