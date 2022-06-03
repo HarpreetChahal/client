@@ -10,8 +10,7 @@ import {
 } from "@mui/icons-material";
 
 export default function Post(props) {
-  const { desc, date,userName } = props;
-  
+  const { desc, date, userName, comments } = props;
   return (
     <div className="post">
       <div className="postWrapper">
@@ -37,7 +36,7 @@ export default function Post(props) {
             <span className="postDislikeText">1 Dislike </span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText"> 10 Comments</span>
+            <span className="postCommentText"> {comments.length}</span>
           </div>
         </div>
         <div className="writeComment">
@@ -62,7 +61,16 @@ export default function Post(props) {
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
                 <span className="postCommentText">My first comment..</span>
                     </div> */}
-        <Comment />
+        {comments.map((c) => {
+          return (
+            <Comment
+              comment={c.comment}
+              date={c.at}
+              user={c.userId}
+              key={c._id}
+            />
+          );
+        })}
       </div>
     </div>
   );
