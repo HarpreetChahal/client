@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./post.css";
 import Comment from "../comment/Comment";
 import moment from "moment";
@@ -8,9 +8,30 @@ import {
   FavoriteBorder,
   Send,
 } from "@mui/icons-material";
+import commonApi from "../../api/common";
+import Toast from "../../api/toast";
 
 export default function Post(props) {
-  const { desc, date, userName, comments } = props;
+  const { desc, date, userName, comments, postId } = props;
+  const [comment, setComment] = useState("");
+
+  const createComment = async (e) => {
+    e.preventDefault();
+
+    await commonApi({
+      action: "createComment",
+      data: {
+        postId: postId,
+        comment: comment,
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(({ MESSAGE }) => {
+      setComment("");
+      Toast.success(MESSAGE);
+    });
+  };
   return (
     <div className="post">
       <div className="postWrapper">
@@ -39,21 +60,31 @@ export default function Post(props) {
             <span className="postCommentText"> {comments.length}</span>
           </div>
         </div>
+
         <div className="writeComment">
           <img
             className="commentProfileImg"
             src="/assets/person/1.jpg"
             alt=""
           />
-          <input placeholder="Write a comment" className="commentInput" />
+          <input
+            placeholder="Write a comment"
+            value={comment}
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            className="commentInput"
+          />
           <div className="sendButton">
             <Send
               sx={{
                 color: "#1877f2",
               }}
+              onClick={createComment}
             />
           </div>
         </div>
+
         {/* <div className="viewComments">
                         <span>View All Comments</span>
                     </div>

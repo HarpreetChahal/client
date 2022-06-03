@@ -43,6 +43,7 @@ export default function Feed() {
               desc={post.desc}
               date={post.createdAt}
               key={post._id}
+              postId={post._id}
               userName={post.userId.fullName}
               comments={post.comments}
             />

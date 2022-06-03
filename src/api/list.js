@@ -17,6 +17,12 @@ const apiList = {
   fetchPost:{
     url:()=>"post/findAll",
     method:"post"
+  },
+
+  // createComment
+  createComment:{
+    url:()=>"comment/add",
+    method:"post"
   }
 };
 export default apiList;
