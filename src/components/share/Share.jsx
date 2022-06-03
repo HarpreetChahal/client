@@ -5,7 +5,7 @@ import "./share.css";
 
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
-export default function Share() {
+export default function Share({fetchPosts}) {
   const [desc, setDesc] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,8 +16,8 @@ export default function Share() {
         authToken: true,
       },
     }).then(({ DATA = {}, MESSAGE }) => {
-      console.log("Success", DATA);
       Toast.success(MESSAGE);
+      fetchPosts();
       setDesc("")
     });
   };

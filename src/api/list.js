@@ -14,5 +14,9 @@ const apiList = {
     url: () => "post/add",
     method: "post",
   },
+  fetchPost:{
+    url:()=>"post/findAll",
+    method:"post"
+  }
 };
 export default apiList;
