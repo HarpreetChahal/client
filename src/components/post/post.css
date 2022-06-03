@@ -59,6 +59,12 @@
     align-items: center;   
 }
 
+.postBottomRight{
+  display: flex;
+  align-items: center;   
+}
+
+
 
 .postLikeCounter{
     font-size: 15px;
