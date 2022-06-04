@@ -47,8 +47,6 @@ export default function Post(props) {
       }).then(({ MESSAGE }) => {
         fetchPosts()
         setIsLiked(!isLiked);
-       
-      
       });
     } catch (err) {}
   };

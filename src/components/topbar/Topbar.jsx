@@ -4,18 +4,20 @@ import { Logout, Search, UploadFile } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import { Context } from "../../components/context/Context";
 import { Link } from "react-router-dom";
-export default function Topbar() {
+export default function Topbar({fetchPosts}) {
   const { user } = useContext(Context);
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
         <span
           className="logo"
-          onClick={() =>
+          onClick={() =>{
+            fetchPosts()
             window.scrollTo({
               top: 0,
               behavior: "smooth",
             })
+          }
           }
         >
           LookMeUp

@@ -28,7 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Leftbar() {
+export default function Leftbar({fetchPosts}) {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(Context);
@@ -69,11 +69,13 @@ export default function Leftbar() {
           <List>
             <ListItem
               disablePadding
-              onClick={() =>
+              onClick={() =>{
+                fetchPosts()
                 window.scrollTo({
                   top: 0,
                   behavior: "smooth",
                 })
+              }
               }
             >
               <ListItemButton>
