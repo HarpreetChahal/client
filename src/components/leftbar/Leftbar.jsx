@@ -23,7 +23,7 @@ import { useNavigate } from "react-router";
 
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import {Context} from "../../components/context/Context"
+import { Context } from "../../components/context/Context";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -31,7 +31,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Leftbar() {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-  const {  dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   const handleLogout = async (e) => {
     localStorage.clear();
@@ -57,27 +57,30 @@ export default function Leftbar() {
           boxShadow: 3,
           borderColor: "background.paper",
           // mt: 2.5, ml: 1,
-          width: '40%',
+          width: "40%",
           maxWidth: 320,
-          bgcolor: 'background.paper',
-          position: 'fixed',
+          bgcolor: "background.paper",
+          position: "fixed",
           top: 100,
           left: "1%",
         }}
       >
         <nav aria-label="main list">
           <List>
-            <ListItem disablePadding>
+            <ListItem
+              disablePadding
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
+            >
               <ListItemButton>
                 <ListItemIcon>
                   <HomeIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary="Home"  onClick={() =>
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            })
-          } />
+                <ListItemText primary="Home" />
               </ListItemButton>
             </ListItem>
             <Divider />

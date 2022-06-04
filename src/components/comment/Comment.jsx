@@ -48,9 +48,9 @@ export default function Comment({ user, comment, date }) {
                 paddingTop: "7px",
               }}
             >
-              DHOLARIYA DIVYESH
+            {user?.fullName}
             </div>
-            <span class="postCommentText">Hello I am a Blogger</span>
+            <span class="postCommentText">{comment}</span>
           </div>
           <div
             style={{
@@ -60,7 +60,7 @@ export default function Comment({ user, comment, date }) {
               paddingRight: "20px",
             }}
           >
-            15 minutes ago
+            {moment(date).fromNow()}
           </div>
         </div>
       </div>
