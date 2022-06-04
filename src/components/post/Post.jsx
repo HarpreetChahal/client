@@ -1,27 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./post.css";
 import Comment from "../comment/Comment";
 import moment from "moment";
 import {
   ThumbDownOffAlt,
   MoreVertOutlined,
-  FavoriteBorder,
+  FavouriteBorder,
   Send,
+  FavoriteBorder,
 } from "@mui/icons-material";
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from '@mui/icons-material/Comment';
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
+import { Context } from "../context/Context";
 
 export default function Post(props) {
-  const PF="http://localhost:5000/assets/"
-  const { desc, date, userName, comments, postId ,images} = props;
-  let imgPath="assets/post/2.jpg"  
-  if(images.length!==0)
-  {
-    imgPath=PF+images[0]
+  const PF = "http://localhost:5000/assets/";
+  const { desc, date, userName, comments, postId, images, likes, dislikes } =
+    props;
+  let imgPath = "assets/post/2.jpg";
+  if (images.length !== 0) {
+    imgPath = PF + images[0];
   }
+  const { user } = useContext(Context);
   const [comment, setComment] = useState("");
-
+  const [isLiked, setIsLiked] = useState(false);
+  const [isDisLiked, setIsDisLiked] = useState(false);
+  const [showComment, setShowComment] = useState(false);
+  useEffect(() => {
+    setIsLiked(likes.includes(user._id));
+    setIsDisLiked(dislikes.includes(user._id));
+  }, [user._id, dislikes, likes]);
+  const likeHandler = async () => {
+    try {
+      await commonApi({
+        action: "likeDislike",
+        data: {
+          postId: postId,
+          action: true,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(({ MESSAGE }) => {
+        setIsLiked(!isLiked);
+      });
+    } catch (err) {}
+  };
+  const disLikeHandler = async () => {
+    try {
+      await commonApi({
+        action: "likeDislike",
+        data: {
+          postId: postId,
+          action: false,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(({ MESSAGE }) => {
+        isDisLiked(!isDisLiked);
+      });
+    } catch (err) {}
+  };
   const createComment = async (e) => {
     e.preventDefault();
 
@@ -44,7 +87,11 @@ export default function Post(props) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img className="postProfileImg" src="/assets/person/1.jpg" alt="/assets/person/1.jpg"  />
+            <img
+              className="postProfileImg"
+              src="/assets/person/1.jpg"
+              alt="/assets/person/1.jpg"
+            />
             <span className="postUsername">{userName}</span>
             <span className="postDate">{moment(date).fromNow()}</span>
           </div>
@@ -58,14 +105,28 @@ export default function Post(props) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <FavoriteBorder cursor="pointer" />
-            <span className="postLikeText">2 Like </span>
-            <ThumbDownOffAlt cursor="pointer" />
-            <span className="postDislikeText">1 Dislike </span>
+            {isLiked && (
+              <FavoriteIcon
+                color={"error"}
+                cursor="pointer"
+                onClick={disLikeHandler}
+              />
+            )}
+            {!isLiked && (
+              <FavoriteBorder cursor="pointer" onClick={likeHandler} />
+            )}
+            <span className="postLikeText">{likes.length} Like </span>
+            {!isDisLiked && <ThumbDownOffAlt cursor="pointer" onClick={disLikeHandler} />}
+            {isDisLiked && <ThumbDownIcon cursor="pointer" onClick={disLikeHandler} />}
+           
+            <span className="postDislikeText">{dislikes.length} DisLike </span>
           </div>
-          <div className="postBottomRight">
-          <CommentIcon cursor="pointer" />
-            <span className="postCommentText"> {comments.length} Comments</span>
+          <div className="postBottomRight" onClick={()=>{setShowComment(!showComment)}}>
+            
+            {/* <span className="postCommentText" onClick={()=>{setShowComment(!showComment)}}> {comments.length} Comment</span> */}
+
+            <CommentIcon cursor="pointer" />
+            <span className="postCommentText" > {comments.length} Comments</span>
           </div>
         </div>
 
@@ -100,7 +161,7 @@ export default function Post(props) {
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
                 <span className="postCommentText">My first comment..</span>
                     </div> */}
-        {comments.map((c) => {
+        { showComment && comments.map((c) => {
           return (
             <Comment
               comment={c.comment}
