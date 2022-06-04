@@ -1,3 +1,11 @@
+/*!
+* @file      Comment.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the comment component page for LookMeUp project.
+*/
+
+
 import React from "react";
 import "./comment.css";
 import moment from "moment";
@@ -43,7 +51,7 @@ export default function Comment({ user, comment, date }) {
           <div>
             <div
               style={{
-                fontSize: "8px",
+                fontSize: "10px",
                 color: "rgb(0, 0, 0)",
                 paddingTop: "7px",
               }}
@@ -54,7 +62,7 @@ export default function Comment({ user, comment, date }) {
           </div>
           <div
             style={{
-              fontSize: "8px",
+              fontSize: "10px",
               paddingTop: "28px",
               paddingBottom: "5px",
               paddingRight: "20px",

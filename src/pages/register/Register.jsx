@@ -1,3 +1,11 @@
+/*!
+* @file      Register.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the register page for LookMeUp project.
+*/
+
+
 import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import commonApi from "../../api/common";
@@ -58,7 +66,7 @@ export default function Register() {
         <Grid container style={{ minHeight: "100vh" }}>
           <Grid item xs={12} sm={6}>
             <img
-              src="/assets/signup1.png"
+              src="/assets/signup.png"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt="logo"
             />
@@ -178,7 +186,7 @@ export default function Register() {
                   href="/login"
                   style={{ cursor: "pointer" }}
                   variant="body2"
-                >
+                  >
                   {"Already have an account? Sign In"}
                 </Link>
               </Grid>

@@ -1,3 +1,11 @@
+/*!
+* @file      Post.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the post component page for LookMeUp project.
+*/
+
+
 import React, { useState, useEffect, useContext } from "react";
 import "./post.css";
 import Comment from "../comment/Comment";
@@ -5,7 +13,6 @@ import moment from "moment";
 import {
   ThumbDownOffAlt,
   MoreVertOutlined,
-  FavouriteBorder,
   Send,
   FavoriteBorder,
 } from "@mui/icons-material";
@@ -160,13 +167,13 @@ export default function Post(props) {
           </div>
         </div>
 
-        {/* <div className="viewComments">
-                        <span>View All Comments</span>
+         <div className="viewComments" onClick={()=>{setShowComment(!showComment)}}>
+                        <span className="viewCommentsText">View All Comments</span>
                     </div>
-                    <div className="profileComment">
+                    {/* <div className="profileComment">
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
                 <span className="postCommentText">My first comment..</span>
-                    </div> */}
+                    </div>  */}
         { showComment && comments.map((c) => {
           return (
             <Comment
