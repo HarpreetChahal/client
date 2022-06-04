@@ -26,7 +26,7 @@
   .postCommentText
   {
     border: none;
-    width: 80%;
-    margin-left: 5px;
+    width: 100%;
+    /* margin-left: 5px; */
     margin-right: 10px;
   }

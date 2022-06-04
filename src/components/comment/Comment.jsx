@@ -1,6 +1,6 @@
 import React from "react";
 import "./comment.css";
-
+import moment from "moment";
 export default function Comment({ user, comment, date }) {
   return (
     <>
@@ -11,7 +11,58 @@ export default function Comment({ user, comment, date }) {
           src="/assets/person/1.jpg"
           alt=""
         />
-        <span className="postCommentText">{comment}. </span>
+
+        {/* <div>Dharmik</div>
+        
+        <span className="postCommentText"> THis is a beafutiful applica</span>
+        <div> 2 h ago</div> */}
+        {/* 
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div style={{ fontSize: "12px", color: "#000" }}>{user?.fullName}</div>
+            <span className="postCommentText">
+              {comment}
+            </span>
+          </div>
+          <div> {moment(date).fromNow()}</div>
+        </div> */}
+
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: "8px",
+                color: "rgb(0, 0, 0)",
+                paddingTop: "7px",
+              }}
+            >
+            {user?.fullName}
+            </div>
+            <span class="postCommentText">{comment}</span>
+          </div>
+          <div
+            style={{
+              fontSize: "8px",
+              paddingTop: "28px",
+              paddingBottom: "5px",
+              paddingRight: "20px",
+            }}
+          >
+            {moment(date).fromNow()}
+          </div>
+        </div>
       </div>
     </>
   );

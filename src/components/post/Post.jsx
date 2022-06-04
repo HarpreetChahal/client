@@ -18,7 +18,7 @@ import { Context } from "../context/Context";
 
 export default function Post(props) {
   const PF = "http://localhost:5000/assets/";
-  const { desc, date, userName, comments, postId, images, likes, dislikes } =
+  const { desc, date, userName, comments, postId, images, likes, dislikes ,fetchPosts} =
     props;
   let imgPath = "assets/post/2.jpg";
   if (images.length !== 0) {
@@ -45,6 +45,7 @@ export default function Post(props) {
           authToken: true,
         },
       }).then(({ MESSAGE }) => {
+        fetchPosts()
         setIsLiked(!isLiked);
       });
     } catch (err) {}
@@ -61,7 +62,10 @@ export default function Post(props) {
           authToken: true,
         },
       }).then(({ MESSAGE }) => {
+        fetchPosts()
         isDisLiked(!isDisLiked);
+        
+        
       });
     } catch (err) {}
   };
@@ -80,6 +84,7 @@ export default function Post(props) {
     }).then(({ MESSAGE }) => {
       setComment("");
       Toast.success(MESSAGE);
+      fetchPosts()
     });
   };
   return (
@@ -105,19 +110,20 @@ export default function Post(props) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            {isLiked && (
+           
+            {!isLiked && (
+              <FavoriteBorder cursor="pointer" onClick={likeHandler} />
+            )}
+             {isLiked && (
               <FavoriteIcon
                 color={"error"}
                 cursor="pointer"
                 onClick={disLikeHandler}
               />
             )}
-            {!isLiked && (
-              <FavoriteBorder cursor="pointer" onClick={likeHandler} />
-            )}
             <span className="postLikeText">{likes.length} Like </span>
             {!isDisLiked && <ThumbDownOffAlt cursor="pointer" onClick={disLikeHandler} />}
-            {isDisLiked && <ThumbDownIcon cursor="pointer" onClick={disLikeHandler} />}
+            {isDisLiked && <ThumbDownIcon cursor="pointer" onClick={likeHandler} />}
            
             <span className="postDislikeText">{dislikes.length} DisLike </span>
           </div>

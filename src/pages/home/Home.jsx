@@ -1,19 +1,44 @@
-import React from "react";
+import React ,{useState}from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Leftbar from "../../components/leftbar/Leftbar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Profile from "../../components/profile/Profile";
 import "./home.css";
-
+import commonApi from "../../api/common"
 export default function Home()
 {
+    const [posts, setPosts] = useState([]);
+  const fetchPosts = async () => {
+    await commonApi({
+      action: "fetchPost",
+      data: {
+        options: {
+          pagination: false,
+          populate: [
+            { path: "userId", model: "user", select: ["_id", "fullName"] },
+            {
+              path: "comments.userId",
+              model: "user",
+              select: ["_id", "fullName"],
+            },
+          ],
+          sort: { createdAt: -1 },
+        },
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(({ DATA }) => {
+      setPosts(DATA.data);
+    });
+  };
     return(
         <>
-        <Topbar/>
+        <Topbar fetchPosts={fetchPosts} />
         <div className="homeContainer">
-         <Leftbar/>
-         <Feed/>
+         <Leftbar fetchPosts={fetchPosts} />
+         <Feed fetchPosts={fetchPosts} posts={posts}/>
          <Rightbar/>   
         </div> 
         </>

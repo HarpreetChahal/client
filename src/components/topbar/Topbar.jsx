@@ -3,12 +3,25 @@ import { useContext } from "react";
 import { Logout, Search, UploadFile } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import { Context } from "../../components/context/Context";
-export default function Topbar() {
+import { Link } from "react-router-dom";
+export default function Topbar({fetchPosts}) {
   const { user } = useContext(Context);
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <span className="logo">LookMeUp</span>
+        <span
+          className="logo"
+          onClick={() =>{
+            fetchPosts()
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
+          }
+        >
+          LookMeUp
+        </span>
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
