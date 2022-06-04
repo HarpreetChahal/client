@@ -14,7 +14,7 @@ function App() {
     <div>
       <ReactNotifications />
       <Routes>
-        {user&&<Route exact path="/" element={user ? <Home /> : <Login />} />}
+        <Route exact path="/" element={user ? <Home /> : <Login />} />
         <Route
           exact
           path="/register"

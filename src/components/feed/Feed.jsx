@@ -32,8 +32,10 @@ export default function Feed() {
     });
   };
   useEffect(() => {
-    if (user) {
+    if (JSON.parse(localStorage.getItem("user")) !== null) {
       fetchPosts();
+    } else {
+      window.location.href = "/";
     }
   }, []);
 
@@ -43,7 +45,8 @@ export default function Feed() {
         <Share fetchPosts={fetchPosts} />
         {posts.map((post) => {
           return (
-            <Post fetchPosts={fetchPosts}
+            <Post
+              fetchPosts={fetchPosts}
               desc={post.desc}
               date={post.createdAt}
               key={post._id}

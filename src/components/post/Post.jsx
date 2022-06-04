@@ -45,9 +45,9 @@ export default function Post(props) {
           authToken: true,
         },
       }).then(({ MESSAGE }) => {
-       
-        setIsLiked(!isLiked);
         fetchPosts()
+        setIsLiked(!isLiked);
+       
       
       });
     } catch (err) {}
@@ -64,8 +64,9 @@ export default function Post(props) {
           authToken: true,
         },
       }).then(({ MESSAGE }) => {
-        isDisLiked(!isDisLiked);
         fetchPosts()
+        isDisLiked(!isDisLiked);
+        
         
       });
     } catch (err) {}
@@ -111,18 +112,18 @@ export default function Post(props) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            {isLiked && (
+           
+            {!isLiked && (
+              <FavoriteBorder cursor="pointer" onClick={likeHandler} />
+            )}
+             {isLiked && (
               <FavoriteIcon
                 color={"error"}
                 cursor="pointer"
                 onClick={disLikeHandler}
               />
             )}
-            {!isLiked && (
-              <FavoriteBorder cursor="pointer" onClick={likeHandler} />
-            )}
             <span className="postLikeText">{likes.length} Like </span>
-            {console.log("Dislike State",isDisLiked)}
             {!isDisLiked && <ThumbDownOffAlt cursor="pointer" onClick={disLikeHandler} />}
             {isDisLiked && <ThumbDownIcon cursor="pointer" onClick={likeHandler} />}
            
