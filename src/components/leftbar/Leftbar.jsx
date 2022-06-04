@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import {Link} from "react-router-dom"
 import "./leftbar.css";
 
 
@@ -73,7 +74,9 @@ export default function Leftbar() {
                 <ListItemIcon>
                   <PersonIcon color="primary" />
                 </ListItemIcon>
+                <Link to={"/profile"}>
                 <ListItemText primary="Profile" />
+                </Link>
               </ListItemButton>
             </ListItem>
           </List>

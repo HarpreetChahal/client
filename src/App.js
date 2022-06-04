@@ -12,20 +12,21 @@ import { Context } from "./components/context/Context";
 function App() {
   const { user } = useContext(Context);
   return (
-    // <div>
-    //   <ReactNotifications />
-    //   <Routes>
-    //     <Route exact path="/" element={user ? <Home /> : <Login />} />
-    //     <Route
-    //       exact
-    //       path="/register"
-    //       element={user ? <Home /> : <Register />}
-    //     />
+    <div>
+      <ReactNotifications />
+      <Routes>
+        <Route exact path="/" element={user ? <Home /> : <Login />} />
+        <Route
+          exact
+          path="/register"
+          element={user ? <Home /> : <Register />}
+        />
 
-    //     <Route exact path="/login" element={user ? <Home /> : <Login />} />
-    //   </Routes>
-    // </div>
-    <Profile/>
+        <Route exact path="/login" element={user ? <Home /> : <Login />} />
+        <Route exact path="/profile" element={user ? <Profile/> : <Login />} />
+      </Routes>
+    </div>
+    
   );
 }
 
