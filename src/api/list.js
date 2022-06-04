@@ -29,6 +29,10 @@ const apiList = {
     upload:{
       url:()=>"upload",
       method:"post"
+    },
+    likeDislike:{
+      url: () => `post`,
+      method:"post"
     }
 };
 export default apiList;

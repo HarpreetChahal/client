@@ -47,6 +47,8 @@ export default function Feed() {
               userName={post.userId ?post.userId.fullName : "John Doe"}
               comments={post.comments}
               images={post.images}
+              likes={post.likes}
+              dislikes={post.dislikes}
             />
           );
         })}

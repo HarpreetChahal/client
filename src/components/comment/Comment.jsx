@@ -11,7 +11,7 @@ export default function Comment({ user, comment, date }) {
           src="/assets/person/1.jpg"
           alt=""
         />
-        <span className="postCommentText">{comment}.</span>
+        <span className="postCommentText">{comment}. </span>
       </div>
     </>
   );
