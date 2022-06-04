@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
-import { UploadFile } from "@mui/icons-material";
+import { Cancel, UploadFile } from "@mui/icons-material";
 
 
 import commonApi from "../../api/common";
@@ -67,6 +67,14 @@ export default function Share({ fetchPosts }) {
             />
           </div>
           <hr className="shareHr" />
+          {file && (
+<div className="shareImgContainer">
+  <img className="shareImg" src={URL.createObjectURL(file)} alt=""/>
+  <Cancel className="shareCancelImg" onClick={() => setFile(null)}/>
+</div>
+          ) }
+
+
           <div className="shareBottom">
             <div className="shareOption">
               <Stack direction="row" alignItems="center" spacing={2}>
@@ -75,14 +83,14 @@ export default function Share({ fetchPosts }) {
                     id="contained-button-file"
                     multiple type="file"
                     onChange={(e) => setFile(e.target.files[0])}
-                    />
-                  <Button variant="contained" 
-                  type="file"
-                    id="fileInput" 
-                    color="success" 
-                    component="span" 
-                    startIcon={<PhotoCamera />} 
-                    >
+                  />
+                  <Button variant="contained"
+                    type="file"
+                    id="fileInput"
+                    color="success"
+                    component="span"
+                    startIcon={<PhotoCamera />}
+                  >
                     Upload
                   </Button>
 
