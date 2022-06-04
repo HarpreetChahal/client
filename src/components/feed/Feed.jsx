@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
 import "./feed.css";
 import commonApi from "../../api/common";
-
+import { Context } from "../context/Context";
 export default function Feed() {
   const [posts, setPosts] = useState([]);
-  const fetchPosts = React.useCallback(async () => {
+  const { user } = useContext(Context);
+  const fetchPosts = async () => {
     await commonApi({
       action: "fetchPost",
       data: {
         options: {
-            pagination:false,
+          pagination: false,
           populate: [
             { path: "userId", model: "user", select: ["_id", "fullName"] },
             {
-              path:"comments.userId",model:"user",select:["_id","fullName"]
-            }
+              path: "comments.userId",
+              model: "user",
+              select: ["_id", "fullName"],
+            },
           ],
           sort: { createdAt: -1 },
         },
@@ -27,24 +30,25 @@ export default function Feed() {
     }).then(({ DATA }) => {
       setPosts(DATA.data);
     });
-  });
+  };
   useEffect(() => {
-  
-    fetchPosts();
-  }, [fetchPosts]);
+    if (user) {
+      fetchPosts();
+    }
+  }, []);
 
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share fetchPosts={fetchPosts}/>
+        <Share fetchPosts={fetchPosts} />
         {posts.map((post) => {
           return (
-            <Post
+            <Post fetchPosts={fetchPosts}
               desc={post.desc}
               date={post.createdAt}
               key={post._id}
               postId={post._id}
-              userName={post.userId ?post.userId.fullName : "John Doe"}
+              userName={post.userId ? post.userId.fullName : "John Doe"}
               comments={post.comments}
               images={post.images}
               likes={post.likes}

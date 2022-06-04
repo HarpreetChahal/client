@@ -13,7 +13,7 @@ import {
   // Face,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
-
+// import { useRouter } from "next/router"
 // import FormControlLabel from "@mui/material/FormControlLabel";
 // import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -25,6 +25,7 @@ export default function Login() {
     password: "",
   });
   const navigate = useNavigate();
+  // const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault();
     await commonApi({
@@ -39,6 +40,8 @@ export default function Login() {
           password: "",
         });
         navigate("/");
+        // window.location.href="/"
+        // router.push("/")
       })
       .catch((error) => {
         dispatch({ type: "LOGIN_FAILURE" });
@@ -89,7 +92,7 @@ export default function Login() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Email color="primary" sx={{ mr: 1 }}/>
+                      <Email color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
@@ -106,7 +109,7 @@ export default function Login() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Key color="primary" sx={{ mr: 1 }}/>
+                      <Key color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}

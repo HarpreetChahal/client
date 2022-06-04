@@ -72,7 +72,12 @@ export default function Leftbar() {
                 <ListItemIcon>
                   <HomeIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Home"  onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          } />
               </ListItemButton>
             </ListItem>
             <Divider />
