@@ -1,3 +1,10 @@
+/*!
+* @file      post.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for post component page (display posts) for LookMeUp project.
+*/
+
 .post {
   width: 100%;
   border-radius: 10px;

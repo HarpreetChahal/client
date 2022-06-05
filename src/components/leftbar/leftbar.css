@@ -1,3 +1,11 @@
+/*!
+* @file      leftbar.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for leftbar component page (side menu) for LookMeUp project.
+*/
+
+
 .leftbar
 {
     flex: 3;

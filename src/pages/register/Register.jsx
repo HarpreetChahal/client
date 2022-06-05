@@ -5,24 +5,15 @@
 * @brief     This is the register page for LookMeUp project.
 */
 
-
+import "./register.css";
 import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import commonApi from "../../api/common";
-import "./register.css";
-import { Context } from "../../components/context/Context";
-
-import { useNavigate } from "react-router";
 import Toast from "../../api/toast";
-
+import { Context } from "../../components/context/Context";
+import { useNavigate } from "react-router";
 import { Button, InputAdornment, TextField } from "@mui/material";
-import {
-  AccountCircle,
-  Email,
-  CalendarToday,
-  Key,
-  Face,
-} from "@mui/icons-material";
+import { AccountCircle, Email, CalendarToday, Key, Face, } from "@mui/icons-material";
 import Link from "@mui/material/Link";
 
 export default function Register() {
@@ -52,7 +43,7 @@ export default function Register() {
           dob: "",
           password: "",
         });
-      
+
         navigate("/");
       })
       .catch((error) => {
@@ -104,7 +95,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <AccountCircle color="primary" sx={{ mr: 1 }}/>
+                      <AccountCircle color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
@@ -119,7 +110,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Face color="primary" sx={{ mr: 1 }}/>
+                      <Face color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
@@ -150,7 +141,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <CalendarToday color="primary" sx={{ mr: 1 }}/>
+                      <CalendarToday color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
@@ -166,7 +157,7 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Key color="primary" sx={{ mr: 1 }}/>
+                      <Key color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
@@ -186,7 +177,7 @@ export default function Register() {
                   href="/login"
                   style={{ cursor: "pointer" }}
                   variant="body2"
-                  >
+                >
                   {"Already have an account? Sign In"}
                 </Link>
               </Grid>
