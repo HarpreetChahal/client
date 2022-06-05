@@ -1,3 +1,11 @@
+/*!
+* @file      Login.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the login page for LookMeUp project.
+*/
+
+
 import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import "react-notifications-component/dist/theme.css";
@@ -54,7 +62,7 @@ export default function Login() {
         <Grid container style={{ minHeight: "100vh" }}>
           <Grid item xs={12} sm={6}>
             <img
-              src="/assets/signup1.png"
+              src="/assets/signup.png"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt="logo"
             />
@@ -76,6 +84,7 @@ export default function Login() {
                 flexDirection: "column",
                 maxWidth: 600,
                 minWidth: 300,
+                marginTop: 100,
               }}
             >
               <Grid container justify="center">

@@ -1,13 +1,16 @@
+/*!
+* @file      Leftbar.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the leftbar component page (side menu) for LookMeUp project.
+*/
+
+
 import React, { useContext } from "react";
 import "./leftbar.css";
-
-import { Home, FavoriteBorder, Person, PersonAdd } from "@mui/icons-material";
-
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-// import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import Box from "@mui/material/Box";
@@ -20,10 +23,8 @@ import Divider from "@mui/material/Divider";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router";
-
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { Context } from "../../components/context/Context";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -117,17 +118,13 @@ export default function Leftbar({fetchPosts}) {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>{"Are you sure you want to logout?"}</DialogTitle>
-        {/* <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            You will have to login again
-          </DialogContentText>
-        </DialogContent> */}
         <DialogActions>
           <Button
             variant="outlined"
             size="small"
             color="success"
             onClick={handleClose}
+            
           >
             Cancel
           </Button>

@@ -1,3 +1,12 @@
+/*!
+* @file      Home.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the home page for LookMeUp project.
+*/
+
+
+
 import React ,{useState}from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Leftbar from "../../components/leftbar/Leftbar";

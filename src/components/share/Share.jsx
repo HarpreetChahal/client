@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+/*!
+* @file      Share.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the share component page (create post) for LookMeUp project.
+*/
 
+
+import React, { useState } from "react";
 import "./share.css";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
-import { Cancel, UploadFile } from "@mui/icons-material";
+import { Cancel } from "@mui/icons-material";
 
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";

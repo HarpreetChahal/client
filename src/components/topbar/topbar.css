@@ -1,3 +1,10 @@
+/*!
+* @file      topbar.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for topbar component page (navigation bar) for LookMeUp project.
+*/
+
 .topbarContainer {
     height: 80px;
     width: 100%;

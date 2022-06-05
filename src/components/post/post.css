@@ -1,3 +1,10 @@
+/*!
+* @file      post.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for post component page (display posts) for LookMeUp project.
+*/
+
 .post {
   width: 100%;
   border-radius: 10px;
@@ -126,14 +133,28 @@ margin-left: 30px;
 cursor: pointer;
 }
 
-/* .viewComments
+.viewComments
 {
 text-align: center;
 margin-top: 15px;
 
 }
 
-.profileComment {
+.viewCommentsText{
+  cursor: pointer;
+  border-bottom: 1px  gray;
+  margin-bottom: 2px;
+  font-size: 16px;
+  
+}
+
+.viewCommentsText:hover
+{
+  color: #1877f2;
+  text-decoration: underline;
+}
+
+/* .profileComment {
 width: auto;
 display: flex;
 align-items: center;

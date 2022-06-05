@@ -1,3 +1,11 @@
+/*!
+* @file      Feed.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the feed component page (displays posts) for LookMeUp project.
+*/
+
+
 import React, { useEffect, useState, useContext } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
