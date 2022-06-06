@@ -10,8 +10,10 @@ import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import "react-notifications-component/dist/theme.css";
 import "./login.css";
+import IconButton from "@material-ui/core/IconButton";
 import { Context } from "../../components/context/Context";
 import { Button, InputAdornment, TextField } from "@mui/material";
+
 import Toast from "../../api/toast";
 import {
   // AccountCircle,
@@ -19,6 +21,7 @@ import {
   // CalendarToday,
   Key,
   // Face,
+  Visibility,VisibilityOff
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 // import { useRouter } from "next/router"
@@ -32,6 +35,15 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword );
+  };
+  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const navigate = useNavigate();
   // const router = useRouter()
   const handleSubmit = async (e) => {
@@ -108,7 +120,7 @@ export default function Login() {
               />
 
               <TextField
-                type="password"
+                type={showPassword ? "text" : "password"}
                 label="Password"
                 margin="normal"
                 onChange={(e) =>
@@ -120,7 +132,16 @@ export default function Login() {
                     <InputAdornment>
                       <Key color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  ),endAdornment:(
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
                 }}
               />
               {/* <FormControlLabel
