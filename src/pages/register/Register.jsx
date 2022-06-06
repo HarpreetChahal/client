@@ -15,6 +15,7 @@ import { useNavigate } from "react-router";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { AccountCircle, Email, CalendarToday, Key, Face, } from "@mui/icons-material";
 import Link from "@mui/material/Link";
+import moment from "moment"
 
 export default function Register() {
   const { dispatch, isFetching } = useContext(Context);
@@ -22,7 +23,7 @@ export default function Register() {
     email: "",
     firstName: "",
     lastName: "",
-    dob: "",
+    dob: moment().format("yyyy-MM-DD"),
     password: "",
   });
   const navigate = useNavigate();
@@ -133,7 +134,7 @@ export default function Register() {
               <TextField
                 label="date of birth"
                 margin="normal"
-                type={"date"}
+                type="date"
                 value={formData.dob}
                 onChange={(e) =>
                   setFormData({ ...formData, dob: e.target.value })
@@ -158,7 +159,7 @@ export default function Register() {
                   startAdornment: (
                     <InputAdornment>
                       <Key color="primary" sx={{ mr: 1 }} />
-                    </InputAdornment>
+                    </InputAdornment> 
                   ),
                 }}
               />
