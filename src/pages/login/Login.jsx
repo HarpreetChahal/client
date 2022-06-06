@@ -92,7 +92,7 @@ export default function Login() {
               </Grid>
 
               <TextField
-                label="email"
+                label="Email"
                 margin="normal"
                 value={formData.email}
                 onChange={(e) =>
@@ -109,7 +109,7 @@ export default function Login() {
 
               <TextField
                 type="password"
-                label="password"
+                label="Password"
                 margin="normal"
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
