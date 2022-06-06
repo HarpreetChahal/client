@@ -7,13 +7,14 @@
 
 import "./register.css";
 import React, { useState, useContext } from "react";
+import IconButton from "@material-ui/core/IconButton";
 import Grid from "@mui/material/Grid";
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
 import { Context } from "../../components/context/Context";
 import { useNavigate } from "react-router";
 import { Button, InputAdornment, TextField } from "@mui/material";
-import { AccountCircle, Email, CalendarToday, Key, Face, } from "@mui/icons-material";
+import { AccountCircle, Email, CalendarToday, Key, Face, Visibility,VisibilityOff} from "@mui/icons-material";
 import Link from "@mui/material/Link";
 import moment from "moment"
 
@@ -26,6 +27,15 @@ export default function Register() {
     dob: moment().format("yyyy-MM-DD"),
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword );
+  };
+  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +97,7 @@ export default function Register() {
               </Grid>
 
               <TextField
-                label="first name"
+                label="First Name"
                 margin="normal"
                 value={formData.firstName}
                 onChange={(e) =>
@@ -102,7 +112,7 @@ export default function Register() {
                 }}
               />
               <TextField
-                label="last name"
+                label="Last Name"
                 margin="normal"
                 value={formData.lastName}
                 onChange={(e) =>
@@ -117,7 +127,7 @@ export default function Register() {
                 }}
               />
               <TextField
-                label="email"
+                label="Email"
                 margin="normal"
                 value={formData.email}
                 onChange={(e) =>
@@ -132,7 +142,7 @@ export default function Register() {
                 }}
               />
               <TextField
-                label="date of birth"
+                label="Date of Birth"
                 margin="normal"
                 type="date"
                 value={formData.dob}
@@ -148,8 +158,8 @@ export default function Register() {
                 }}
               />
               <TextField
-                type="password"
-                label="password"
+                type={showPassword ? "text" : "password"}
+                label="Password"
                 margin="normal"
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
@@ -160,7 +170,16 @@ export default function Register() {
                     <InputAdornment>
                       <Key color="primary" sx={{ mr: 1 }} />
                     </InputAdornment> 
-                  ),
+                  ),endAdornment:(
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
                 }}
               />
 
