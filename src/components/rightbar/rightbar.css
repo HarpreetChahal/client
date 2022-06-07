@@ -1,3 +1,10 @@
+/*!
+* @file      rightbar.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for rightbar component page for LookMeUp project.
+*/
+
 .rightbar
 {
     flex: 3;

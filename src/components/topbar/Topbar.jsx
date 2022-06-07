@@ -1,14 +1,33 @@
+/*!
+* @file      Topbar.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the topbar component page (navigation bar) for LookMeUp project.
+*/
+
+
 import "./topbar.css";
 import { useContext } from "react";
-import { Logout, Search, UploadFile } from "@mui/icons-material";
-import Button from "@mui/material/Button";
+import { Search } from "@mui/icons-material";
 import { Context } from "../../components/context/Context";
-export default function Topbar() {
+export default function Topbar({fetchPosts}) {
   const { user } = useContext(Context);
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <span className="logo">LookMeUp</span>
+        <span
+          className="logo"
+          onClick={() =>{
+            fetchPosts()
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
+          }
+        >
+          LookMeUp
+        </span>
       </div>
       <div className="topbarCenter">
         <div className="searchbar">

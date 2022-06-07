@@ -1,9 +1,19 @@
+/*!
+* @file      Login.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the login page for LookMeUp project.
+*/
+
+
 import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import "react-notifications-component/dist/theme.css";
 import "./login.css";
+import IconButton from "@material-ui/core/IconButton";
 import { Context } from "../../components/context/Context";
 import { Button, InputAdornment, TextField } from "@mui/material";
+
 import Toast from "../../api/toast";
 import {
   // AccountCircle,
@@ -11,9 +21,10 @@ import {
   // CalendarToday,
   Key,
   // Face,
+  Visibility,VisibilityOff
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
-
+// import { useRouter } from "next/router"
 // import FormControlLabel from "@mui/material/FormControlLabel";
 // import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -24,7 +35,17 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword );
+  };
+  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const navigate = useNavigate();
+  // const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault();
     await commonApi({
@@ -39,19 +60,25 @@ export default function Login() {
           password: "",
         });
         navigate("/");
+        // window.location.href="/"
+        // router.push("/")
       })
       .catch((error) => {
         dispatch({ type: "LOGIN_FAILURE" });
         console.error(error);
       });
   };
+
+  const isFormValid = () => {
+    return formData.email && formData.password 
+  }
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <Grid container style={{ minHeight: "100vh" }}>
           <Grid item xs={12} sm={6}>
             <img
-              src="/assets/signup1.png"
+              src="/assets/signup.png"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt="logo"
             />
@@ -73,6 +100,7 @@ export default function Login() {
                 flexDirection: "column",
                 maxWidth: 600,
                 minWidth: 300,
+                marginTop: 100,
               }}
             >
               <Grid container justify="center">
@@ -80,7 +108,7 @@ export default function Login() {
               </Grid>
 
               <TextField
-                label="email"
+                label="Email"
                 margin="normal"
                 value={formData.email}
                 onChange={(e) =>
@@ -89,15 +117,15 @@ export default function Login() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Email color="primary" />
+                      <Email color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
 
               <TextField
-                type="password"
-                label="password"
+                type={showPassword ? "text" : "password"}
+                label="Password"
                 margin="normal"
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
@@ -106,9 +134,19 @@ export default function Login() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Key color="primary" />
+                      <Key color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  )
+                  // ,endAdornment:(
+                  //   <InputAdornment position="end">
+                  //     <IconButton
+                  //       onClick={handleClickShowPassword}
+                  //       onMouseDown={handleMouseDownPassword}
+                  //     >
+                  //       {showPassword ? <Visibility /> : <VisibilityOff />}
+                  //     </IconButton>
+                  //   </InputAdornment>
+                  // )
                 }}
               />
               {/* <FormControlLabel
@@ -120,7 +158,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
-                disabled={isFetching}
+                disabled={!isFormValid()}
               >
                 Sign In
               </Button>

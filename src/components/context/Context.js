@@ -4,7 +4,7 @@ import Reducer from "./Reducer";
 const INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("user")),
   isFetching: false,
-  error: false,
+  error: false
 };
 
 export const Context = createContext(INITIAL_STATE);

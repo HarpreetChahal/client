@@ -1,155 +1,182 @@
+/*!
+* @file      post.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for post component page (display posts) for LookMeUp project.
+*/
+
 .post {
-    width: 100%;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    margin: 30px 0;
-  }
-  
-  .postWrapper {
-    padding: 10px;
-  }
-
-  .postTop {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .postTopLeft {
-    display: flex;
-    align-items: center;
-  }
-  
-  .postProfileImg {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .postUsername {
-    font-size: 15px;
-    font-weight: 500;
-    margin: 0 10px;
-  }
-  
-  .postDate{
-      font-size: 11px;
-  }
-  .postCenter{
-    margin: 20px 0;
-}
-
-.postImg{
-    margin-top: 20px;
-    width: 100%;
-    max-height: 500px;
-    object-fit: contain;
-}
-
-.postBottom{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.postBottomLeft{
-    display: flex;
-    align-items: center;   
-}
-
-
-.postLikeCounter{
-    font-size: 15px;
-}
-
-.postCommentText{
-    cursor: pointer;
-    border-bottom: 1px  gray;
-    margin-bottom: 2px;
-    font-size: 16px;
-}
-
-.postLikeText{
-    cursor: pointer;
-    border-bottom: 1px gray;
-    font-size: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.postDislikeText{
-    cursor: pointer;
-    border-bottom: 1px gray;
-    font-size: 15px;
-    margin-left: 5px;
-}
-
-.writeComment {
-  display: flex;
-  align-items: center;
+  width: 100%;
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  margin-top: 20px;
+  margin: 30px 0;
 }
 
-.commentProfileImg {
+.postWrapper {
+  padding: 10px;
+}
+
+.postTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postTopLeft {
+  display: flex;
+  align-items: center;
+}
+
+.postProfileImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 10px;
-  
 }
 
-.commentInput {
-  border: none;
-  width: 80%;
+.postUsername {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 10px;
+}
+
+.postDate{
+    font-size: 11px;
+}
+.postCenter{
+  margin: 20px 0;
+}
+
+.postImg{
+  margin-top: 20px;
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.postBottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postBottomLeft{
+  display: flex;
+  align-items: center;   
+}
+
+.postBottomRight{
+display: flex;
+align-items: center;   
+}
+
+
+
+.postLikeCounter{
+  font-size: 15px;
+}
+
+.postCommentText{
+  cursor: pointer;
+  border-bottom: 1px  gray;
+  margin-bottom: 2px;
+  font-size: 16px;
+}
+
+.postLikeText{
+  cursor: pointer;
+  border-bottom: 1px gray;
+  font-size: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.postDislikeText{
+  cursor: pointer;
+  border-bottom: 1px gray;
+  font-size: 15px;
   margin-left: 5px;
 }
 
+.writeComment {
+display: flex;
+align-items: center;
+border-radius: 10px;
+-webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+margin-top: 20px;
+}
+
+.commentProfileImg {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+object-fit: cover;
+margin: 10px;
+
+}
+
+.commentInput {
+border: none;
+width: 80%;
+margin-left: 5px;
+}
+
 .commentInput:focus {
-  outline: none;
+outline: none;
 }
 
 .sendButton
 {
-  margin-left: 30px;
-  cursor: pointer;
+margin-left: 30px;
+cursor: pointer;
 }
 
 .viewComments
 {
-  text-align: center;
-  margin-top: 15px;
+text-align: center;
+margin-top: 15px;
+
+}
+
+.viewCommentsText{
+  cursor: pointer;
+  border-bottom: 1px  gray;
+  margin-bottom: 2px;
+  font-size: 16px;
   
 }
 
-.profileComment {
-  width: auto;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  margin-top: 15px;
+.viewCommentsText:hover
+{
+  color: #1877f2;
+  text-decoration: underline;
+}
+
+/* .profileComment {
+width: auto;
+display: flex;
+align-items: center;
+border-radius: 10px;
+-webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+margin-top: 15px;
 }
 
 .profilePommentProfileImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 10px;
-  
+width: 32px;
+height: 32px;
+border-radius: 50%;
+object-fit: cover;
+margin: 10px;
+
 }
 
 .postCommentText
 {
-  border: none;
-  width: 80%;
-  margin-left: 5px;
-  margin-right: 10px;
-}
+border: none;
+width: 80%;
+margin-left: 5px;
+margin-right: 10px;
+} */

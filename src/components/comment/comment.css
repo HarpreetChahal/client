@@ -1,0 +1,40 @@
+/*!
+* @file      comment.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for comment component page for LookMeUp project.
+*/
+
+
+.viewComments
+{
+  text-align: center;
+  margin-top: 15px;
+  
+}
+
+.profileComment {
+  width: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin-top: 15px;
+}
+.profilePommentProfileImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+    
+  }
+  
+  .postCommentText
+  {
+    border: none;
+    width: 100%;
+    /* margin-left: 5px; */
+    margin-right: 10px;
+  }

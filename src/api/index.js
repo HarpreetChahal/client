@@ -9,6 +9,16 @@ const POST = "POST";
 const PUT = "PUT";
 const PATCH = "PATCH";
 
+const getToken = () => {
+  if (typeof localStorage !== "undefined") {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user ) {
+      return user.token;
+    }
+  }
+
+  return "";
+};
 const ACTION_HANDLERS = {
   [GET]: (url, data, headers) => {
     let queryUrl = url;
@@ -43,11 +53,14 @@ const ACTION_HANDLERS = {
     }),
 };
 
-function setHeaders({ contentType }) {
+function setHeaders({ contentType, authToken }) {
   // set contentType
   if (contentType) {
     axios.defaults.headers.post["Content-Type"] = contentType;
     axios.defaults.headers.post.Accept = "application/json";
+  }
+  if (authToken) {
+    axios.defaults.headers.common.Authorization = `JWT ${getToken()}`;
   }
 }
 
@@ -60,7 +73,7 @@ function handleError(error) {
 
   return Promise.reject(error);
 }
-const fetchUrl = ({ type, url, data = {}, config = {}, hash = "" }) => {
+const fetchUrl = ({ type, url, data = {}, config = {}}) => {
   setHeaders(config);
   const handler = ACTION_HANDLERS[type.toUpperCase()];
 

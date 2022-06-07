@@ -1,21 +1,22 @@
+/*!
+* @file      Register.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the register page for LookMeUp project.
+*/
+
+import "./register.css";
 import React, { useState, useContext } from "react";
+import IconButton from "@material-ui/core/IconButton";
 import Grid from "@mui/material/Grid";
 import commonApi from "../../api/common";
-import "./register.css";
-import { Context } from "../../components/context/Context";
-
-import { useNavigate } from "react-router";
 import Toast from "../../api/toast";
-
+import { Context } from "../../components/context/Context";
+import { useNavigate } from "react-router";
 import { Button, InputAdornment, TextField } from "@mui/material";
-import {
-  AccountCircle,
-  Email,
-  CalendarToday,
-  Key,
-  Face,
-} from "@mui/icons-material";
+import { AccountCircle, Email, CalendarToday, Key, Face, Visibility,VisibilityOff} from "@mui/icons-material";
 import Link from "@mui/material/Link";
+import moment from "moment"
 
 export default function Register() {
   const { dispatch, isFetching } = useContext(Context);
@@ -23,9 +24,21 @@ export default function Register() {
     email: "",
     firstName: "",
     lastName: "",
-    dob: "",
+    dob: moment().format("yyyy-MM-DD"),
     password: "",
   });
+  const isFormValid = () => {
+    return formData.email && formData.password  && formData.firstName && formData.lastName && formData.dob
+  }
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword );
+  };
+  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +57,7 @@ export default function Register() {
           dob: "",
           password: "",
         });
-      
+
         navigate("/");
       })
       .catch((error) => {
@@ -52,13 +65,15 @@ export default function Register() {
         console.error(error);
       });
   };
+
+ 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <Grid container style={{ minHeight: "100vh" }}>
           <Grid item xs={12} sm={6}>
             <img
-              src="/assets/signup1.png"
+              src="/assets/signup.png"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt="logo"
             />
@@ -87,7 +102,7 @@ export default function Register() {
               </Grid>
 
               <TextField
-                label="first name"
+                label="First Name"
                 margin="normal"
                 value={formData.firstName}
                 onChange={(e) =>
@@ -96,13 +111,13 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <AccountCircle color="primary" />
+                      <AccountCircle color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
               <TextField
-                label="last name"
+                label="Last Name"
                 margin="normal"
                 value={formData.lastName}
                 onChange={(e) =>
@@ -111,13 +126,13 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Face color="primary" />
+                      <Face color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
               <TextField
-                label="email"
+                label="Email"
                 margin="normal"
                 value={formData.email}
                 onChange={(e) =>
@@ -126,15 +141,15 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Email color="primary" />
+                      <Email color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
               <TextField
-                label="date of birth"
+                label="Date of Birth"
                 margin="normal"
-                type={"date"}
+                type="date"
                 value={formData.dob}
                 onChange={(e) =>
                   setFormData({ ...formData, dob: e.target.value })
@@ -142,14 +157,14 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <CalendarToday color="primary" />
+                      <CalendarToday color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
               <TextField
-                type="password"
-                label="password"
+                type={showPassword ? "text" : "password"}
+                label="Password"
                 margin="normal"
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
@@ -158,9 +173,18 @@ export default function Register() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Key color="primary" />
+                      <Key color="primary" sx={{ mr: 1 }} />
+                    </InputAdornment> 
+                  ),endAdornment:(
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
                     </InputAdornment>
-                  ),
+                  )
                 }}
               />
 
@@ -169,7 +193,7 @@ export default function Register() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
-                disabled={isFetching}
+                disabled={!isFormValid()} 
               >
                 Sign Up
               </Button>
