@@ -1,10 +1,9 @@
 /*!
-* @file      Post.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the post component page for LookMeUp project.
-*/
-
+ * @file      Post.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the post component page for LookMeUp project.
+ */
 
 import React, { useState, useEffect, useContext } from "react";
 import "./post.css";
@@ -16,17 +15,26 @@ import {
   Send,
   FavoriteBorder,
 } from "@mui/icons-material";
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import CommentIcon from '@mui/icons-material/Comment';
+import CommentIcon from "@mui/icons-material/Comment";
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
 import { Context } from "../context/Context";
 
 export default function Post(props) {
   const PF = "http://localhost:5000/assets/";
-  const { desc, date, userName, comments, postId, images, likes, dislikes ,fetchPosts} =
-    props;
+  const {
+    desc,
+    date,
+    userName,
+    comments,
+    postId,
+    images,
+    likes,
+    dislikes,
+    fetchPosts,
+  } = props;
   let imgPath = "assets/post/2.jpg";
   if (images.length !== 0) {
     imgPath = PF + images[0];
@@ -52,7 +60,7 @@ export default function Post(props) {
           authToken: true,
         },
       }).then(({ MESSAGE }) => {
-        fetchPosts()
+        fetchPosts();
         setIsLiked(!isLiked);
       });
     } catch (err) {}
@@ -69,10 +77,8 @@ export default function Post(props) {
           authToken: true,
         },
       }).then(({ MESSAGE }) => {
-        fetchPosts()
+        fetchPosts();
         isDisLiked(!isDisLiked);
-        
-        
       });
     } catch (err) {}
   };
@@ -91,8 +97,12 @@ export default function Post(props) {
     }).then(({ MESSAGE }) => {
       setComment("");
       Toast.success(MESSAGE);
-      fetchPosts()
+      fetchPosts();
     });
+  };
+
+  const validateComment = () => {
+    return comment !== "";
   };
   return (
     <div className="post">
@@ -117,11 +127,10 @@ export default function Post(props) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-           
             {!isLiked && (
               <FavoriteBorder cursor="pointer" onClick={likeHandler} />
             )}
-             {isLiked && (
+            {isLiked && (
               <FavoriteIcon
                 color={"error"}
                 cursor="pointer"
@@ -129,17 +138,27 @@ export default function Post(props) {
               />
             )}
             <span className="postLikeText">{likes.length} Like </span>
-            {!isDisLiked && <ThumbDownOffAlt cursor="pointer" onClick={disLikeHandler} />}
-            {isDisLiked && <ThumbDownIcon cursor="pointer" onClick={likeHandler} />}
-           
+            {!isDisLiked && (
+              <ThumbDownOffAlt cursor="pointer" onClick={disLikeHandler} />
+            )}
+            {isDisLiked && (
+              <ThumbDownIcon cursor="pointer" onClick={likeHandler} />
+            )}
+
             <span className="postDislikeText">{dislikes.length} DisLike </span>
           </div>
-          <div className="postBottomRight" onClick={()=>{setShowComment(!showComment)}}>
-            
+          <div
+            className="postBottomRight"
+            onClick={() => {
+              if (comments.length !== 0) {
+                setShowComment(!showComment);
+              }
+            }}
+          >
             {/* <span className="postCommentText" onClick={()=>{setShowComment(!showComment)}}> {comments.length} Comment</span> */}
 
             <CommentIcon cursor="pointer" />
-            <span className="postCommentText" > {comments.length} Comments</span>
+            <span className="postCommentText"> {comments.length} Comments</span>
           </div>
         </div>
 
@@ -157,33 +176,45 @@ export default function Post(props) {
             }}
             className="commentInput"
           />
-          <div className="sendButton">
-            <Send
-              sx={{
-                color: "#1877f2",
-              }}
-              onClick={createComment}
-            />
-          </div>
+          {validateComment() && (
+            <div className="sendButton">
+              <Send
+                sx={{
+                  color: "#1877f2",
+                }}
+                onClick={createComment}
+              />
+            </div>
+          )}
         </div>
 
-         <div className="viewComments" onClick={()=>{setShowComment(!showComment)}}>
-                        <span className="viewCommentsText">View All Comments</span>
-                    </div>
-                    {/* <div className="profileComment">
+        <div
+          className="viewComments"
+          onClick={() => {
+            if (comments.length !== 0) {
+              setShowComment(!showComment);
+            }
+          }}
+        >
+          <span className="viewCommentsText">
+            {showComment ? "Hide All" : "View All"} Comments
+          </span>
+        </div>
+        {/* <div className="profileComment">
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
                 <span className="postCommentText">My first comment..</span>
                     </div>  */}
-        { showComment && comments.map((c) => {
-          return (
-            <Comment
-              comment={c.comment}
-              date={c.at}
-              user={c.userId}
-              key={c._id}
-            />
-          );
-        })}
+        {showComment &&
+          comments.map((c) => {
+            return (
+              <Comment
+                comment={c.comment}
+                date={c.at}
+                user={c.userId}
+                key={c._id}
+              />
+            );
+          })}
       </div>
     </div>
   );
