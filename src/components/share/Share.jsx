@@ -24,7 +24,9 @@ const Input = styled("input")({
 export default function Share({ fetchPosts }) {
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
-
+  const isFormValid = () => {
+    return (desc!=="")
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = { desc: desc };
@@ -105,6 +107,7 @@ export default function Share({ fetchPosts }) {
                     id="fileInput"
                     color="success"
                     component="span"
+                   
                     startIcon={<PhotoCamera />}
                   >
                     Upload
@@ -118,7 +121,7 @@ export default function Share({ fetchPosts }) {
                 </label>
               </Stack>
             </div>
-            <Button variant="contained" type="submit" onClick={handleSubmit}>
+            <Button variant="contained" type="submit"  disabled={!isFormValid()} onClick={handleSubmit}>
               Create Post
             </Button>
           </div>

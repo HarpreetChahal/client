@@ -68,6 +68,10 @@ export default function Login() {
         console.error(error);
       });
   };
+
+  const isFormValid = () => {
+    return formData.email && formData.password 
+  }
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -154,7 +158,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
-                disabled={isFetching}
+                disabled={!isFormValid()}
               >
                 Sign In
               </Button>

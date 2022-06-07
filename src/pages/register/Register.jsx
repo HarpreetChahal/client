@@ -27,6 +27,9 @@ export default function Register() {
     dob: moment().format("yyyy-MM-DD"),
     password: "",
   });
+  const isFormValid = () => {
+    return formData.email && formData.password  && formData.firstName && formData.lastName && formData.dob
+  }
   const [showPassword, setShowPassword] = useState(false);
   
   const handleClickShowPassword = () => {
@@ -62,6 +65,8 @@ export default function Register() {
         console.error(error);
       });
   };
+
+ 
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -188,7 +193,7 @@ export default function Register() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
-                disabled={isFetching}
+                disabled={!isFormValid()} 
               >
                 Sign Up
               </Button>
