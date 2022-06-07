@@ -101,7 +101,7 @@ export default function Leftbar({fetchPosts}) {
 
       <Button
         variant="contained"
-        onClick={handleClickOpen}
+        onClick={handleLogout}
         sx={{
           position: "fixed",
           bottom: 10,
@@ -110,34 +110,6 @@ export default function Leftbar({fetchPosts}) {
       >
         Logout
       </Button>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"Are you sure you want to logout?"}</DialogTitle>
-        <DialogActions>
-          <Button
-            variant="outlined"
-            size="small"
-            color="success"
-            onClick={handleClose}
-            
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            color="error"
-            onClick={handleLogout}
-          >
-            Log out
-          </Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 }
