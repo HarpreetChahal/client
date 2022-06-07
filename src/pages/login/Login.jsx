@@ -1,19 +1,19 @@
 /*!
-* @file      Login.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the login page for LookMeUp project.
-*/
+ * @file      Login.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the login page for LookMeUp project.
+ */
 
-
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import "react-notifications-component/dist/theme.css";
 import "./login.css";
 import IconButton from "@material-ui/core/IconButton";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { Context } from "../../components/context/Context";
 import { Button, InputAdornment, TextField } from "@mui/material";
-
 import Toast from "../../api/toast";
 import {
   // AccountCircle,
@@ -21,7 +21,8 @@ import {
   // CalendarToday,
   Key,
   // Face,
-  Visibility,VisibilityOff
+  Visibility,
+  VisibilityOff,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 // import { useRouter } from "next/router"
@@ -31,50 +32,67 @@ import Link from "@mui/material/Link";
 import commonApi from "../../api/common";
 export default function Login() {
   const { dispatch, isFetching } = useContext(Context);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+
   const [showPassword, setShowPassword] = useState(false);
-  
+
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword );
+    setShowPassword(!showPassword);
   };
-  
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
   const navigate = useNavigate();
-  // const router = useRouter()
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await commonApi({
-      action: "login",
-      data: formData,
-    })
-      .then(({ DATA = {}, MESSAGE }) => {
-        dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
-        Toast.success(MESSAGE);
-        setFormData({
-          email: "",
-          password: "",
-        });
-        navigate("/");
-        // window.location.href="/"
-        // router.push("/")
-      })
-      .catch((error) => {
-        dispatch({ type: "LOGIN_FAILURE" });
-        console.error(error);
-      });
-  };
+  const [isEmail, setIsEmail] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
 
-  const isFormValid = () => {
-    return formData.email && formData.password 
-  }
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      password: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required"),
+    }),
+    onSubmit: async (values) => {
+      //  const {email,password}=values
+      await commonApi({
+        action: "login",
+        data: values,
+      })
+        .then(({ DATA = {}, MESSAGE }) => {
+          dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
+          setIsEmail(false);
+          setIsPassword(false);
+          Toast.success(MESSAGE);
+          navigate("/");
+        })
+        .catch((error) => {
+          dispatch({ type: "LOGIN_FAILURE" });
+          let { data } = error.response;
+          if (data.DATA === "email") {
+            setIsEmail(true);
+          }
+          if (data.DATA === "password") {
+            setIsPassword(true);
+          }
+
+          console.error(error);
+        });
+    },
+  });
+  useEffect(() => {
+    if (isEmail) {
+      setIsEmail(false);
+    }
+    if (isPassword) {
+      setIsPassword(false);
+    }
+  }, [formik.values.email,formik.values.password]);
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Grid container style={{ minHeight: "100vh" }}>
           <Grid item xs={12} sm={6}>
             <img
@@ -110,10 +128,12 @@ export default function Login() {
               <TextField
                 label="Email"
                 margin="normal"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                name="email"
+                type="email"
+                error={(formik.touched.email && formik.errors.email) || isEmail}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
@@ -122,21 +142,24 @@ export default function Login() {
                   ),
                 }}
               />
-
+              {/* {formik.touched.email && formik.errors.email ? (
+                <div style={{color:"red"}}>{formik.errors.email}</div>
+              ) : null} */}
               <TextField
                 type={showPassword ? "text" : "password"}
                 label="Password"
                 margin="normal"
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                value={formData.password}
+                name="password"
+                error={formik.touched.password && formik.errors.password || isPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
                       <Key color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  )
+                  ),
                   // ,endAdornment:(
                   //   <InputAdornment position="end">
                   //     <IconButton
@@ -149,6 +172,9 @@ export default function Login() {
                   // )
                 }}
               />
+              {/* {formik.touched.password && formik.errors.password ? (
+                <div>{formik.errors.password}</div>
+              ) : null} */}
               {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -158,7 +184,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
-                disabled={!isFormValid()}
+                disabled={!(formik.isValid && formik.dirty)}
               >
                 Sign In
               </Button>
