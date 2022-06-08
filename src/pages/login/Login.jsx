@@ -53,7 +53,7 @@ export default function Login() {
     },
     validationSchema: Yup.object({
       password: Yup.string().required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
+      email: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
       //  const {email,password}=values
@@ -89,7 +89,7 @@ export default function Login() {
     if (isPassword) {
       setIsPassword(false);
     }
-  }, [formik.values.email,formik.values.password]);
+  }, [formik.values.email, formik.values.password]);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -129,7 +129,7 @@ export default function Login() {
                 label="Email"
                 margin="normal"
                 name="email"
-                type="email"
+                type="text"
                 error={(formik.touched.email && formik.errors.email) || isEmail}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -150,7 +150,10 @@ export default function Login() {
                 label="Password"
                 margin="normal"
                 name="password"
-                error={formik.touched.password && formik.errors.password || isPassword}
+                error={
+                  (formik.touched.password && formik.errors.password) ||
+                  isPassword
+                }
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
