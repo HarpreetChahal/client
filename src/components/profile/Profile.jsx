@@ -10,6 +10,9 @@ import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 
 export default function Profile() {
+
+
+  const [file, setFile] = useState(null);
   const { user } = useContext(Context);
   const [posts, setPosts] = useState([]);
   const fetchPosts = async (query={}) => {
@@ -48,16 +51,28 @@ export default function Profile() {
     <>
       <Topbar />
       <div className="profile">
-        <Leftbar />
+        {/* <Leftbar /> */}
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
+           
               <img className="profileCoverImg" src="assets/post/3.jpg" alt="" />
-              <img
+
+              
+             
+              <img 
                 className="profileUserImg"
                 src="assets/person/1.jpg"
                 alt=""
               />
+                 <input className="changeUserImg"
+                // style={{ display: "none" }}
+                type="file"
+                id="file"
+                accept=".png,.jpeg,.jpg"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+               
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{user.fullName}</h4>
@@ -65,7 +80,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Leftbar fetchPosts={()=>fetchPosts}/>
+            <Profileleftbar fetchPosts={()=>fetchPosts}/>
             <Feed posts={posts} fetchPosts={()=>fetchPosts({userId:user._id})} />
             <Rightbar  />
           </div>
