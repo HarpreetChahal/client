@@ -1,12 +1,117 @@
 import React from "react";
 import "./profileleftbar.css"
+import { Edit, Logout } from "@mui/icons-material";
 
 
 export default function Profileleftbar({ profile }) {
     const ProfileProfileleftbar = () => {
         return (
             <>
-            <h4 className="rightbarTitle"> User Information </h4>
+            <div className="InfoCard">
+                <div className="infoHead">
+                    <h3>User Information </h3>
+                    <div>
+                    <Edit/>
+                    </div>
+                </div>
+
+            <div className="info">
+                <span>
+                    <b>Username : </b>
+                </span>
+                <span>John Doe</span>
+
+            </div>
+
+            <div className="info">
+                <span>
+                    <b>Email : </b>
+                </span>
+                <span>johndoe@gmail.com</span>
+
+            </div>
+
+            <div className="info">
+                <span>
+                    <b>Date of birth : </b>
+                </span>
+                <span>01-01-1990</span>
+
+            </div>
+
+
+            <button className="logout-button">Logout
+            <Logout sx={{ml:1}}/>
+            </button>
+            
+
+            </div>
+
+            <div className="FollowersCard">
+                <h3>Who is following you</h3>
+                <div className="follower">
+                    <div>
+                        <img src="assets/person/1.jpg" alt="" className="followerImg"/>
+                        <div className="name">
+                            <span>
+                                John Doe
+                            </span>
+                        </div>
+                    </div>
+
+                    <button className="follow-button">Follow</button>
+
+
+                </div>
+                <div className="follower">
+                    <div>
+                        <img src="assets/person/1.jpg" alt="" className="followerImg"/>
+                        <div className="name">
+                            <span>
+                                Jaden Smith
+                            </span>
+                        </div>
+                    </div>
+
+                    <button className="follow-button">Follow</button>
+
+
+                </div>
+                <div className="follower">
+                    <div>
+                        <img src="assets/person/1.jpg" alt="" className="followerImg"/>
+                        <div className="name">
+                            <span>
+                                Manny Moe
+                            </span>
+                        </div>
+                    </div>
+
+                    <button className="follow-button">Follow</button>
+
+
+                </div>
+                <div className="follower">
+                    <div>
+                        <img src="assets/person/1.jpg" alt="" className="followerImg"/>
+                        <div className="name">
+                            <span>
+                                Twin Turbo
+                            </span>
+                        </div>
+                    </div>
+
+                    <button className="follow-button">Follow</button>
+
+
+                </div>
+            </div>
+
+
+
+
+            {/* <h4 className="rightbarTitle"> User Information </h4>
+            
             <div className="rightbarInfo">
                 <div className="rightbarInfoItem">
                     <span className="rightbarInfoKey">Lives in:</span>
@@ -28,7 +133,7 @@ export default function Profileleftbar({ profile }) {
                     <span className="rightbarInfoValue">Banker</span>
                 </div>
 
-            </div>
+            </div> */}
             </>
         )
     }
