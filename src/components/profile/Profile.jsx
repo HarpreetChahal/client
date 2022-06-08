@@ -48,7 +48,7 @@ export default function Profile() {
     <>
       <Topbar />
       <div className="profile">
-        <Leftbar />
+        {/* <Leftbar /> */}
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
@@ -65,7 +65,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Leftbar fetchPosts={()=>fetchPosts}/>
+            <Profileleftbar fetchPosts={()=>fetchPosts}/>
             <Feed posts={posts} fetchPosts={()=>fetchPosts({userId:user._id})} />
             <Rightbar  />
           </div>
