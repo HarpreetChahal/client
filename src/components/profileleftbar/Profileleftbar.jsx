@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./profileleftbar.css"
 import { Edit, Logout } from "@mui/icons-material";
+import { Context } from "../context/Context";
+import moment from "moment"
 
-
-export default function Profileleftbar({ profile }) {
+export default function Profileleftbar() {
+    const {user}=useContext(Context)
     const ProfileProfileleftbar = () => {
         return (
             <>
@@ -19,7 +21,7 @@ export default function Profileleftbar({ profile }) {
                 <span>
                     <b>Username : </b>
                 </span>
-                <span>John Doe</span>
+                <span>{user.fullName}</span>
 
             </div>
 
@@ -27,7 +29,7 @@ export default function Profileleftbar({ profile }) {
                 <span>
                     <b>Email : </b>
                 </span>
-                <span>johndoe@gmail.com</span>
+                <span>{user.email}</span>
 
             </div>
 
@@ -35,7 +37,7 @@ export default function Profileleftbar({ profile }) {
                 <span>
                     <b>Date of birth : </b>
                 </span>
-                <span>01-01-1990</span>
+                <span>{moment(user.dob).format("DD MMM,yyyy")}</span>
 
             </div>
 
