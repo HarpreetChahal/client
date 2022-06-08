@@ -16,7 +16,7 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import Profile from "../../components/profile/Profile";
 import "./home.css";
 import commonApi from "../../api/common"
-export default function Home()
+export default function Home({handleLogout})
 {
     const [posts, setPosts] = useState([]);
   const fetchPosts = async () => {
@@ -47,7 +47,7 @@ export default function Home()
         <>
         <Topbar fetchPosts={fetchPosts} />
         <div className="homeContainer">
-         <Leftbar fetchPosts={fetchPosts} />
+         <Leftbar fetchPosts={fetchPosts} handleLogout={handleLogout}/>
          <Feed fetchPosts={fetchPosts} posts={posts}/>
          {/* <Rightbar/>    */}
       

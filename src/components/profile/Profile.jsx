@@ -9,7 +9,7 @@ import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 
-export default function Profile() {
+export default function Profile({handleLogout}) {
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
   const [posts, setPosts] = useState([]);
@@ -74,7 +74,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar />
+            <Profileleftbar handleLogout={handleLogout}/>
             <Feed
               posts={posts}
               fetchPosts={() => fetchPosts({ userId: user._id })}

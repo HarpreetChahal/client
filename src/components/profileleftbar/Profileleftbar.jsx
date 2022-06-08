@@ -4,7 +4,7 @@ import { Edit, Logout } from "@mui/icons-material";
 import { Context } from "../context/Context";
 import moment from "moment"
 
-export default function Profileleftbar() {
+export default function Profileleftbar({handleLogout}) {
     const {user}=useContext(Context)
     const ProfileProfileleftbar = () => {
         return (
@@ -42,7 +42,7 @@ export default function Profileleftbar() {
             </div>
 
 
-            <button className="logout-button">Logout
+            <button className="logout-button" onClick={handleLogout}>Logout
             <Logout sx={{ml:1}}/>
             </button>
             
