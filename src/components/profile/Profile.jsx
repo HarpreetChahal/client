@@ -3,6 +3,7 @@ import React from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Leftbar from "../../components/leftbar/Leftbar";
 import Feed from "../../components/feed/Feed";
+import Profileleftbar from "../profileleftbar/Profileleftbar";
 import Rightbar from "../../components/rightbar/Rightbar";
 import "./profile.css"
 
@@ -12,7 +13,7 @@ export default function Profile() {
         <>
             <Topbar />
             <div className="profile">
-            <Leftbar />
+            {/* <Leftbar /> */}
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileCover">
@@ -31,7 +32,7 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        {/* <Leftbar /> */}
+                        <Profileleftbar profile />
                         <Feed />
                         <Rightbar profile/>
                     </div>

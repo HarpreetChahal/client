@@ -1,34 +1,67 @@
 import React from "react";
-import "./rightbar.css"
+import "./rightbar.css";
+import {Add} from "@mui/icons-material";
 
 
 export default function Rightbar({ profile }) {
     const ProfileRightbar = () => {
         return (
             <>
-            <h4 className="rightbarTitle"> User Information</h4>
-            <div className="rightbarInfo">
-                <div className="rightbarInfoItem">
-                    <span className="rightbarInfoKey">Lives in:</span>
-                    <span className="rightbarInfoValue">New York</span>
-                </div>
+            <button className="rightbarFollowButton">
+             Follow <Add/>
+            </button>
+            <h4 className="rightbarTitle">User friends</h4>
+        <div className="rightbarFollowings">
+          <div className="rightbarFollowing">
+            <img
+              src="assets/person/1.jpg"
+              alt=""
+              className="rightbarFollowingImg"
+            />
+            <span className="rightbarFollowingName">Jay Saul</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img
+              src="assets/person/2.jpg"
+              alt=""
+              className="rightbarFollowingImg"
+            />
+            <span className="rightbarFollowingName">Jason Smith</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img
+              src="assets/person/3.jpg"
+              alt=""
+              className="rightbarFollowingImg"
+            />
+            <span className="rightbarFollowingName">Tony Stark</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img
+              src="assets/person/4.jpg"
+              alt=""
+              className="rightbarFollowingImg"
+            />
+            <span className="rightbarFollowingName">Allison Ray</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img
+              src="assets/person/5.jpg"
+              alt=""
+              className="rightbarFollowingImg"
+            />
+            <span className="rightbarFollowingName">Carter King</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img
+              src="assets/person/6.jpg"
+              alt=""
+              className="rightbarFollowingImg"
+            />
+            <span className="rightbarFollowingName">Jessie Pin</span>
+          </div>
+        </div>
 
-                <div className="rightbarInfoItem">
-                    <span className="rightbarInfoKey">From:</span>
-                    <span className="rightbarInfoValue">Amsterdam</span>
-                </div>
-
-                <div className="rightbarInfoItem">
-                    <span className="rightbarInfoKey">Relationship:</span>
-                    <span className="rightbarInfoValue">Single</span>
-                </div>
-
-                <div className="rightbarInfoItem">
-                    <span className="rightbarInfoKey">Occupation:</span>
-                    <span className="rightbarInfoValue">Banker</span>
-                </div>
-
-            </div>
             </>
         )
     }
