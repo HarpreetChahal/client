@@ -1,3 +1,11 @@
+/*!
+* @file      comment.css
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the stylesheet page for comment component page for LookMeUp project.
+*/
+
+
 .viewComments
 {
   text-align: center;
@@ -26,7 +34,7 @@
   .postCommentText
   {
     border: none;
-    width: 80%;
-    margin-left: 5px;
+    width: 100%;
+    /* margin-left: 5px; */
     margin-right: 10px;
   }

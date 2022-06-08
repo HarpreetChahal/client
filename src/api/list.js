@@ -1,12 +1,38 @@
 const apiList = {
   // Authentication APIs
   register: {
-    url: () => 'auth/register',
-    method: 'post',
+    url: () => "auth/register",
+    method: "post",
   },
   login: {
-    url: () => 'auth/login',
-    method: 'post',
+    url: () => "auth/login",
+    method: "post",
   },
-}
-export default apiList
+
+  // Posts APIs
+  createPost: {
+    url: () => "post/add",
+    method: "post",
+  },
+  fetchPost:{
+    url:()=>"post/findAll",
+    method:"post"
+  },
+
+  // createComment
+  createComment:{
+    url:()=>"comment/add",
+    method:"post"
+  },
+
+  // upload file 
+    upload:{
+      url:()=>"upload",
+      method:"post"
+    },
+    likeDislike:{
+      url: () => `post`,
+      method:"post"
+    }
+};
+export default apiList;

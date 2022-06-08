@@ -1,12 +1,20 @@
-import React, { useState, useContext } from "react";
+/*!
+ * @file      Register.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the register page for LookMeUp project.
+ */
+
+import "./register.css";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import React, { useState, useContext, useEffect } from "react";
+import IconButton from "@material-ui/core/IconButton";
 import Grid from "@mui/material/Grid";
 import commonApi from "../../api/common";
-import "./register.css";
-import { Context } from "../../components/context/Context";
-
-import { useNavigate } from "react-router";
 import Toast from "../../api/toast";
-
+import { Context } from "../../components/context/Context";
+import { useNavigate } from "react-router";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import {
   AccountCircle,
@@ -14,51 +22,75 @@ import {
   CalendarToday,
   Key,
   Face,
+  Visibility,
+  VisibilityOff,
 } from "@mui/icons-material";
 import Link from "@mui/material/Link";
+import moment from "moment";
 
 export default function Register() {
   const { dispatch, isFetching } = useContext(Context);
-  const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    dob: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [showPassword, setShowPassword] = useState(false);
 
-    await commonApi({
-      action: "register",
-      data: formData,
-    })
-      .then(({ DATA = {}, MESSAGE }) => {
-        dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
-        Toast.success(MESSAGE);
-        setFormData({
-          email: "",
-          firstName: "",
-          lastName: "",
-          dob: "",
-          password: "",
-        });
-      
-        navigate("/");
-      })
-      .catch((error) => {
-        dispatch({ type: "LOGIN_FAILURE" });
-        console.error(error);
-      });
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
   };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  const navigate = useNavigate();
+  const [isEmail, setIsEmail] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      dob: moment().format("yyyy-MM-DD"),
+      password: "",
+    },
+    validationSchema: Yup.object({
+      password: Yup.string().required("Required"),
+      firstName: Yup.string().required("Required"),
+      lastName: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required"),
+    }),
+    onSubmit: async (values) => {
+      await commonApi({
+        action: "register",
+        data: values,
+      })
+        .then(({ DATA = {}, MESSAGE }) => {
+          dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
+          Toast.success(MESSAGE);
+          navigate("/");
+        })
+        .catch((error) => {
+          dispatch({ type: "LOGIN_FAILURE" });
+          let { data } = error.response;
+          if (data.DATA === "email") {
+            setIsEmail(true);
+          }
+          console.error(error);
+        });
+    },
+  });
+  useEffect(() => {
+    if (isEmail) {
+      setIsEmail(false);
+    }
+  
+  }, [formik.values.email]);
+
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Grid container style={{ minHeight: "100vh" }}>
           <Grid item xs={12} sm={6}>
             <img
-              src="/assets/signup1.png"
+              src="/assets/signup.png"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt="logo"
             />
@@ -87,42 +119,47 @@ export default function Register() {
               </Grid>
 
               <TextField
-                label="first name"
+                label="First Name"
                 margin="normal"
-                value={formData.firstName}
-                onChange={(e) =>
-                  setFormData({ ...formData, firstName: e.target.value })
-                }
+                name="firstName"
+                error={(formik.touched.firstName && formik.errors.firstName) }
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.firstName}
+               
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <AccountCircle color="primary" sx={{ mr: 1 }}/>
+                      <AccountCircle color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
               <TextField
-                label="last name"
+                label="Last Name"
                 margin="normal"
-                value={formData.lastName}
-                onChange={(e) =>
-                  setFormData({ ...formData, lastName: e.target.value })
-                }
+                name="lastName"
+                error={(formik.touched.lastName && formik.errors.lastName)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.lastName}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Face color="primary" sx={{ mr: 1 }}/>
+                      <Face color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
               <TextField
-                label="email"
+                label="Email"
                 margin="normal"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                name="email"
+                type="email"
+                error={(formik.touched.email && formik.errors.email) || isEmail}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
@@ -132,33 +169,45 @@ export default function Register() {
                 }}
               />
               <TextField
-                label="date of birth"
+                label="Date of Birth"
                 margin="normal"
-                type={"date"}
-                value={formData.dob}
-                onChange={(e) =>
-                  setFormData({ ...formData, dob: e.target.value })
-                }
+                type="date"
+                name="dob"
+                error={(formik.touched.dob && formik.errors.dob)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.dob}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <CalendarToday color="primary" sx={{ mr: 1 }}/>
+                      <CalendarToday color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
                   ),
                 }}
               />
               <TextField
-                type="password"
-                label="password"
+                type={showPassword ? "text" : "password"}
+                label="Password"
                 margin="normal"
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                value={formData.password}
+                name="password"
+                error={(formik.touched.password && formik.errors.password) }
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
-                      <Key color="primary" sx={{ mr: 1 }}/>
+                      <Key color="primary" sx={{ mr: 1 }} />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
                     </InputAdornment>
                   ),
                 }}
@@ -169,7 +218,7 @@ export default function Register() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 2 }}
-                disabled={isFetching}
+                disabled={!(formik.isValid && formik.dirty)}
               >
                 Sign Up
               </Button>

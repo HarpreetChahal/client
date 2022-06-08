@@ -1,3 +1,11 @@
+/*!
+* @file      Rightbar.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the rightbar component page for LookMeUp project.
+*/
+
+
 import React from "react";
 import "./rightbar.css"
 
@@ -6,7 +14,7 @@ export default function Rightbar({ profile }) {
     const ProfileRightbar = () => {
         return (
             <>
-            <h4 className="rightbarTitle"> User Information</h4>
+            {/* <h4 className="rightbarTitle"> User Information</h4>
             <div className="rightbarInfo">
                 <div className="rightbarInfoItem">
                     <span className="rightbarInfoKey">Lives in:</span>
@@ -28,7 +36,7 @@ export default function Rightbar({ profile }) {
                     <span className="rightbarInfoValue">Banker</span>
                 </div>
 
-            </div>
+            </div> */}
             </>
         )
     }

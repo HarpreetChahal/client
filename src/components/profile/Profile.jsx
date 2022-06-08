@@ -1,3 +1,11 @@
+/*!
+* @file      Profile.jsx
+* @author    Dharmik Dholariya and Harpreet Singh 
+* @date      02-06-2022
+* @brief     This is the profile component page for LookMeUp project.
+*/
+
+
 import React from "react";
 
 import Topbar from "../../components/topbar/Topbar";
@@ -32,7 +40,7 @@ export default function Profile() {
                     </div>
                     <div className="profileRightBottom">
                         {/* <Leftbar /> */}
-                        <Feed />
+                        {/* <Feed /> */}
                         <Rightbar profile/>
                     </div>
                 </div>
