@@ -5,8 +5,7 @@ import { ReactNotifications } from "react-notifications-component";
 import { Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "./components/context/Context";
-import Profile from "./components/profile/Profile";
-
+import Profile from "./components/profile/Profile.jsx"
 function App() {
   const { user } = useContext(Context);
   return (
@@ -21,7 +20,7 @@ function App() {
         />
 
         <Route exact path="/login" element={user ? <Home /> : <Login />} />
-        <Route exact path="/profile" element={user ? <Profile /> : <Login />} />
+        <Route exact path="/profile" element={user ? <Profile  /> : <Login />} />
       </Routes>
     </div>
   );
