@@ -7,6 +7,7 @@
 
 
 import React, { useContext } from "react";
+import {Link} from "react-router-dom"
 import "./leftbar.css";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -96,7 +97,9 @@ export default function Leftbar({fetchPosts }) {
                 <ListItemIcon>
                   <PersonIcon color="primary" />
                 </ListItemIcon>
+                
                 <ListItemText primary="Profile" />
+                
               </ListItemButton>
             </ListItem>
           </List>

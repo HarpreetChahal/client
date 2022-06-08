@@ -3,6 +3,7 @@ import React, { useContext, useState,useEffect } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Leftbar from "../../components/leftbar/Leftbar";
 import Feed from "../../components/feed/Feed";
+import Profileleftbar from "../profileleftbar/Profileleftbar";
 import Rightbar from "../../components/rightbar/Rightbar";
 import "./profile.css";
 import { Context } from "../context/Context";
