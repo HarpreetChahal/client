@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import Topbar from "../../components/topbar/Topbar";
 import Leftbar from "../../components/leftbar/Leftbar";
@@ -10,28 +10,25 @@ import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 
 export default function Profile() {
-
-
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
   const [posts, setPosts] = useState([]);
-  const fetchPosts = async (query={}) => {
-      console.log("query",query)
-      let data={
-          query:query,
-          options: {
-            pagination: false,
-            populate: [
-              { path: "userId", model: "user", select: ["_id", "fullName"] },
-              {
-                path: "comments.userId",
-                model: "user",
-                select: ["_id", "fullName"],
-              },
-            ],
-            sort: { createdAt: -1 },
+  const fetchPosts = async (query = {}) => {
+    let data = {
+      query: query,
+      options: {
+        pagination: false,
+        populate: [
+          { path: "userId", model: "user", select: ["_id", "fullName"] },
+          {
+            path: "comments.userId",
+            model: "user",
+            select: ["_id", "fullName"],
           },
-      }
+        ],
+        sort: { createdAt: -1 },
+      },
+    };
     await commonApi({
       action: "fetchPost",
       data: data,
@@ -44,35 +41,32 @@ export default function Profile() {
   };
 
   useEffect(() => {
-      fetchPosts();
+    fetchPosts({ userId: user._id });
   }, []);
 
   return (
     <>
-      <Topbar />
+      <Topbar fetchPosts={fetchPosts} />
       <div className="profile">
         {/* <Leftbar /> */}
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-           
               <img className="profileCoverImg" src="assets/post/3.jpg" alt="" />
 
-              
-             
-              <img 
+              <img
                 className="profileUserImg"
                 src="assets/person/1.jpg"
                 alt=""
               />
-                 <input className="changeUserImg"
+              <input
+                className="changeUserImg"
                 // style={{ display: "none" }}
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
                 onChange={(e) => setFile(e.target.files[0])}
               />
-               
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{user.fullName}</h4>
@@ -80,9 +74,12 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar fetchPosts={()=>fetchPosts}/>
-            <Feed posts={posts} fetchPosts={()=>fetchPosts({userId:user._id})} />
-            <Rightbar  />
+            <Profileleftbar />
+            <Feed
+              posts={posts}
+              fetchPosts={() => fetchPosts({ userId: user._id })}
+            />
+            <Rightbar />
           </div>
         </div>
       </div>
