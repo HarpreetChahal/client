@@ -7,6 +7,7 @@
 
 
 import React, { useContext } from "react";
+import {Link} from "react-router-dom"
 import "./leftbar.css";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -29,7 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Leftbar({fetchPosts}) {
+export default function Leftbar({fetchPosts }) {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(Context);
@@ -71,6 +72,7 @@ export default function Leftbar({fetchPosts}) {
             <ListItem
               disablePadding
               onClick={() =>{
+                navigate("/")
                 fetchPosts()
                 window.scrollTo({
                   top: 0,
@@ -87,12 +89,17 @@ export default function Leftbar({fetchPosts}) {
               </ListItemButton>
             </ListItem>
             <Divider />
-            <ListItem disablePadding>
+          <ListItem disablePadding  onClick={() =>{
+               navigate("/profile")
+              }
+              }>
               <ListItemButton>
                 <ListItemIcon>
                   <PersonIcon color="primary" />
                 </ListItemIcon>
+                
                 <ListItemText primary="Profile" />
+                
               </ListItemButton>
             </ListItem>
           </List>
