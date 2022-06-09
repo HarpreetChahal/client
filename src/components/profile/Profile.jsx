@@ -55,23 +55,27 @@ export default function Profile() {
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-           
+              
               <img className="profileCoverImg" src="assets/post/3.jpg" alt="" />
 
               
              
-              <img 
+              <img
                 className="profileUserImg"
                 src="assets/person/1.jpg"
                 alt=""
               />
-                 <input className="changeUserImg"
+             
+              <input className="changeUserImg"
                 // style={{ display: "none" }}
+              
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
                 onChange={(e) => setFile(e.target.files[0])}
               />
+             
+              
                
             </div>
             <div className="profileInfo">

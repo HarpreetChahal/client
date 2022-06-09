@@ -14,6 +14,8 @@ import {
   MoreVertOutlined,
   Send,
   FavoriteBorder,
+  Edit,
+  Delete,
 } from "@mui/icons-material";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -21,6 +23,11 @@ import CommentIcon from "@mui/icons-material/Comment";
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
 import { Context } from "../context/Context";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+
+import IconButton from '@mui/material/IconButton';
 
 export default function Post(props) {
   const PF = "http://localhost:5000/assets/";
@@ -104,6 +111,19 @@ export default function Post(props) {
   const validateComment = () => {
     return comment !== "";
   };
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -118,7 +138,37 @@ export default function Post(props) {
             <span className="postDate">{moment(date).fromNow()}</span>
           </div>
           <div className="postTopRight">
+            
+            <IconButton
+            onClick={handleClick}
+            size="small"
+            sx={{ ml: 2 }}
+          >
             <MoreVertOutlined />
+          </IconButton>
+            <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+       
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem>
+        <ListItemIcon>
+        <Edit fontSize="small" />
+        </ListItemIcon>Edit 
+        </MenuItem>
+        
+        <MenuItem>
+        <ListItemIcon>
+        <Delete fontSize="small" />
+        </ListItemIcon>Delete
+        </MenuItem>
+      </Menu>
+     
           </div>
         </div>
         <div className="postCenter">
