@@ -5,22 +5,47 @@ import { ReactNotifications } from "react-notifications-component";
 import { Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "./components/context/Context";
-import Profile from "./components/profile/Profile.jsx"
+import Profile from "./components/profile/Profile.jsx";
+import { useNavigate } from "react-router";
 function App() {
-  const { user } = useContext(Context);
+  const { user, dispatch, token } = useContext(Context);
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    localStorage.clear();
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+  };
   return (
     <div>
       <ReactNotifications />
       <Routes>
-        <Route exact path="/" element={user ? <Home /> : <Login />} />
+        <Route
+          exact
+          path="/"
+          element={
+            (token && user) ? <Home handleLogout={handleLogout} /> : <Login />
+          }
+        />
         <Route
           exact
           path="/register"
-          element={user ? <Home /> : <Register />}
+          element={(token && user) ? <Home /> : <Register />}
         />
 
-        <Route exact path="/login" element={user ? <Home /> : <Login />} />
-        <Route exact path="/profile" element={user ? <Profile  /> : <Login />} />
+        <Route
+          exact
+          path="/login"
+          element={
+            (token && user) ? <Home handleLogout={handleLogout} /> : <Login />
+          }
+        />
+        <Route
+          exact
+          path="/profile"
+          element={
+            (token && user) ? <Profile handleLogout={handleLogout} /> : <Login />
+          }
+        />
       </Routes>
     </div>
   );

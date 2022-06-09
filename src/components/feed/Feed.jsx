@@ -33,7 +33,7 @@ export default function Feed({posts,fetchPosts}) {
               date={post.createdAt}
               key={post._id}
               postId={post._id}
-              userName={post.userId ? post.userId.fullName : "John Doe"}
+              userData={post.userId }
               comments={post.comments}
               images={post.images}
               likes={post.likes}

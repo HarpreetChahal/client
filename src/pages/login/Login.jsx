@@ -62,7 +62,8 @@ export default function Login() {
         data: values,
       })
         .then(({ DATA = {}, MESSAGE }) => {
-          dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
+          let {token,...data}=DATA
+         dispatch({ type: "LOGIN_SUCCESS", payload: data,token:token });
           setIsEmail(false);
           setIsPassword(false);
           Toast.success(MESSAGE);

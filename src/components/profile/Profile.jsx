@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import Topbar from "../../components/topbar/Topbar";
 import Leftbar from "../../components/leftbar/Leftbar";
@@ -9,29 +9,27 @@ import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 
-export default function Profile() {
-
-
+export default function Profile({ handleLogout }) {
   const [file, setFile] = useState(null);
-  const { user } = useContext(Context);
+  const { user, dispatch } = useContext(Context);
   const [posts, setPosts] = useState([]);
-  const fetchPosts = async (query={}) => {
-      console.log("query",query)
-      let data={
-          query:query,
-          options: {
-            pagination: false,
-            populate: [
-              { path: "userId", model: "user", select: ["_id", "fullName"] },
-              {
-                path: "comments.userId",
-                model: "user",
-                select: ["_id", "fullName"],
-              },
-            ],
-            sort: { createdAt: -1 },
+
+  const fetchPosts = async (query = {}) => {
+    let data = {
+      query: query,
+      options: {
+        pagination: false,
+        populate: [
+          { path: "userId", model: "user", select: ["_id", "fullName","profilePicture"] },
+          {
+            path: "comments.userId",
+            model: "user",
+            select: ["_id", "fullName","profilePicture"],
           },
-      }
+        ],
+        sort: { createdAt: -1 },
+      },
+    };
     await commonApi({
       action: "fetchPost",
       data: data,
@@ -43,36 +41,62 @@ export default function Profile() {
     });
   };
 
-  useEffect(() => {
-      fetchPosts();
-  }, []);
+  const uploadImage=async()=> {
+    const fileData = new FormData();
+    const fileName = Date.now() + file.name;
+    fileData.append("name", fileName);
+    fileData.append("file", file);
+    await commonApi({
+      action: "upload",
+      data: fileData,
+    });
+    let pp = "http://localhost:5000/assets/" + fileName;
+
+    await commonApi({
+      action: "updateUser",
+      parameters: user._id ? [user._id] : [],
+      data: {
+        profilePicture: pp,
+      },
+    }).then(({ DATA = {} }) => {
+      dispatch({ type: "UPDATE_USER", payload: DATA });
+    });
+  }
+  useEffect( () => {
+    fetchPosts({ userId: user._id });
+    if (file) {
+       uploadImage();
+    }
+  }, [file]);
 
   return (
     <>
-      <Topbar />
+      <Topbar fetchPosts={fetchPosts} />
       <div className="profile">
         {/* <Leftbar /> */}
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-           
               <img className="profileCoverImg" src="assets/post/3.jpg" alt="" />
 
-              
-             
-              <img 
+              <img
                 className="profileUserImg"
-                src="assets/person/1.jpg"
+                src={
+                  (file && URL.createObjectURL(file)) ||
+                  user.profilePicture ||
+                  "assets/person/1.jpg"
+                }
                 alt=""
               />
-                 <input className="changeUserImg"
+              <input
+                className="changeUserImg"
                 // style={{ display: "none" }}
+                style={{opacity:0}}
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
                 onChange={(e) => setFile(e.target.files[0])}
               />
-               
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{user.fullName}</h4>
@@ -80,9 +104,12 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar fetchPosts={()=>fetchPosts}/>
-            <Feed posts={posts} fetchPosts={()=>fetchPosts({userId:user._id})} />
-            <Rightbar  />
+            <Profileleftbar handleLogout={handleLogout} />
+            <Feed
+              posts={posts}
+              fetchPosts={() => fetchPosts({ userId: user._id })}
+            />
+            <Rightbar />
           </div>
         </div>
       </div>

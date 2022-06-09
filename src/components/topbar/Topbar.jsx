@@ -10,8 +10,10 @@ import "./topbar.css";
 import { useContext } from "react";
 import { Search } from "@mui/icons-material";
 import { Context } from "../../components/context/Context";
+import {useNavigate} from "react-router-dom"
 export default function Topbar({fetchPosts}) {
   const { user } = useContext(Context);
+  const navigate=useNavigate()
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -19,6 +21,7 @@ export default function Topbar({fetchPosts}) {
           className="logo"
           onClick={() =>{
             fetchPosts()
+            navigate("/")
             window.scrollTo({
               top: 0,
               behavior: "smooth",
@@ -38,7 +41,7 @@ export default function Topbar({fetchPosts}) {
 
       <div className="topbarRight">
         <span className="helloUser">Hello, {user.firstName}</span>
-        <img src="/assets/person/1.jpg" alt="" className="topbarImg" />
+        <img src={user?.profilePicture||"/assets/person/1.jpg"} alt="" className="topbarImg" />
         {/* <div className="logout">
                     <Button variant="contained" color="success" endIcon={<UploadFile />}>
                        Logout

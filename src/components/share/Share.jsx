@@ -6,7 +6,7 @@
 */
 
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./share.css";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
@@ -16,12 +16,14 @@ import { Cancel } from "@mui/icons-material";
 
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
+import {Context} from "../context/Context"
 
 const Input = styled("input")({
   display: "none",
 });
 
 export default function Share({ fetchPosts }) {
+  const {user}=useContext(Context)
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const isFormValid = () => {
@@ -40,7 +42,7 @@ export default function Share({ fetchPosts }) {
         action: "upload",
         data: fileData,
       });
-      data.images = [fileName];
+      data.images = ["http://localhost:5000/assets/"+fileName];
     }
     await commonApi({
       action: "createPost",
@@ -63,7 +65,7 @@ export default function Share({ fetchPosts }) {
           <div className="shareTop">
             <img
               className="shareProfileImg"
-              src="/assets/person/1.jpg"
+              src={user?.profilePicture||"/assets/person/1.jpg"}
               alt=""
             />
             <input

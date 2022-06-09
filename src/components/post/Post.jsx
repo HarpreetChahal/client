@@ -27,7 +27,7 @@ export default function Post(props) {
   const {
     desc,
     date,
-    userName,
+    userData,
     comments,
     postId,
     images,
@@ -35,10 +35,7 @@ export default function Post(props) {
     dislikes,
     fetchPosts,
   } = props;
-  let imgPath = "assets/post/2.jpg";
-  if (images.length !== 0) {
-    imgPath = PF + images[0];
-  }
+  let imgPath = images[0];
   const { user } = useContext(Context);
   const [comment, setComment] = useState("");
   const [isLiked, setIsLiked] = useState(false);
@@ -104,6 +101,7 @@ export default function Post(props) {
   const validateComment = () => {
     return comment !== "";
   };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -111,10 +109,10 @@ export default function Post(props) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src="/assets/person/1.jpg"
+              src={userData.profilePicture || "/assets/person/1.jpg"}
               alt="/assets/person/1.jpg"
             />
-            <span className="postUsername">{userName}</span>
+            <span className="postUsername">{userData.fullName}</span>
             <span className="postDate">{moment(date).fromNow()}</span>
           </div>
           <div className="postTopRight">
@@ -165,7 +163,7 @@ export default function Post(props) {
         <div className="writeComment">
           <img
             className="commentProfileImg"
-            src="/assets/person/1.jpg"
+            src={user?.profilePicture || "/assets/person/1.jpg"}
             alt=""
           />
           <input
@@ -196,9 +194,11 @@ export default function Post(props) {
             }
           }}
         >
-          <span className="viewCommentsText">
-            {showComment ? "Hide All" : "View All"} Comments
-          </span>
+          {comments.length > 0 && (
+            <span className="viewCommentsText">
+              {showComment ? "Hide All" : "View All"} Comments
+            </span>
+          )}
         </div>
         {/* <div className="profileComment">
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
