@@ -20,7 +20,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
 
 
                 </div>
@@ -34,7 +34,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
 
 
                 </div>
@@ -48,7 +48,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
 
 
                 </div>
@@ -62,7 +62,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
                     
 
 
@@ -77,7 +77,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
                     
 
 
@@ -91,7 +91,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
                     
 
 
@@ -105,7 +105,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
                     
 
 
@@ -119,7 +119,7 @@ export default function Homerightbar() {
                         </div>
                     </div>
 
-                    <button className="add-friend-button">Add Friend</button>
+                    <button className="add-friend-button">Follow</button>
                     
 
 

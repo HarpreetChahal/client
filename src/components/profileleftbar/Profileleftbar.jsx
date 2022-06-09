@@ -79,12 +79,10 @@ export default function Profileleftbar({ profile }) {
                                     <TextField id="outlined-basic" label="Last Name" variant="outlined" sx={{ mt: 1, ml: 2.6, width: "48%" }} />
                                     <TextField id="outlined-basic" label="Email" type="email" variant="outlined" sx={{ mt: 2, width: "100%" }} />
                                     <TextField id="outlined-basic" label="Date of Birth" type="date" defaultValue="1990-01-01" variant="outlined" sx={{ mt: 2, width: "100%" }} />
-                                    <TextField id="outlined-basic" label="Password" type="password" variant="outlined" sx={{ mt: 2, width: "100%" }} />
-
                                 </DialogContent>
                                 <DialogActions>
                                     <Button variant="contained" onClick={handleClose}>Cancel</Button>
-                                    <Button variant="contained" onClick={handleClose}>Save</Button>
+                                    <Button variant="contained" onClick={handleClose}>Update</Button>
                                 </DialogActions>
                             </Dialog>
                         </div>
