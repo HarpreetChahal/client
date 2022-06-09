@@ -109,7 +109,7 @@ export default function Post(props) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={userData.profilePicture||"/assets/person/1.jpg"}
+              src={userData.profilePicture || "/assets/person/1.jpg"}
               alt="/assets/person/1.jpg"
             />
             <span className="postUsername">{userData.fullName}</span>
@@ -163,7 +163,7 @@ export default function Post(props) {
         <div className="writeComment">
           <img
             className="commentProfileImg"
-            src={user?.profilePicture||"/assets/person/1.jpg"}
+            src={user?.profilePicture || "/assets/person/1.jpg"}
             alt=""
           />
           <input
@@ -194,9 +194,11 @@ export default function Post(props) {
             }
           }}
         >
-          <span className="viewCommentsText">
-            {showComment ? "Hide All" : "View All"} Comments
-          </span>
+          {comments.length > 0 && (
+            <span className="viewCommentsText">
+              {showComment ? "Hide All" : "View All"} Comments
+            </span>
+          )}
         </div>
         {/* <div className="profileComment">
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
