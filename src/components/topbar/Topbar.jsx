@@ -41,7 +41,7 @@ export default function Topbar({fetchPosts}) {
 
       <div className="topbarRight">
         <span className="helloUser">Hello, {user.firstName}</span>
-        <img src="/assets/person/1.jpg" alt="" className="topbarImg" />
+        <img src={user?.profilePicture||"/assets/person/1.jpg"} alt="" className="topbarImg" />
         {/* <div className="logout">
                     <Button variant="contained" color="success" endIcon={<UploadFile />}>
                        Logout

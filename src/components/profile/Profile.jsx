@@ -20,11 +20,11 @@ export default function Profile({ handleLogout }) {
       options: {
         pagination: false,
         populate: [
-          { path: "userId", model: "user", select: ["_id", "fullName"] },
+          { path: "userId", model: "user", select: ["_id", "fullName","profilePicture"] },
           {
             path: "comments.userId",
             model: "user",
-            select: ["_id", "fullName"],
+            select: ["_id", "fullName","profilePicture"],
           },
         ],
         sort: { createdAt: -1 },
