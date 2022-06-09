@@ -11,11 +11,11 @@ export default function Profileleftbar({handleLogout}) {
             <>
              <div className="ProfileCardData">
                     <div className="ProfileImages">
-                        <img src="assets/cover/1.jpg" alt="" />
-                        <img src="assets/person/1.jpg" alt="" />
+                        <img src={"assets/cover/1.jpg"} alt="" />
+                        <img src={user.profilePicture || "assets/person/1.jpg"} alt="" />
                     </div>
                     <div className="ProfileName">
-                        <span>John Doe</span>
+                        <span>{user.fullName}</span>
                     </div>
                     <div className="followStatus">
                         <hr />
