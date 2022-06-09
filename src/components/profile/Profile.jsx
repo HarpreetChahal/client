@@ -9,10 +9,11 @@ import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 
-export default function Profile({handleLogout}) {
+export default function Profile({ handleLogout }) {
   const [file, setFile] = useState(null);
-  const { user } = useContext(Context);
+  const { user, dispatch } = useContext(Context);
   const [posts, setPosts] = useState([]);
+
   const fetchPosts = async (query = {}) => {
     let data = {
       query: query,
@@ -40,9 +41,33 @@ export default function Profile({handleLogout}) {
     });
   };
 
-  useEffect(() => {
+  const uploadImage=async()=> {
+    const fileData = new FormData();
+    const fileName = Date.now() + file.name;
+    fileData.append("name", fileName);
+    fileData.append("file", file);
+    await commonApi({
+      action: "upload",
+      data: fileData,
+    });
+    let pp = "http://localhost:5000/assets/" + fileName;
+
+    await commonApi({
+      action: "updateUser",
+      parameters: user._id ? [user._id] : [],
+      data: {
+        profilePicture: pp,
+      },
+    }).then(({ DATA = {} }) => {
+      dispatch({ type: "UPDATE_USER", payload: DATA });
+    });
+  }
+  useEffect( () => {
     fetchPosts({ userId: user._id });
-  }, []);
+    if (file) {
+       uploadImage();
+    }
+  }, [file]);
 
   return (
     <>
@@ -56,7 +81,11 @@ export default function Profile({handleLogout}) {
 
               <img
                 className="profileUserImg"
-                src="assets/person/1.jpg"
+                src={
+                  (file && URL.createObjectURL(file)) ||
+                  user.profilePicture ||
+                  "assets/person/1.jpg"
+                }
                 alt=""
               />
               <input
@@ -74,7 +103,7 @@ export default function Profile({handleLogout}) {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar handleLogout={handleLogout}/>
+            <Profileleftbar handleLogout={handleLogout} />
             <Feed
               posts={posts}
               fetchPosts={() => fetchPosts({ userId: user._id })}

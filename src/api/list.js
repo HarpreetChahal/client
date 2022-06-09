@@ -33,6 +33,12 @@ const apiList = {
     likeDislike:{
       url: () => `post`,
       method:"post"
+    },
+
+    // User
+    updateUser:{
+      url:(id)=>`user/${id}`,
+      method:"put"
     }
 };
 export default apiList;

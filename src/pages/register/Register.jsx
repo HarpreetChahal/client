@@ -62,7 +62,8 @@ export default function Register() {
         data: values,
       })
         .then(({ DATA = {}, MESSAGE }) => {
-          dispatch({ type: "LOGIN_SUCCESS", payload: DATA });
+          let { token, ...data } = DATA;
+          dispatch({ type: "LOGIN_SUCCESS", payload: data, token: token });
           Toast.success(MESSAGE);
           navigate("/");
         })
@@ -80,9 +81,7 @@ export default function Register() {
     if (isEmail) {
       setIsEmail(false);
     }
-  
   }, [formik.values.email]);
-
 
   return (
     <div>
@@ -122,11 +121,10 @@ export default function Register() {
                 label="First Name"
                 margin="normal"
                 name="firstName"
-                error={(formik.touched.firstName && formik.errors.firstName) }
+                error={formik.touched.firstName && formik.errors.firstName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
-               
                 InputProps={{
                   startAdornment: (
                     <InputAdornment>
@@ -139,7 +137,7 @@ export default function Register() {
                 label="Last Name"
                 margin="normal"
                 name="lastName"
-                error={(formik.touched.lastName && formik.errors.lastName)}
+                error={formik.touched.lastName && formik.errors.lastName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.lastName}
@@ -173,7 +171,7 @@ export default function Register() {
                 margin="normal"
                 type="date"
                 name="dob"
-                error={(formik.touched.dob && formik.errors.dob)}
+                error={formik.touched.dob && formik.errors.dob}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.dob}
@@ -190,7 +188,7 @@ export default function Register() {
                 label="Password"
                 margin="normal"
                 name="password"
-                error={(formik.touched.password && formik.errors.password) }
+                error={formik.touched.password && formik.errors.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
