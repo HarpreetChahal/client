@@ -77,8 +77,11 @@ export default function Profile({ handleLogout }) {
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
+              
               <img className="profileCoverImg" src="assets/post/3.jpg" alt="" />
 
+              
+             
               <img
                 className="profileUserImg"
                 src={

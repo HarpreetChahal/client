@@ -18,7 +18,7 @@ export default function Rightbar({ profile }) {
             <>
            
             <button className="rightbarFollowButton">
-             Add Friend <PersonAdd sx={{ml:1}}/>
+             Follow <PersonAdd sx={{ml:1}}/>
             </button>
             
             <h4 className="rightbarTitle">Friends</h4>
