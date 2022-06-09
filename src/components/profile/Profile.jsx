@@ -91,6 +91,7 @@ export default function Profile({ handleLogout }) {
               <input
                 className="changeUserImg"
                 // style={{ display: "none" }}
+                style={{opacity:0}}
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"

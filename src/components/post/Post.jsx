@@ -35,7 +35,7 @@ export default function Post(props) {
     dislikes,
     fetchPosts,
   } = props;
-  let imgPath = PF + images[0];
+  let imgPath = images[0];
   const { user } = useContext(Context);
   const [comment, setComment] = useState("");
   const [isLiked, setIsLiked] = useState(false);
