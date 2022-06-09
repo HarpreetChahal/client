@@ -8,17 +8,20 @@
 
 import React from "react";
 import "./rightbar.css";
-import {Add} from "@mui/icons-material";
+import {Add, PersonAdd} from "@mui/icons-material";
+import { Edit, Logout } from "@mui/icons-material";
 
 
 export default function Rightbar({ profile }) {
     const ProfileRightbar = () => {
         return (
             <>
+           
             <button className="rightbarFollowButton">
-             Follow <Add/>
+             Add Friend <PersonAdd sx={{ml:1}}/>
             </button>
-            <h4 className="rightbarTitle">User friends</h4>
+            
+            <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
             <img

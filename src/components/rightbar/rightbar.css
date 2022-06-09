@@ -1,10 +1,11 @@
 .rightbar {
   flex: 3;
   margin-left: 10px;
+  
 }
 
 .rightbarWrapper {
-  /* padding: 20px 20px 0 0; */
+  padding: 20px 20px 0 0;
 }
 
 /* .rightbarTitle
@@ -39,6 +40,7 @@
 .rightbarFollowButton
 {
   margin-bottom: 20px;
+  margin-left: 1%;
   border: none;
   background-color: #1877f2;
   color: white;
@@ -51,9 +53,58 @@
 
 }
 
-.rightbarTitle{
-    margin-bottom: 20px;
+
+.InfoCardRight
+{
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin-left: 1%;
+    background-color: white;
+    border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 }
+
+.infoHead
+{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 10px;
+
+}
+
+.infoHead>div:hover
+{
+    cursor: pointer;
+
+}
+
+.info{
+    margin-bottom: 7px;
+}
+
+.logout-button
+{
+    cursor: pointer;
+    width: 6rem;
+    height: 2rem ;
+    margin-top: 10px;
+    align-self:flex-start;
+    align-items: center;
+    border: none;
+    background-color: #1877f2;
+    color: white;
+    border-radius: 5px;
+    padding: 5px  10px;
+    display: flex;
+    font-size: 16px;
+    font-family: 500;
+
+}
+
 
 .rightbarFriendList {
   padding: 0;
@@ -63,7 +114,8 @@
 
 .rightbarTitle{
   font-size: 18px;
-  font-weight: 500;
+  margin-left: 1%;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
@@ -86,6 +138,7 @@
 }
 
 .rightbarFollowings{
+  margin-left: 1%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

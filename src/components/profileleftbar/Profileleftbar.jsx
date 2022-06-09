@@ -7,6 +7,39 @@ export default function Profileleftbar({ profile }) {
     const ProfileProfileleftbar = () => {
         return (
             <>
+             <div className="ProfileCardData">
+                    <div className="ProfileImages">
+                        <img src="assets/cover/1.jpg" alt="" />
+                        <img src="assets/person/1.jpg" alt="" />
+                    </div>
+                    <div className="ProfileName">
+                        <span>John Doe</span>
+                    </div>
+                    <div className="followStatus">
+                        <hr />
+                        <div>
+                            <div className="follow">
+                                <span>10</span>
+                                <span>Followers</span>
+                            </div>
+                            <div className="vline"></div>
+                            <div className="follow">
+                                <span>5</span>
+                                <span>Posts</span>
+                            </div>
+                            <div className="vline"></div>
+                            <div className="follow">
+                                <span>12</span>
+                                <span>Following</span>
+                            </div>
+
+                        </div>
+                        <hr />
+
+                    </div>
+
+
+                </div>
             <div className="InfoCard">
                 <div className="infoHead">
                     <h3>User Information </h3>
@@ -65,7 +98,7 @@ export default function Profileleftbar({ profile }) {
                 </div>
                 <div className="follower">
                     <div>
-                        <img src="assets/person/1.jpg" alt="" className="followerImg"/>
+                        <img src="assets/person/2.jpg" alt="" className="followerImg"/>
                         <div className="name">
                             <span>
                                 Jaden Smith
@@ -79,7 +112,7 @@ export default function Profileleftbar({ profile }) {
                 </div>
                 <div className="follower">
                     <div>
-                        <img src="assets/person/1.jpg" alt="" className="followerImg"/>
+                        <img src="assets/person/3.jpg" alt="" className="followerImg"/>
                         <div className="name">
                             <span>
                                 Manny Moe
@@ -93,7 +126,7 @@ export default function Profileleftbar({ profile }) {
                 </div>
                 <div className="follower">
                     <div>
-                        <img src="assets/person/1.jpg" alt="" className="followerImg"/>
+                        <img src="assets/person/4.jpg" alt="" className="followerImg"/>
                         <div className="name">
                             <span>
                                 Twin Turbo
