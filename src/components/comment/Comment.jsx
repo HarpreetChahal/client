@@ -16,7 +16,7 @@ export default function Comment({ user, comment, date }) {
       <div className="profileComment">
         <img
           className="profilePommentProfileImg"
-          src="/assets/person/1.jpg"
+          src={user.profilePicture ||"/assets/person/1.jpg"}
           alt=""
         />
 

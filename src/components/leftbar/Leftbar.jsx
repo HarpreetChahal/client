@@ -1,13 +1,12 @@
 /*!
-* @file      Leftbar.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the leftbar component page (side menu) for LookMeUp project.
-*/
-
+ * @file      Leftbar.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the leftbar component page (side menu) for LookMeUp project.
+ */
 
 import React, { useContext } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import "./leftbar.css";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -30,18 +29,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Leftbar({fetchPosts }) {
+export default function Leftbar({ fetchPosts, handleLogout }) {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(Context);
 
-  const handleLogout = async (e) => {
-    localStorage.clear();
-    e.preventDefault();
-    setOpen(false);
-    dispatch({ type: "LOGOUT" });
-    navigate("/login");
-  };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -71,15 +63,14 @@ export default function Leftbar({fetchPosts }) {
           <List>
             <ListItem
               disablePadding
-              onClick={() =>{
-                navigate("/")
-                fetchPosts()
+              onClick={() => {
+                navigate("/");
+                fetchPosts();
                 window.scrollTo({
                   top: 0,
                   behavior: "smooth",
-                })
-              }
-              }
+                });
+              }}
             >
               <ListItemButton>
                 <ListItemIcon>
@@ -89,17 +80,18 @@ export default function Leftbar({fetchPosts }) {
               </ListItemButton>
             </ListItem>
             <Divider />
-          <ListItem disablePadding  onClick={() =>{
-               navigate("/profile")
-              }
-              }>
+            <ListItem
+              disablePadding
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   <PersonIcon color="primary" />
                 </ListItemIcon>
-                
+
                 <ListItemText primary="Profile" />
-                
               </ListItemButton>
             </ListItem>
           </List>
@@ -108,7 +100,9 @@ export default function Leftbar({fetchPosts }) {
 
       <Button
         variant="contained"
-        onClick={handleLogout}
+        onClick={
+          handleLogout
+        }
         sx={{
           position: "fixed",
           bottom: 10,
