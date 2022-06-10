@@ -62,6 +62,10 @@ const apiList = {
     followers:{
       url:()=>"user/followers",
       method:"post"
+    },
+    getUser:{
+      url:(id)=>`user/${id}`,
+      method:"get"
     }
 };
 export default apiList;

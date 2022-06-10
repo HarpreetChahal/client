@@ -1,0 +1,151 @@
+.profile
+{
+    display: flex;
+}
+
+.profileRight
+{
+    flex: 9;
+}
+
+.profileCover
+{
+    height: 320px;
+    position: relative;
+}
+
+.profileCoverImg
+{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.profileUserImg
+{
+    /* cursor: pointer; */
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 160px;
+    border: 3px solid white;
+}
+
+.profileUserImg:hover
+{
+    cursor: pointer;
+    background-color: rgba(0,0,0,.8);
+}
+.changeUserImg::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+.changeUserImg
+{
+    /* cursor: pointer; */
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    color: transparent;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 160px;
+    border: 3px solid white;
+}
+
+.changeUserImg:hover
+{
+    cursor: pointer;
+    background-color: rgba(0,0,0,.7);
+}
+
+  .changeU
+  {
+     
+    display:inline-block;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    top: 230px;
+   
+    color: transparent;
+} 
+  
+ .changeU:hover
+{
+    display:inline-block;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+   
+    position: absolute;
+   
+    text-align: center;
+    
+   
+    color: aliceblue;
+} 
+
+/* .changeUserImg
+{
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 160px;
+    border: 3px solid white;
+
+   content:'gg';
+} */
+
+
+.profileInfo
+{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileInfoName
+{
+    font-size: 24px;
+    
+}
+
+/* .profileInfoDesc
+{
+    font-weight: 500;
+} */
+
+.profileRightBottom
+{
+    display: flex;
+}
+
+

@@ -5,11 +5,12 @@
  * @brief     This is the rightbar component page for LookMeUp project.
  */
 
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./rightbar.css";
 import { Add, PersonAdd } from "@mui/icons-material";
 import { Edit, Logout } from "@mui/icons-material";
 import commonApi from "../../api/common";
+import { useNavigate } from "react-router-dom";
 
 export default function Rightbar({ profile }) {
   const [friends, setFriends] = useState([]);
@@ -29,10 +30,14 @@ export default function Rightbar({ profile }) {
       setFriends(DATA.data);
     });
   };
-  useEffect(()=>{
-    fetchFriends()
-  },[])
+  useEffect(() => {
+    fetchFriends();
+  }, []);
   const ProfileRightbar = () => {
+    const navigate = useNavigate();
+    const handleFriends = (id) => {
+      navigate("/userProfile?userId=" + id);
+    };
     return (
       <>
         <button className="rightbarFollowButton">
@@ -43,7 +48,7 @@ export default function Rightbar({ profile }) {
         <div className="rightbarFollowings">
           {friends.map((friend) => {
             return (
-              <div className="rightbarFollowing">
+              <div className="rightbarFollowing" onClick={()=>{handleFriends(friend._id)}}>
                 <img
                   src={friend.profilePicture || "assets/person/1.jpg"}
                   alt=""
