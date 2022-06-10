@@ -58,6 +58,10 @@ const apiList = {
     friends:{
       url:()=>"user/friends",
       method:"post"
+    },
+    followers:{
+      url:()=>"user/followers",
+      method:"post"
     }
 };
 export default apiList;

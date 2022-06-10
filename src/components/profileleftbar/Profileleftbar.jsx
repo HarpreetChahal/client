@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./profileleftbar.css";
 import { Edit, Logout } from "@mui/icons-material";
 
@@ -14,12 +14,12 @@ import moment from "moment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import commonApi from "../../api/common";
-export default function Profileleftbar({post, handleLogout,fetchPosts }) {
+export default function Profileleftbar({ post, handleLogout, fetchPosts }) {
   const { user, dispatch } = useContext(Context);
+  const [followers, setFollowers] = useState([]);
+  const [value, setValue] = useState(null);
 
-  const [value, setValue] = React.useState(null);
-
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,6 +28,26 @@ export default function Profileleftbar({post, handleLogout,fetchPosts }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const fetchFollowers = async () => {
+    await commonApi({
+      action: "followers",
+      data: {
+        options: {
+          pagination: false,
+          sort: { createdAt: -1 },
+        },
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(({ DATA = {} }) => {
+      setFollowers(DATA.data);
+    });
+  };
+  useEffect(() => {
+    fetchFollowers();
+  }, []);
 
   const ProfileProfileleftbar = () => {
     const formik = useFormik({
@@ -49,7 +69,7 @@ export default function Profileleftbar({post, handleLogout,fetchPosts }) {
         })
           .then(({ DATA = {} }) => {
             dispatch({ type: "UPDATE_USER", payload: DATA });
-            fetchPosts({userId:user._id})
+            fetchPosts({ userId: user._id });
             handleClose();
             //   Toast.success(MESSAGE);
           })
@@ -72,7 +92,7 @@ export default function Profileleftbar({post, handleLogout,fetchPosts }) {
             <hr />
             <div>
               <div className="follow">
-                <span>{user.followers.length ||0}</span>
+                <span>{user.followers.length || 0}</span>
                 <span>Followers</span>
               </div>
               <div className="vline"></div>
@@ -82,7 +102,7 @@ export default function Profileleftbar({post, handleLogout,fetchPosts }) {
               </div>
               <div className="vline"></div>
               <div className="follow">
-                <span>{user.following.length ||0}</span>
+                <span>{user.following.length || 0}</span>
                 <span>Following</span>
               </div>
             </div>
@@ -192,46 +212,22 @@ export default function Profileleftbar({post, handleLogout,fetchPosts }) {
 
         <div className="FollowersCard">
           <h3>Who is following you</h3>
-          <div className="follower">
+          {followers.map((follower)=>{
+            return (
+              <div className="follower">
             <div>
               <img src="assets/person/1.jpg" alt="" className="followerImg" />
               <div className="name">
-                <span>John Doe</span>
+                <span>{follower.fullName}</span>
               </div>
             </div>
 
             <button className="follow-button">Follow</button>
           </div>
-          <div className="follower">
-            <div>
-              <img src="assets/person/2.jpg" alt="" className="followerImg" />
-              <div className="name">
-                <span>Jaden Smith</span>
-              </div>
-            </div>
-
-            <button className="follow-button">Follow</button>
-          </div>
-          <div className="follower">
-            <div>
-              <img src="assets/person/3.jpg" alt="" className="followerImg" />
-              <div className="name">
-                <span>Manny Moe</span>
-              </div>
-            </div>
-
-            <button className="follow-button">Follow</button>
-          </div>
-          <div className="follower">
-            <div>
-              <img src="assets/person/4.jpg" alt="" className="followerImg" />
-              <div className="name">
-                <span>Twin Turbo</span>
-              </div>
-            </div>
-
-            <button className="follow-button">Follow</button>
-          </div>
+            )
+          })}
+          
+     
         </div>
 
         {/* <h4 className="rightbarTitle"> User Information </h4>
