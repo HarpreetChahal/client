@@ -39,6 +39,11 @@ const apiList = {
     updateUser:{
       url:(id)=>`user/${id}`,
       method:"put"
+    },
+    // Post
+    deletePost:{
+      url:(id)=>`post/${id}`,
+      method:"delete"
     }
 };
 export default apiList;

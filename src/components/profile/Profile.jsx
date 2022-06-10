@@ -20,11 +20,15 @@ export default function Profile({ handleLogout }) {
       options: {
         pagination: false,
         populate: [
-          { path: "userId", model: "user", select: ["_id", "fullName","profilePicture"] },
+          {
+            path: "userId",
+            model: "user",
+            select: ["_id", "fullName", "profilePicture"],
+          },
           {
             path: "comments.userId",
             model: "user",
-            select: ["_id", "fullName","profilePicture"],
+            select: ["_id", "fullName", "profilePicture"],
           },
         ],
         sort: { createdAt: -1 },
@@ -41,7 +45,7 @@ export default function Profile({ handleLogout }) {
     });
   };
 
-  const uploadImage=async()=> {
+  const uploadImage = async () => {
     const fileData = new FormData();
     const fileName = Date.now() + file.name;
     fileData.append("name", fileName);
@@ -61,11 +65,11 @@ export default function Profile({ handleLogout }) {
     }).then(({ DATA = {} }) => {
       dispatch({ type: "UPDATE_USER", payload: DATA });
     });
-  }
-  useEffect( () => {
+  };
+  useEffect(() => {
     fetchPosts({ userId: user._id });
     if (file) {
-       uploadImage();
+      uploadImage();
     }
   }, [file]);
 
@@ -77,11 +81,8 @@ export default function Profile({ handleLogout }) {
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-              
               <img className="profileCoverImg" src="assets/post/3.jpg" alt="" />
 
-              
-             
               <img
                 className="profileUserImg"
                 src={
@@ -94,7 +95,7 @@ export default function Profile({ handleLogout }) {
               <input
                 className="changeUserImg"
                 // style={{ display: "none" }}
-                style={{opacity:0}}
+                style={{ opacity: 0 }}
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
@@ -107,7 +108,10 @@ export default function Profile({ handleLogout }) {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar handleLogout={handleLogout} />
+            <Profileleftbar
+              post={posts.length || 0}
+              handleLogout={handleLogout}
+            />
             <Feed
               posts={posts}
               fetchPosts={() => fetchPosts({ userId: user._id })}

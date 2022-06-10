@@ -14,7 +14,7 @@ import moment from "moment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import commonApi from "../../api/common";
-export default function Profileleftbar({ handleLogout }) {
+export default function Profileleftbar({post, handleLogout }) {
   const { user, dispatch } = useContext(Context);
 
   const [value, setValue] = React.useState(null);
@@ -71,17 +71,17 @@ export default function Profileleftbar({ handleLogout }) {
             <hr />
             <div>
               <div className="follow">
-                <span>10</span>
+                <span>{user.followers.length ||0}</span>
                 <span>Followers</span>
               </div>
               <div className="vline"></div>
               <div className="follow">
-                <span>5</span>
+                <span>{post}</span>
                 <span>Posts</span>
               </div>
               <div className="vline"></div>
               <div className="follow">
-                <span>12</span>
+                <span>{user.following.length ||0}</span>
                 <span>Following</span>
               </div>
             </div>
