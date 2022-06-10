@@ -39,6 +39,29 @@ const apiList = {
     updateUser:{
       url:(id)=>`user/${id}`,
       method:"put"
+    },
+    // Post
+    deletePost:{
+      url:(id)=>`post/${id}`,
+      method:"delete"
+    },
+
+    // Friends and suggestions
+    suggestions:{
+      url:()=>"user/suggestions",
+      method:"post"
+    },
+    followFriend:{
+      url:()=>"user/followFriend",
+      method:"post"
+    },
+    friends:{
+      url:()=>"user/friends",
+      method:"post"
+    },
+    followers:{
+      url:()=>"user/followers",
+      method:"post"
     }
 };
 export default apiList;

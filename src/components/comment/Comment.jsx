@@ -58,7 +58,7 @@ export default function Comment({ user, comment, date }) {
             >
             {user?.fullName}
             </div>
-            <span class="postCommentText">{comment}</span>
+            <span className="postCommentText">{comment}</span>
           </div>
           <div
             style={{

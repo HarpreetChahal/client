@@ -1,89 +1,68 @@
 /*!
-* @file      Rightbar.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the rightbar component page for LookMeUp project.
-*/
+ * @file      Rightbar.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the rightbar component page for LookMeUp project.
+ */
 
-
-import React from "react";
+import React, { useState,useEffect } from "react";
 import "./rightbar.css";
-import {Add, PersonAdd} from "@mui/icons-material";
+import { Add, PersonAdd } from "@mui/icons-material";
 import { Edit, Logout } from "@mui/icons-material";
-
+import commonApi from "../../api/common";
 
 export default function Rightbar({ profile }) {
-    const ProfileRightbar = () => {
-        return (
-            <>
-           
-            <button className="rightbarFollowButton">
-             Follow <PersonAdd sx={{ml:1}}/>
-            </button>
-            
-            <h4 className="rightbarTitle">Friends</h4>
-        <div className="rightbarFollowings">
-          <div className="rightbarFollowing">
-            <img
-              src="assets/person/1.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">Jay Saul</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="assets/person/2.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">Jason Smith</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="assets/person/3.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">Tony Stark</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="assets/person/4.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">Allison Ray</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="assets/person/5.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">Carter King</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="assets/person/6.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">Jessie Pin</span>
-          </div>
-        </div>
-
-            </>
-        )
-    }
-
-
+  const [friends, setFriends] = useState([]);
+  const fetchFriends = async () => {
+    await commonApi({
+      action: "friends",
+      data: {
+        options: {
+          pagination: false,
+          sort: { createdAt: -1 },
+        },
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(({ DATA = {} }) => {
+      setFriends(DATA.data);
+    });
+  };
+  useEffect(()=>{
+    fetchFriends()
+  },[])
+  const ProfileRightbar = () => {
     return (
-        <div className="rightbar">
-            <div className="rightbarWrapper">
-                <ProfileRightbar />
-            </div>
+      <>
+        <button className="rightbarFollowButton">
+          Follow <PersonAdd sx={{ ml: 1 }} />
+        </button>
 
+        <h4 className="rightbarTitle">Friends</h4>
+        <div className="rightbarFollowings">
+          {friends.map((friend) => {
+            return (
+              <div className="rightbarFollowing">
+                <img
+                  src={friend.profilePicture || "assets/person/1.jpg"}
+                  alt=""
+                  className="rightbarFollowingImg"
+                />
+                <span className="rightbarFollowingName">{friend.fullName}</span>
+              </div>
+            );
+          })}
         </div>
-    )
+      </>
+    );
+  };
+
+  return (
+    <div className="rightbar">
+      <div className="rightbarWrapper">
+        <ProfileRightbar />
+      </div>
+    </div>
+  );
 }
