@@ -44,6 +44,12 @@ const apiList = {
     deletePost:{
       url:(id)=>`post/${id}`,
       method:"delete"
+    },
+
+    // Friends and suggestions
+    suggestions:{
+      url:()=>"user/suggestions",
+      method:"post"
     }
 };
 export default apiList;

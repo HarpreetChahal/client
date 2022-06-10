@@ -111,6 +111,7 @@ export default function Profile({ handleLogout }) {
             <Profileleftbar
               post={posts.length || 0}
               handleLogout={handleLogout}
+              fetchPosts={fetchPosts}
             />
             <Feed
               posts={posts}

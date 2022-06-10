@@ -14,7 +14,7 @@ import moment from "moment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import commonApi from "../../api/common";
-export default function Profileleftbar({post, handleLogout }) {
+export default function Profileleftbar({post, handleLogout,fetchPosts }) {
   const { user, dispatch } = useContext(Context);
 
   const [value, setValue] = React.useState(null);
@@ -49,6 +49,7 @@ export default function Profileleftbar({post, handleLogout }) {
         })
           .then(({ DATA = {} }) => {
             dispatch({ type: "UPDATE_USER", payload: DATA });
+            fetchPosts({userId:user._id})
             handleClose();
             //   Toast.success(MESSAGE);
           })
