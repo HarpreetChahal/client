@@ -88,6 +88,28 @@ export default function Profile({ handleLogout }) {
       dispatch({ type: "UPDATE_USER", payload: DATA });
     });
   };
+  const unFollowFriend = async (id) => {
+    await commonApi({
+      action: "unFollowFriend",
+      data: {
+        followingId: id
+      },
+      config: {
+        authToken: true
+      }
+    }).then(async ({ DATA = {} }) => {
+      fetchFriends(user._id)
+      await commonApi({
+        action: "getUser",
+        parameters: [user._id],
+        config: {
+          authToken: true
+        }
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
+      });
+    });
+  };
   useEffect(() => {
     fetchPosts({ userId: user._id });
     if (file) {
@@ -135,6 +157,7 @@ export default function Profile({ handleLogout }) {
               handleLogout={handleLogout}
               fetchPosts={fetchPosts}
               fetchFriends={fetchFriends}
+              unFollowFriend={unFollowFriend}
             />
             <Feed
               posts={posts}

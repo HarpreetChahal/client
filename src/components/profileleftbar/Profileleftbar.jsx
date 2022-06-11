@@ -10,12 +10,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Context } from "../context/Context";
-import moment from "moment";
+import moment from "moment" ;
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import commonApi from "../../api/common";
 import { useLocation } from "react-router-dom";
-export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFriends}) {
+export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFriends,unFollowFriend}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
   const { user, dispatch } = useContext(Context);
@@ -302,6 +302,16 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
                     }}
                   >
                     Follow
+                  </button>
+                )}
+                {user.following.includes(follower._id) && (user._id!==follower._id) &&(
+                  <button
+                    className="follow-button"
+                    onClick={() => {
+                      unFollowFriend(follower._id);
+                    }}
+                  >
+                    UnFollow
                   </button>
                 )}
               </div>
