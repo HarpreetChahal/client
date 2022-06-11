@@ -9,6 +9,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 
 
@@ -79,11 +84,25 @@ export default function Profileleftbar({ profile }) {
                                     <TextField id="outlined-basic" label="Last Name" variant="outlined" sx={{ mt: 1, ml: 2.6, width: "48%" }} />
                                     <TextField id="outlined-basic" label="Email" type="email" variant="outlined" sx={{ mt: 2, width: "100%" }} />
                                     <TextField id="outlined-basic" label="Date of Birth" type="date" defaultValue="1990-01-01" variant="outlined" sx={{ mt: 2, width: "100%" }} />
+                                    <FormControl>
+                                        <FormLabel id="demo-row-radio-buttons-group-label" sx={{mt:1}}>Account Type</FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-labelledby="demo-row-radio-buttons-group-label"
+                                            name="row-radio-buttons-group"
+                                            
+                                        >
+                                            <FormControlLabel size="small" value="public" control={<Radio />} label="Public" />
+                                            <FormControlLabel size="small" value="private" control={<Radio />} label="Private" />
+                                            
+                                        </RadioGroup>
+                                    </FormControl>
                                 </DialogContent>
                                 <DialogActions>
                                     <Button variant="contained" onClick={handleClose}>Cancel</Button>
                                     <Button variant="contained" onClick={handleClose}>Update</Button>
                                 </DialogActions>
+
                             </Dialog>
                         </div>
                     </div>
