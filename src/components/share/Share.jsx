@@ -1,10 +1,9 @@
 /*!
-* @file      Share.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the share component page (create post) for LookMeUp project.
-*/
-
+ * @file      Share.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the share component page (create post) for LookMeUp project.
+ */
 
 import React, { useContext, useState } from "react";
 import "./share.css";
@@ -16,19 +15,19 @@ import { Cancel } from "@mui/icons-material";
 
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
-import {Context} from "../context/Context"
+import { Context } from "../context/Context";
 
 const Input = styled("input")({
-  display: "none",
+  display: "none"
 });
 
 export default function Share({ fetchPosts }) {
-  const {user}=useContext(Context)
+  const { user } = useContext(Context);
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const isFormValid = () => {
-    return (desc!=="")
-  }
+    return desc !== "";
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = { desc: desc };
@@ -40,16 +39,16 @@ export default function Share({ fetchPosts }) {
       fileData.append("file", file);
       await commonApi({
         action: "upload",
-        data: fileData,
+        data: fileData
       });
-      data.images = ["http://localhost:5000/assets/"+fileName];
+      data.images = ["http://localhost:5000/assets/" + fileName];
     }
     await commonApi({
       action: "createPost",
       data: data,
       config: {
-        authToken: true,
-      },
+        authToken: true
+      }
     }).then(({ DATA = {}, MESSAGE }) => {
       Toast.success(MESSAGE);
       fetchPosts();
@@ -65,7 +64,7 @@ export default function Share({ fetchPosts }) {
           <div className="shareTop">
             <img
               className="shareProfileImg"
-              src={user?.profilePicture||"/assets/person/1.jpg"}
+              src={user?.profilePicture || "/assets/person/1.jpg"}
               alt=""
             />
             <input
@@ -109,7 +108,6 @@ export default function Share({ fetchPosts }) {
                     id="fileInput"
                     color="success"
                     component="span"
-                   
                     startIcon={<PhotoCamera />}
                   >
                     Upload
@@ -123,7 +121,12 @@ export default function Share({ fetchPosts }) {
                 </label>
               </Stack>
             </div>
-            <Button variant="contained" type="submit"  disabled={!isFormValid()} onClick={handleSubmit}>
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!isFormValid()}
+              onClick={handleSubmit}
+            >
               Create Post
             </Button>
           </div>

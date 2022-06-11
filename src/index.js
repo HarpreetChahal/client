@@ -6,10 +6,10 @@ import { ContextProvider } from "./components/context/Context";
 
 ReactDOM.render(
   <React.StrictMode>
-     <ContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -22,7 +22,7 @@ import {
   Key,
   // Face,
   Visibility,
-  VisibilityOff,
+  VisibilityOff
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 // import { useRouter } from "next/router"
@@ -49,21 +49,21 @@ export default function Login() {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
+      password: ""
     },
     validationSchema: Yup.object({
       password: Yup.string().required("Required"),
-      email: Yup.string().required("Required"),
+      email: Yup.string().required("Required")
     }),
     onSubmit: async (values) => {
       //  const {email,password}=values
       await commonApi({
         action: "login",
-        data: values,
+        data: values
       })
         .then(({ DATA = {}, MESSAGE }) => {
-          let {token,...data}=DATA
-         dispatch({ type: "LOGIN_SUCCESS", payload: data,token:token });
+          let { token, ...data } = DATA;
+          dispatch({ type: "LOGIN_SUCCESS", payload: data, token: token });
           setIsEmail(false);
           setIsPassword(false);
           Toast.success(MESSAGE);
@@ -81,7 +81,7 @@ export default function Login() {
 
           console.error(error);
         });
-    },
+    }
   });
   useEffect(() => {
     if (isEmail) {
@@ -119,7 +119,7 @@ export default function Login() {
                 flexDirection: "column",
                 maxWidth: 600,
                 minWidth: 300,
-                marginTop: 100,
+                marginTop: 100
               }}
             >
               <Grid container justify="center">
@@ -140,7 +140,7 @@ export default function Login() {
                     <InputAdornment>
                       <Email color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  )
                 }}
               />
               {/* {formik.touched.email && formik.errors.email ? (
@@ -163,7 +163,7 @@ export default function Login() {
                     <InputAdornment>
                       <Key color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  )
                   // ,endAdornment:(
                   //   <InputAdornment position="end">
                   //     <IconButton

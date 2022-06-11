@@ -1,33 +1,31 @@
 /*!
-* @file      Topbar.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the topbar component page (navigation bar) for LookMeUp project.
-*/
-
+ * @file      Topbar.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the topbar component page (navigation bar) for LookMeUp project.
+ */
 
 import "./topbar.css";
 import { useContext } from "react";
 import { Search } from "@mui/icons-material";
 import { Context } from "../../components/context/Context";
-import {useNavigate} from "react-router-dom"
-export default function Topbar({fetchPosts}) {
+import { useNavigate } from "react-router-dom";
+export default function Topbar({ fetchPosts }) {
   const { user } = useContext(Context);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
         <span
           className="logo"
-          onClick={() =>{
-            fetchPosts()
-            navigate("/")
+          onClick={() => {
+            fetchPosts();
+            navigate("/");
             window.scrollTo({
               top: 0,
-              behavior: "smooth",
-            })
-          }
-          }
+              behavior: "smooth"
+            });
+          }}
         >
           LookMeUp
         </span>
@@ -41,7 +39,14 @@ export default function Topbar({fetchPosts}) {
 
       <div className="topbarRight">
         <span className="helloUser">Hello, {user.firstName}</span>
-        <img src={user?.profilePicture||"/assets/person/1.jpg"} alt="" className="topbarImg" />
+        <img
+          src={user?.profilePicture || "/assets/person/1.jpg"}
+          alt=""
+          className="topbarImg"
+          onClick={() => {
+            navigate("/profile");
+          }}
+        />
         {/* <div className="logout">
                     <Button variant="contained" color="success" endIcon={<UploadFile />}>
                        Logout

@@ -1,18 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 
-import Topbar from "../../components/topbar/Topbar";
-import Leftbar from "../../components/leftbar/Leftbar";
-import Feed from "../../components/feed/Feed";
+import Topbar from "../topbar/Topbar";
+import Leftbar from "../leftbar/Leftbar";
+import Feed from "../feed/Feed";
 import Profileleftbar from "../profileleftbar/Profileleftbar";
-import Rightbar from "../../components/rightbar/Rightbar";
+import Rightbar from "../rightbar/Rightbar";
 import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
-
-export default function Profile({ handleLogout }) {
-  const [file, setFile] = useState(null);
-  const { user, dispatch } = useContext(Context);
-  const [posts, setPosts] = useState([]);
+import { useLocation } from "react-router-dom";
+export default function UserProfile() {
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get("userId");
+  const [user, setUser] = useState();
   const [friends, setFriends] = useState([]);
   const fetchFriends = async (id) => {
     await commonApi({
@@ -33,6 +33,20 @@ export default function Profile({ handleLogout }) {
       setFriends(DATA.data);
     });
   };
+  const userData = () => {
+    commonApi({
+      action: "getUser",
+      parameters: [name],
+      config: {
+        authToken: true
+      }
+    }).then(({ DATA }) => {
+      setUser(DATA);
+    });
+  };
+
+  const [posts, setPosts] = useState([]);
+
   const fetchPosts = async (query = {}) => {
     let data = {
       query: query,
@@ -64,36 +78,12 @@ export default function Profile({ handleLogout }) {
     });
   };
 
-  const uploadImage = async () => {
-    const fileData = new FormData();
-    const fileName = Date.now() + file.name;
-    fileData.append("name", fileName);
-    fileData.append("file", file);
-    await commonApi({
-      action: "upload",
-      data: fileData
-    });
-    let pp = "http://localhost:5000/assets/" + fileName;
-
-    await commonApi({
-      action: "updateUser",
-      parameters: user._id ? [user._id] : [],
-      data: {
-        profilePicture: pp
-      },
-      config: {
-        authToken: true
-      }
-    }).then(({ DATA = {} }) => {
-      dispatch({ type: "UPDATE_USER", payload: DATA });
-    });
-  };
   useEffect(() => {
-    fetchPosts({ userId: user._id });
-    if (file) {
-      uploadImage();
+    userData();
+    if (user) {
+      fetchPosts({ userId: user._id });
     }
-  }, [file]);
+  }, [user?._id]);
 
   return (
     <>
@@ -107,39 +97,18 @@ export default function Profile({ handleLogout }) {
 
               <img
                 className="profileUserImg"
-                src={
-                  (file && URL.createObjectURL(file)) ||
-                  user.profilePicture ||
-                  "assets/person/1.jpg"
-                }
+                src={user?.profilePicture || "assets/person/1.jpg"}
                 alt=""
-              />
-              <input
-                className="changeUserImg"
-                // style={{ display: "none" }}
-                style={{ opacity: 0 }}
-                type="file"
-                id="file"
-                accept=".png,.jpeg,.jpg"
-                onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">{user.fullName}</h4>
+              <h4 className="profileInfoName">{user?.fullName}</h4>
               {/* <span className="profileInfoDesc">It's a good day..!</span> */}
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar
-              post={posts.length || 0}
-              handleLogout={handleLogout}
-              fetchPosts={fetchPosts}
-              fetchFriends={fetchFriends}
-            />
-            <Feed
-              posts={posts}
-              fetchPosts={() => fetchPosts({ userId: user._id })}
-            />
+            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends}/>
+            <Feed posts={posts} fetchPosts={fetchPosts} />
             <Rightbar friends={friends} fetchFriends={fetchFriends}/>
           </div>
         </div>

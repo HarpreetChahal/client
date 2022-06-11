@@ -4,7 +4,7 @@ import { Context } from "../context/Context";
 import "./homerightbar.css";
 
 export default function Homerightbar() {
-  const { user } = useContext(Context);
+  const { user, dispatch } = useContext(Context);
   const [friends, setFriends] = useState([]);
   const fetchSuggestions = async () => {
     await commonApi({
@@ -12,12 +12,12 @@ export default function Homerightbar() {
       data: {
         options: {
           pagination: false,
-          sort: { createdAt: -1 },
-        },
+          sort: { createdAt: -1 }
+        }
       },
       config: {
-        authToken: true,
-      },
+        authToken: true
+      }
     }).then(({ DATA = {} }) => {
       setFriends(DATA.data);
     });
@@ -26,13 +26,22 @@ export default function Homerightbar() {
     await commonApi({
       action: "followFriend",
       data: {
-        followingId: id,
+        followingId: id
       },
       config: {
-        authToken: true,
-      },
-    }).then(({ DATA = {} }) => {
+        authToken: true
+      }
+    }).then(async ({ DATA = {} }) => {
       fetchSuggestions();
+      await commonApi({
+        action: "getUser",
+        parameters: [user._id],
+        config: {
+          authToken: true
+        }
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
+      });
     });
   };
   useEffect(() => {

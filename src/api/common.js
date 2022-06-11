@@ -15,7 +15,7 @@ const commonApi = ({ parameters = [], action, module = "", data, config }) => {
       type: api.method,
       url: api.url(...parameters),
       data,
-      config,
+      config
     });
   }
 

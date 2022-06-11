@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { Context } from "./components/context/Context";
 import Profile from "./components/profile/Profile.jsx";
 import { useNavigate } from "react-router";
+import UserProfile from "./components/userProfile/UserProfile";
 function App() {
   const { user, dispatch, token } = useContext(Context);
   const navigate = useNavigate();
@@ -23,27 +24,38 @@ function App() {
           exact
           path="/"
           element={
-            (token && user) ? <Home handleLogout={handleLogout} /> : <Login />
+            token && user ? <Home handleLogout={handleLogout} /> : <Login />
           }
         />
         <Route
           exact
           path="/register"
-          element={(token && user) ? <Home /> : <Register />}
+          element={token && user ? <Home /> : <Register />}
         />
 
         <Route
           exact
           path="/login"
           element={
-            (token && user) ? <Home handleLogout={handleLogout} /> : <Login />
+            token && user ? <Home handleLogout={handleLogout} /> : <Login />
           }
         />
         <Route
           exact
           path="/profile"
           element={
-            (token && user) ? <Profile handleLogout={handleLogout} /> : <Login />
+            token && user ? <Profile handleLogout={handleLogout} /> : <Login />
+          }
+        />
+        <Route
+          exact
+          path="/userProfile"
+          element={
+            token && user ? (
+              <UserProfile handleLogout={handleLogout} />
+            ) : (
+              <Login />
+            )
           }
         />
       </Routes>
