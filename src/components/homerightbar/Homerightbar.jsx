@@ -4,7 +4,7 @@ import { Context } from "../context/Context";
 import "./homerightbar.css";
 
 export default function Homerightbar() {
-  const { user } = useContext(Context);
+  const { user ,dispatch} = useContext(Context);
   const [friends, setFriends] = useState([]);
   const fetchSuggestions = async () => {
     await commonApi({
@@ -31,8 +31,17 @@ export default function Homerightbar() {
       config: {
         authToken: true,
       },
-    }).then(({ DATA = {} }) => {
+    }).then(async({ DATA = {} }) => {
       fetchSuggestions();
+      await commonApi({
+        action: "getUser",
+        parameters: [user._id],
+        config: {
+          authToken: true,
+        },
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
+      });
     });
   };
   useEffect(() => {

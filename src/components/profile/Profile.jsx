@@ -62,6 +62,9 @@ export default function Profile({ handleLogout }) {
       data: {
         profilePicture: pp,
       },
+      config:{
+        authToken:true
+      }
     }).then(({ DATA = {} }) => {
       dispatch({ type: "UPDATE_USER", payload: DATA });
     });
@@ -111,7 +114,8 @@ export default function Profile({ handleLogout }) {
             <Profileleftbar
               post={posts.length || 0}
               handleLogout={handleLogout}
-              fetchPosts={fetchPosts}
+              fetchPosts={fetchPosts} 
+            
             />
             <Feed
               posts={posts}

@@ -14,8 +14,28 @@ import moment from "moment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import commonApi from "../../api/common";
+import { useLocation } from "react-router-dom";
 export default function Profileleftbar({ post, handleLogout, fetchPosts }) {
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get("userId");
   const { user, dispatch } = useContext(Context);
+  const [userData, setUserData] = useState(user);
+  const [loggedInUser, setLoggedInUser] = useState(true);
+  const getUserData = () => {
+    commonApi({
+      action: "getUser",
+      parameters: [name],
+      config: {
+        authToken: true,
+      },
+    }).then(({ DATA }) => {
+      setUserData(DATA);
+      if (userData._id !== user._id) {
+        setLoggedInUser(false);
+      }
+    });
+  };
+
   const [followers, setFollowers] = useState([]);
   const [value, setValue] = useState(null);
 
@@ -29,10 +49,13 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts }) {
     setOpen(false);
   };
 
-  const fetchFollowers = async () => {
+  const fetchFollowers = async (id) => {
     await commonApi({
       action: "followers",
       data: {
+        query: {
+          _id: id,
+        },
         options: {
           pagination: false,
           sort: { createdAt: -1 },
@@ -46,15 +69,43 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts }) {
     });
   };
   useEffect(() => {
-    fetchFollowers();
-  }, []);
+    if (name) {
+      getUserData();
+    }
 
+    if(userData)
+    {
+      fetchFollowers(userData._id);
+    }
+   
+  }, [user,userData]);
   const ProfileProfileleftbar = () => {
+    const followFriend = async (id) => {
+      await commonApi({
+        action: "followFriend",
+        data: {
+          followingId: id,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(async({ DATA = {} }) => {
+        await commonApi({
+          action: "getUser",
+          parameters: [user._id],
+          config: {
+            authToken: true,
+          },
+        }).then(({ DATA = {} }) => {
+          dispatch({ type: "UPDATE_USER", payload: DATA });
+        });
+      });
+    };
     const formik = useFormik({
       initialValues: {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        dob: moment(user.dob).format("yyyy-MM-DD"),
+        firstName: loggedInUser?user.firstName:userData.firstName,
+        lastName: loggedInUser?user.lastName:userData.lastName,
+        dob:loggedInUser?moment(user.dob).format("yyyy-MM-DD"): moment(userData.dob).format("yyyy-MM-DD"),
       },
       validationSchema: Yup.object({
         firstName: Yup.string().required("Required"),
@@ -83,16 +134,19 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts }) {
         <div className="ProfileCardData">
           <div className="ProfileImages">
             <img src="assets/cover/1.jpg" alt="" />
-            <img src={user.profilePicture || "assets/person/1.jpg"} alt="" />
+            <img
+              src={loggedInUser?user.profilePicture:userData.profilePicture || "assets/person/1.jpg"}
+              alt=""
+            />
           </div>
           <div className="ProfileName">
-            <span>{user.fullName}</span>
+            <span>{loggedInUser?user.fullName:userData.fullName}</span>
           </div>
           <div className="followStatus">
             <hr />
             <div>
               <div className="follow">
-                <span>{user.followers.length || 0}</span>
+                <span>{loggedInUser?user.followers.length:userData.followers.length || 0}</span>
                 <span>Followers</span>
               </div>
               <div className="vline"></div>
@@ -102,7 +156,7 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts }) {
               </div>
               <div className="vline"></div>
               <div className="follow">
-                <span>{user.following.length || 0}</span>
+                <span>{loggedInUser?user.following.length:userData.following.length || 0}</span>
                 <span>Following</span>
               </div>
             </div>
@@ -112,122 +166,128 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts }) {
         <div className="InfoCard">
           <div className="infoHead">
             <h3>User Information </h3>
-            <div>
-              <Edit onClick={handleClickOpen} />
+            {user._id === userData._id && (
+              <div>
+                <Edit onClick={handleClickOpen} />
 
-              <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Update user information</DialogTitle>
-                <DialogContent>
-                  {/* <DialogContentText>
+                <Dialog open={open} onClose={handleClose}>
+                  <DialogTitle>Update user information</DialogTitle>
+                  <DialogContent>
+                    {/* <DialogContentText>
             User Information
           </DialogContentText> */}
-                  <TextField
-                    id="outlined-basic"
-                    label="First Name"
-                    variant="outlined"
-                    name="firstName"
-                    sx={{ mt: 1, width: "48%" }}
-                    //error={(formik.touched.firstName && formik.errors.firstName)}
-                    onChange={formik.handleChange}
-                    value={formik.values.firstName}
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Last Name"
-                    variant="outlined"
-                    name="lastName"
-                    sx={{ mt: 1, ml: 2.6, width: "48%" }}
-                    //error={(formik.touched.lastName && formik.errors.lastName)}
-                    onChange={formik.handleChange}
-                    value={formik.values.lastName}
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Email"
-                    type="email"
-                    variant="outlined"
-                    sx={{ mt: 2, width: "100%" }}
-                    value={user.email}
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Date of Birth"
-                    name="dob"
-                    type="date"
-                    defaultValue="1990-01-01"
-                    variant="outlined"
-                    sx={{ mt: 2, width: "100%" }}
-                    //  error={(formik.touched.dob && formik.errors.dob)}
-                    onChange={formik.handleChange}
-                    value={formik.values.dob}
-                  />
-                </DialogContent>
-                <DialogActions>
-                  <Button variant="contained" onClick={handleClose}>
-                    Cancel
-                  </Button>
-                  <Button
-                    variant="contained"
-                    disabled={!(formik.isValid && formik.dirty)}
-                    onClick={formik.handleSubmit}
-                  >
-                    Update
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
+                    <TextField
+                      id="outlined-basic"
+                      label="First Name"
+                      variant="outlined"
+                      name="firstName"
+                      sx={{ mt: 1, width: "48%" }}
+                      //error={(formik.touched.firstName && formik.errors.firstName)}
+                      onChange={formik.handleChange}
+                      value={formik.values.firstName}
+                    />
+                    <TextField
+                      id="outlined-basic"
+                      label="Last Name"
+                      variant="outlined"
+                      name="lastName"
+                      sx={{ mt: 1, ml: 2.6, width: "48%" }}
+                      //error={(formik.touched.lastName && formik.errors.lastName)}
+                      onChange={formik.handleChange}
+                      value={formik.values.lastName}
+                    />
+                    <TextField
+                      id="outlined-basic"
+                      label="Email"
+                      type="email"
+                      variant="outlined"
+                      sx={{ mt: 2, width: "100%" }}
+                      value={user.email}
+                    />
+                    <TextField
+                      id="outlined-basic"
+                      label="Date of Birth"
+                      name="dob"
+                      type="date"
+                      defaultValue="1990-01-01"
+                      variant="outlined"
+                      sx={{ mt: 2, width: "100%" }}
+                      //  error={(formik.touched.dob && formik.errors.dob)}
+                      onChange={formik.handleChange}
+                      value={formik.values.dob}
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button variant="contained" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="contained"
+                      disabled={!(formik.isValid && formik.dirty)}
+                      onClick={formik.handleSubmit}
+                    >
+                      Update
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+            )}
           </div>
 
           <div className="info">
             <span>
               <b>FirstName : </b>
             </span>
-            <span>{user.firstName}</span>
+            <span>{loggedInUser?user.firstName:userData.firstName}</span>
           </div>
           <div className="info">
             <span>
               <b>LastName : </b>
             </span>
-            <span>{user.lastName}</span>
+            <span>{loggedInUser?user.lastName:userData.lastName}</span>
           </div>
           <div className="info">
             <span>
               <b>Email : </b>
             </span>
-            <span>{user.email}</span>
+            <span>{loggedInUser?user.email:userData.email}</span>
           </div>
 
           <div className="info">
             <span>
               <b>Date of birth : </b>
             </span>
-            <span>{moment(user.dob).format("DD MMM,yyyy")}</span>
+            <span>{loggedInUser?moment(user.dob).format("DD MMM,yyyy"):moment(userData.dob).format("DD MMM,yyyy")}</span>
           </div>
 
-          <button className="logout-button" onClick={handleLogout}>
-            Logout
-            <Logout sx={{ ml: 1 }} />
-          </button>
+          {loggedInUser && (
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+              <Logout sx={{ ml: 1 }} />
+            </button>
+          )}
         </div>
 
         <div className="FollowersCard">
           <h3>Who is following you</h3>
-          {followers.map((follower)=>{
+          {followers.map((follower) => {
             return (
               <div className="follower">
-            <div>
-              <img src="assets/person/1.jpg" alt="" className="followerImg" />
-              <div className="name">
-                <span>{follower.fullName}</span>
-              </div>
-            </div>
+                <div>
+                  <img
+                    src={follower.profilePicture||"assets/person/1.jpg"}
+                    alt=""
+                    className="followerImg"
+                  />
+                  <div className="name">
+                    <span>{follower.fullName}</span>
+                  </div>
+                </div>
 
-            <button className="follow-button">Follow</button>
-          </div>
-            )
+                {!user.following.includes(follower._id)&&<button className="follow-button" onClick={()=>{followFriend(follower._id)}}>Follow</button>}
+              </div>
+            );
           })}
-          
-     
         </div>
 
         {/* <h4 className="rightbarTitle"> User Information </h4>

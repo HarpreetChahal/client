@@ -28,7 +28,7 @@ export default function Feed({ posts, fetchPosts }) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share fetchPosts={fetchPosts} />
+       { !name&& <Share fetchPosts={fetchPosts} />}
         {posts.map((post) => {
           return (
             <Post
@@ -45,6 +45,7 @@ export default function Feed({ posts, fetchPosts }) {
             />
           );
         })}
+        {posts.length===0 &&<div> No Post Found</div>}
       </div>
     </div>
   );

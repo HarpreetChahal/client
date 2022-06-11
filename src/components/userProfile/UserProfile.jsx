@@ -12,14 +12,18 @@ import { useLocation } from "react-router-dom";
 export default function UserProfile() {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
-const [user,setUser]=useState()
-  const userData=()=>{ commonApi({ action: "getUser", parameters: [name],  config: {
-    authToken: true,
-  }, }).then( ({DATA})=>{
-    setUser(DATA)
-  
-  })}
-  
+  const [user, setUser] = useState();
+  const userData = () => {
+    commonApi({
+      action: "getUser",
+      parameters: [name],
+      config: {
+        authToken: true,
+      },
+    }).then(({ DATA }) => {
+      setUser(DATA);
+    });
+  };
 
   const [posts, setPosts] = useState([]);
 
@@ -55,14 +59,11 @@ const [user,setUser]=useState()
   };
 
   useEffect(() => {
-    userData()
-    if(user)
-    {  
-     fetchPosts({ userId: user._id });
-
+    userData();
+    if (user) {
+      fetchPosts({ userId: user._id });
     }
-    
-  }, []);
+  }, [user]);
 
   return (
     <>
@@ -86,11 +87,8 @@ const [user,setUser]=useState()
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} />
-            <Feed
-              posts={posts}
-              fetchPosts={() => fetchPosts({ userId: user?._id })}
-            />
+            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts}  />
+            <Feed posts={posts} fetchPosts={fetchPosts} />
             <Rightbar />
           </div>
         </div>
