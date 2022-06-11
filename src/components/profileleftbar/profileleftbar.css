@@ -198,6 +198,7 @@
     border-radius: 50%;
     position: absolute;
     bottom: -3rem;
+    object-fit: cover;
   }
   
   .ProfileName {
