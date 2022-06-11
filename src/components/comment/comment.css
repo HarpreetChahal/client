@@ -13,6 +13,46 @@
   
 }
 
+.CommentSectionReply
+{
+  width: 100%;
+  /* width: auto; */
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  /* text-align:right; */
+ 
+  /* border-radius: 10px; */
+  /* -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
+  /* box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
+  margin-top: 5px; 
+  margin-right: 150px;
+}
+
+
+.commentLike
+{
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  margin-right: 7px; 
+  
+}
+.commentReply
+{
+  display: flex;
+  font-size: 12px;
+  align-items: center; 
+  
+}
+
+/* style={{
+  display:"flex",
+  fontSize: "10px",
+  textAlign:""
+  cursor:"pointer",
+}} */
+
 .profileComment {
   width: auto;
   display: flex;
@@ -38,3 +78,16 @@
     /* margin-left: 5px; */
     margin-right: 10px;
   }
+
+
+  .replyCommentAdded {
+    margin-left: 25px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin-top: 5px;
+  }
+  

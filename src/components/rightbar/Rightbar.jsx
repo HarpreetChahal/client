@@ -9,18 +9,24 @@
 import React from "react";
 import "./rightbar.css";
 import {Add, PersonAdd} from "@mui/icons-material";
-import { Edit, Logout } from "@mui/icons-material";
+import { Edit, Logout,Search } from "@mui/icons-material";
 
 
 export default function Rightbar({ profile }) {
     const ProfileRightbar = () => {
         return (
             <>
-           
+           <div className="AddSearch" >
             <button className="rightbarFollowButton">
              Add Friend <PersonAdd sx={{ml:1}}/>
             </button>
-            
+            <div className="Search">
+            <input type="text" placeholder="#Search"/>
+            <div className="s-icon">
+              <Search/>
+            </div>
+            </div>
+            </div>
             <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
@@ -61,7 +67,7 @@ export default function Rightbar({ profile }) {
               alt=""
               className="rightbarFollowingImg"
             />
-            <span className="rightbarFollowingName">Carter King</span>
+            <span className="rightbarFollowingName">Harpreet Singh</span>
           </div>
           <div className="rightbarFollowing">
             <img
@@ -69,7 +75,7 @@ export default function Rightbar({ profile }) {
               alt=""
               className="rightbarFollowingImg"
             />
-            <span className="rightbarFollowingName">Jessie Pin</span>
+            <span className="rightbarFollowingName">Jessie Pink</span>
           </div>
         </div>
 

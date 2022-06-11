@@ -8,6 +8,9 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
+import { CameraAlt } from "@mui/icons-material";
+
+
 
 export default function Profile({ handleLogout }) {
   const [file, setFile] = useState(null);
@@ -20,11 +23,11 @@ export default function Profile({ handleLogout }) {
       options: {
         pagination: false,
         populate: [
-          { path: "userId", model: "user", select: ["_id", "fullName","profilePicture"] },
+          { path: "userId", model: "user", select: ["_id", "fullName", "profilePicture"] },
           {
             path: "comments.userId",
             model: "user",
-            select: ["_id", "fullName","profilePicture"],
+            select: ["_id", "fullName", "profilePicture"],
           },
         ],
         sort: { createdAt: -1 },
@@ -41,7 +44,7 @@ export default function Profile({ handleLogout }) {
     });
   };
 
-  const uploadImage=async()=> {
+  const uploadImage = async () => {
     const fileData = new FormData();
     const fileName = Date.now() + file.name;
     fileData.append("name", fileName);
@@ -62,10 +65,10 @@ export default function Profile({ handleLogout }) {
       dispatch({ type: "UPDATE_USER", payload: DATA });
     });
   }
-  useEffect( () => {
+  useEffect(() => {
     fetchPosts({ userId: user._id });
     if (file) {
-       uploadImage();
+      uploadImage();
     }
   }, [file]);
 
@@ -88,15 +91,29 @@ export default function Profile({ handleLogout }) {
                 }
                 alt=""
               />
+              <CameraAlt fontSize="large"
+              sx={{color:"#1877f2"}}
+                className="changeImg"
+              />
+
+
+              {/* <Badge className="profileUserImg"
+                overlap="circular"
+                // anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                badgeContent={
+                  <SmallAvatar alt="Remy Sharp" src="/assets/person/1.jpg" />
+                }
+              ></Badge> */}
               <input
                 className="changeUserImg"
                 // style={{ display: "none" }}
-                style={{opacity:0}}
+                style={{ opacity: 0 }}
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
                 onChange={(e) => setFile(e.target.files[0])}
               />
+
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{user.fullName}</h4>

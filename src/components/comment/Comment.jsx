@@ -9,6 +9,7 @@
 import React from "react";
 import "./comment.css";
 import moment from "moment";
+import { Favorite, ReplyOutlined } from "@mui/icons-material";
 export default function Comment({ user, comment, date }) {
   return (
     <>
@@ -16,7 +17,7 @@ export default function Comment({ user, comment, date }) {
       <div className="profileComment">
         <img
           className="profilePommentProfileImg"
-          src={user.profilePicture ||"/assets/person/1.jpg"}
+          src={user.profilePicture || "/assets/person/1.jpg"}
           alt=""
         />
 
@@ -56,7 +57,7 @@ export default function Comment({ user, comment, date }) {
                 paddingTop: "7px",
               }}
             >
-            {user?.fullName}
+              {user?.fullName}
             </div>
             <span class="postCommentText">{comment}</span>
           </div>
@@ -72,6 +73,178 @@ export default function Comment({ user, comment, date }) {
           </div>
         </div>
       </div>
-    </>
+
+
+      {/* NESTED COMMENT */}
+
+
+      <div className="profileComment">
+        <img
+          className="profilePommentProfileImg"
+          src={user.profilePicture || "/assets/person/1.jpg"}
+          alt=""
+        />
+
+        {/* <div>Dharmik</div>
+        
+        <span className="postCommentText"> THis is a beafutiful applica</span>
+        <div> 2 h ago</div> */}
+        {/* 
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div style={{ fontSize: "12px", color: "#000" }}>{user?.fullName}</div>
+            <span className="postCommentText">
+              {comment}
+            </span>
+          </div>
+          <div> {moment(date).fromNow()}</div>
+        </div> */}
+
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: "10px",
+                color: "rgb(0, 0, 0)",
+                paddingTop: "7px",
+              }}
+            >
+              {user?.fullName}
+            </div>
+            <span class="postCommentText">{comment}</span>
+          </div>
+          <div
+            style={{
+              fontSize: "10px",
+              paddingTop: "28px",
+              paddingBottom: "5px",
+              paddingRight: "20px",
+            }}
+          >
+            {moment(date).fromNow()}
+          </div>
+        </div>
+
+        </div>
+
+{/* LIKE AND REPLY FOR COMMENTS */}
+      
+      <div className="CommentSectionReply" >
+        <div className="commentLike">
+          Like
+          <Favorite sx={{ fontSize: "small", ml: 0.5 }} />
+        </div>
+        <div className="commentReply">
+          Reply
+          <ReplyOutlined sx={{ fontSize: "medium", ml: 0.5 }} />
+        </div>
+      </div>
+
+      {/* LIKE AND REPLY END */}
+
+
+
+      <div className="replyCommentAdded">
+        <img
+          className="profilePommentProfileImg"
+          src={user.profilePicture || "/assets/person/1.jpg"}
+          alt=""
+        />
+
+        {/* <div>Dharmik</div>
+        
+        <span className="postCommentText"> THis is a beafutiful applica</span>
+        <div> 2 h ago</div> */}
+        {/* 
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div style={{ fontSize: "12px", color: "#000" }}>{user?.fullName}</div>
+            <span className="postCommentText">
+              {comment}
+            </span>
+          </div>
+          <div> {moment(date).fromNow()}</div>
+        </div> */}
+
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: "10px",
+                color: "rgb(0, 0, 0)",
+                paddingTop: "7px",
+              }}
+            >
+              {user?.fullName}
+            </div>
+            <span class="postCommentText">{comment}</span>
+          </div>
+          <div
+            style={{
+              fontSize: "10px",
+              paddingTop: "28px",
+              paddingBottom: "5px",
+              paddingRight: "20px",
+            }}
+          >
+            {moment(date).fromNow()}
+          </div>
+        </div>
+
+      </div>
+
+      {/* LIKE AND REPLY FOR COMMENTS */}
+      
+      <div className="CommentSectionReply" >
+        <div className="commentLike">
+          Like
+          <Favorite sx={{ fontSize: "small", ml: 0.5 }} />
+        </div>
+        <div className="commentReply">
+          Reply
+          <ReplyOutlined sx={{ fontSize: "medium", ml: 0.5 }} />
+        </div>
+      </div>
+
+      {/* LIKE AND REPLY END */}
+
+
+      
+      </>
+
+
+
+
+
+      /* END */
+
+      
+
+      
+    
   );
 }
