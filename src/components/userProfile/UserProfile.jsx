@@ -14,6 +14,7 @@ export default function UserProfile() {
   const name = new URLSearchParams(search).get("userId");
   const [user, setUser] = useState();
   const [friends, setFriends] = useState([]);
+  const {dispatch}=useContext(Context)
   const fetchFriends = async (id) => {
     await commonApi({
       action: "friends",
@@ -78,6 +79,28 @@ export default function UserProfile() {
     });
   };
 
+  const unFollowFriend = async (id) => {
+    await commonApi({
+      action: "unFollowFriend",
+      data: {
+        followingId: id
+      },
+      config: {
+        authToken: true
+      }
+    }).then(async ({ DATA = {} }) => {
+      fetchFriends(name?name:user._id)
+      await commonApi({
+        action: "getUser",
+        parameters: [user._id],
+        config: {
+          authToken: true
+        }
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
+      });
+    });
+  };
   useEffect(() => {
     userData();
     if (user) {
@@ -107,7 +130,7 @@ export default function UserProfile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends}/>
+            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends} unFollowFriend={unFollowFriend}/>
             <Feed posts={posts} fetchPosts={fetchPosts} />
             <Rightbar friends={friends} fetchFriends={fetchFriends}/>
           </div>

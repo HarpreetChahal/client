@@ -63,6 +63,10 @@ const apiList = {
     url: () => "user/followers",
     method: "post"
   },
+  unFollowFriend:{
+    url: () => "user/unFollowFriend",
+    method: "post"
+  },
   getUser: {
     url: (id) => `user/${id}`,
     method: "get"
