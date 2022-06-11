@@ -56,7 +56,7 @@ export default function Leftbar({ fetchPosts, handleLogout }) {
           bgcolor: "background.paper",
           position: "fixed",
           top: 100,
-          left: "1%",
+          left: "1%"
         }}
       >
         <nav aria-label="main list">
@@ -68,7 +68,7 @@ export default function Leftbar({ fetchPosts, handleLogout }) {
                 fetchPosts();
                 window.scrollTo({
                   top: 0,
-                  behavior: "smooth",
+                  behavior: "smooth"
                 });
               }}
             >
@@ -100,13 +100,11 @@ export default function Leftbar({ fetchPosts, handleLogout }) {
 
       <Button
         variant="contained"
-        onClick={
-          handleLogout
-        }
+        onClick={handleLogout}
         sx={{
           position: "fixed",
           bottom: 10,
-          left: "1%",
+          left: "1%"
         }}
       >
         Logout

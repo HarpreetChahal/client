@@ -9,17 +9,17 @@ const config = {
 
   dismiss: {
     duration: 2000,
-    showIcon: true,
+    showIcon: true
 
     //   onScreen: true,
-  },
+  }
 };
 const addToast = (title, message) => {
   Store.addNotification({
     // title,
     message,
     ...config,
-    type: title || "info",
+    type: title || "info"
   });
 };
 
@@ -31,7 +31,7 @@ const Toast = {
   success: (data) => addToast("success", data),
   info: (data) => addToast("info", data),
   default: (data) => addToast("default", data),
-  warn: (data) => addToast("warning", data),
+  warn: (data) => addToast("warning", data)
 };
 
 export default Toast;

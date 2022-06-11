@@ -1,10 +1,9 @@
 /*!
-* @file      Comment.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the comment component page for LookMeUp project.
-*/
-
+ * @file      Comment.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the comment component page for LookMeUp project.
+ */
 
 import React from "react";
 import "./comment.css";
@@ -16,7 +15,7 @@ export default function Comment({ user, comment, date }) {
       <div className="profileComment">
         <img
           className="profilePommentProfileImg"
-          src={user.profilePicture ||"/assets/person/1.jpg"}
+          src={user.profilePicture || "/assets/person/1.jpg"}
           alt=""
         />
 
@@ -45,7 +44,7 @@ export default function Comment({ user, comment, date }) {
           style={{
             display: "flex",
             width: "100%",
-            justifyContent: "space-between",
+            justifyContent: "space-between"
           }}
         >
           <div>
@@ -53,10 +52,10 @@ export default function Comment({ user, comment, date }) {
               style={{
                 fontSize: "10px",
                 color: "rgb(0, 0, 0)",
-                paddingTop: "7px",
+                paddingTop: "7px"
               }}
             >
-            {user?.fullName}
+              {user?.fullName}
             </div>
             <span className="postCommentText">{comment}</span>
           </div>
@@ -65,7 +64,7 @@ export default function Comment({ user, comment, date }) {
               fontSize: "10px",
               paddingTop: "28px",
               paddingBottom: "5px",
-              paddingRight: "20px",
+              paddingRight: "20px"
             }}
           >
             {moment(date).fromNow()}

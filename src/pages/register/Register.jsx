@@ -23,7 +23,7 @@ import {
   Key,
   Face,
   Visibility,
-  VisibilityOff,
+  VisibilityOff
 } from "@mui/icons-material";
 import Link from "@mui/material/Link";
 import moment from "moment";
@@ -48,18 +48,18 @@ export default function Register() {
       firstName: "",
       lastName: "",
       dob: moment().format("yyyy-MM-DD"),
-      password: "",
+      password: ""
     },
     validationSchema: Yup.object({
       password: Yup.string().required("Required"),
       firstName: Yup.string().required("Required"),
       lastName: Yup.string().required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required")
     }),
     onSubmit: async (values) => {
       await commonApi({
         action: "register",
-        data: values,
+        data: values
       })
         .then(({ DATA = {}, MESSAGE }) => {
           let { token, ...data } = DATA;
@@ -75,7 +75,7 @@ export default function Register() {
           }
           console.error(error);
         });
-    },
+    }
   });
   useEffect(() => {
     if (isEmail) {
@@ -110,7 +110,7 @@ export default function Register() {
                 display: "flex",
                 flexDirection: "column",
                 maxWidth: 600,
-                minWidth: 300,
+                minWidth: 300
               }}
             >
               <Grid container justify="center">
@@ -130,7 +130,7 @@ export default function Register() {
                     <InputAdornment>
                       <AccountCircle color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  )
                 }}
               />
               <TextField
@@ -146,7 +146,7 @@ export default function Register() {
                     <InputAdornment>
                       <Face color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  )
                 }}
               />
               <TextField
@@ -163,7 +163,7 @@ export default function Register() {
                     <InputAdornment>
                       <Email color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  )
                 }}
               />
               <TextField
@@ -180,7 +180,7 @@ export default function Register() {
                     <InputAdornment>
                       <CalendarToday color="primary" sx={{ mr: 1 }} />
                     </InputAdornment>
-                  ),
+                  )
                 }}
               />
               <TextField
@@ -207,7 +207,7 @@ export default function Register() {
                         {showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
-                  ),
+                  )
                 }}
               />
 

@@ -15,7 +15,7 @@ import {
   Send,
   FavoriteBorder,
   Edit,
-  Delete,
+  Delete
 } from "@mui/icons-material";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -40,7 +40,7 @@ export default function Post(props) {
     images,
     likes,
     dislikes,
-    fetchPosts,
+    fetchPosts
   } = props;
   let imgPath = images[0];
   const { user } = useContext(Context);
@@ -58,11 +58,11 @@ export default function Post(props) {
         action: "likeDislike",
         data: {
           postId: postId,
-          action: true,
+          action: true
         },
         config: {
-          authToken: true,
-        },
+          authToken: true
+        }
       }).then(({ MESSAGE }) => {
         fetchPosts();
         setIsLiked(!isLiked);
@@ -75,11 +75,11 @@ export default function Post(props) {
         action: "likeDislike",
         data: {
           postId: postId,
-          action: false,
+          action: false
         },
         config: {
-          authToken: true,
-        },
+          authToken: true
+        }
       }).then(({ MESSAGE }) => {
         fetchPosts();
         isDisLiked(!isDisLiked);
@@ -93,11 +93,11 @@ export default function Post(props) {
       action: "createComment",
       data: {
         postId: postId,
-        comment: comment,
+        comment: comment
       },
       config: {
-        authToken: true,
-      },
+        authToken: true
+      }
     }).then(({ MESSAGE }) => {
       setComment("");
       Toast.success(MESSAGE);
@@ -118,12 +118,12 @@ export default function Post(props) {
     setAnchorEl(null);
   };
 
-  const handleDeletePost=async()=>{
-    await commonApi({action:"deletePost",parameters:[postId]}).then(()=>{
+  const handleDeletePost = async () => {
+    await commonApi({ action: "deletePost", parameters: [postId] }).then(() => {
       fetchPosts();
       handleClose();
-    })
-  }
+    });
+  };
 
   return (
     <div className="post">
@@ -139,9 +139,11 @@ export default function Post(props) {
             <span className="postDate">{moment(date).fromNow()}</span>
           </div>
           <div className="postTopRight">
-          {(userData._id===user._id) &&  <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-              <MoreVertOutlined />
-            </IconButton>}
+            {userData._id === user._id && (
+              <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+                <MoreVertOutlined />
+              </IconButton>
+            )}
             <Menu
               anchorEl={anchorEl}
               id="account-menu"
@@ -226,7 +228,7 @@ export default function Post(props) {
             <div className="sendButton">
               <Send
                 sx={{
-                  color: "#1877f2",
+                  color: "#1877f2"
                 }}
                 onClick={createComment}
               />
