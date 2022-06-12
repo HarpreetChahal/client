@@ -58,9 +58,11 @@ export default function Topbar({ fetchPosts }) {
 
       <div className="topbarRight">
         <Home className="home_button" fontSize="medium"/> 
-        <span className="home_text">Homepage</span>
-        <Feed className="home_button" fontSize="medium"/>
-        <span className="home_text">Timeline</span>
+        <span className="home_text">Home</span>
+        <Feed className="timeline_button" fontSize="medium"/>
+        <span className="timeline_text">Timeline</span>
+        <Logout className="logout_button" fontSize="medium"/>
+        <span className="logout_text">Logout</span>
 
         {/* <span className="helloUser">Hi, {user.firstName}</span> */}
         <div>

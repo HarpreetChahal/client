@@ -68,23 +68,50 @@
 
   .home_button
   {
-    /* align-items:flex-start; */
-    /* display: flex; */
+    align-items:flex-start;
+    display: flex;
     justify-content: flex-start;
-    margin-right: 5px;
+    margin-right: 3px;
     align-items: center;
   }
 
  .home_text
  {
-  justify-content: space-between;
-  /* margin-right: 180px; */
-  text-align:justify;
-  font-size: 20px;
   margin-right: 10px;
-  /* margin-top: 10px; */
-
+  font-size: 17px;
  }
+
+ .timeline_button
+ {
+   align-items:flex-start;
+   display: flex;
+   justify-content: flex-start;
+   margin-right: 3px;
+   align-items: center;
+ }
+
+.timeline_text
+{
+ margin-right: 10px;
+ font-size: 17px;
+}
+
+
+.logout_button
+{
+  align-items:flex-start;
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 3px;
+  align-items: center;
+}
+
+.logout_text
+{
+margin-right: 20px;
+font-size: 17px;
+}
+
  
   
   .helloUser
@@ -97,6 +124,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 2px solid white;
     align-items: flex-end;
     object-fit: cover;
     cursor: pointer;
