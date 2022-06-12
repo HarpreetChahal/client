@@ -40,7 +40,7 @@
 .rightbarFollowButton
 {
   margin-bottom: 20px;
-  margin-left: 1%;
+  margin-left: 10%;
   border: none;
   background-color: #1877f2;
   color: white;
@@ -110,40 +110,64 @@
 
 .rightbarTitle{
   font-size: 18px;
-  margin-left: 1%;
+  margin-left: 10%;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 
 .rightbarFollowings{
-  margin-left: 1%;
+  /* margin-left: 1%; */
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  /* background-color: white;
+  border-radius: 10px;
+-webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
 }
 
 .rightbarFollowing{
-  display: flex;
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  width: 110px;
+  margin-top: 10px;
+  margin-left: 12px;
+  /* display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  cursor: pointer;
-  position: relative;
+  cursor: pointer; */
+  /* position: relative; */
   /* overflow: hidden; */
   /* float: center; */
 }
+.rightbarFollowing>img
+{
+  width: 110px;
+  height: 110px;
+  border-radius: 6px;
+  object-fit: cover;
+  justify-content: space-between;
 
-.rightbarFollowingImg{
+}
+
+/* .rightbarFollowingImg{
   width: 110px;
   height: 120px;
   object-fit: cover;
   border-radius: 5px ;
-}
+} */
 
 .rightbarFollowingName
 {
+
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
   /* display: flex; */
-  color: white;
+  /* color: white;
   align-items: center;
   
   position:absolute;
@@ -151,8 +175,8 @@
   font-size: 13px;
   font-weight: 500;
   bottom: 1px;
-  text-align: center;
+  text-align: center; */
   /* float: center; */
-  background-color: black;
-  opacity: 0.8;
+  /* background-color: black;
+  opacity: 0.8; */
 }
