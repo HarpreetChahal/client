@@ -138,7 +138,7 @@ export default function Profile({ handleLogout }) {
               handleLogout={handleLogout}
               fetchPosts={fetchPosts}
               fetchFriends={fetchFriends}
-          
+          show={true}
             />
             <Feed
               posts={posts}

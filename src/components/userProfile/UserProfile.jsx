@@ -109,7 +109,7 @@ export default function UserProfile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends} />
+            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends} show={false}/>
             <Feed posts={posts} fetchPosts={fetchPosts} />
             <Rightbar friends={friends} fetchFriends={fetchFriends} user={user} userData={userData}/>
           </div>

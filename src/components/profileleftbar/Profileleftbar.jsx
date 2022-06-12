@@ -20,6 +20,7 @@ export default function Profileleftbar({
   handleLogout,
   fetchPosts,
   fetchFriends,
+  show,
 }) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
@@ -305,7 +306,7 @@ export default function Profileleftbar({
           )}
         </div>
 
-        <div className="FollowersCard">
+        {show && <div className="FollowersCard">
           <h3>Who is following you</h3>
           {followers.map((follower) => {
             return (
@@ -346,7 +347,7 @@ export default function Profileleftbar({
               </div>
             );
           })}
-        </div>
+        </div>}
 
         {/* <h4 className="rightbarTitle"> User Information </h4>
             
