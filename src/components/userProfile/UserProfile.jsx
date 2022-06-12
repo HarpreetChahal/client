@@ -79,28 +79,7 @@ export default function UserProfile() {
     });
   };
 
-  const unFollowFriend = async (id) => {
-    await commonApi({
-      action: "unFollowFriend",
-      data: {
-        followingId: id
-      },
-      config: {
-        authToken: true
-      }
-    }).then(async ({ DATA = {} }) => {
-      fetchFriends(name?name:user._id)
-      await commonApi({
-        action: "getUser",
-        parameters: [user._id],
-        config: {
-          authToken: true
-        }
-      }).then(({ DATA = {} }) => {
-        dispatch({ type: "UPDATE_USER", payload: DATA });
-      });
-    });
-  };
+
   useEffect(() => {
     userData();
     if (user) {
@@ -130,9 +109,9 @@ export default function UserProfile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends} unFollowFriend={unFollowFriend}/>
+            <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends} />
             <Feed posts={posts} fetchPosts={fetchPosts} />
-            <Rightbar friends={friends} fetchFriends={fetchFriends}/>
+            <Rightbar friends={friends} fetchFriends={fetchFriends} user={user} userData={userData}/>
           </div>
         </div>
       </div>

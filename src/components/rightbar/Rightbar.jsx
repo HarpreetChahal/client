@@ -14,10 +14,16 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
 
-export default function Rightbar({friends,fetchFriends}) {
+export default function Rightbar({friends,fetchFriends,userDetails,userData}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
   const { user } = useContext(Context);
+  
+  if(!name)
+  {
+    userDetails=user
+  }
+  
   
   // const [loggedInUser, setLoggedInUser] = useState(user._id!==name)
   
@@ -25,13 +31,14 @@ export default function Rightbar({friends,fetchFriends}) {
     if (name) {
       fetchFriends(name);
     } else {
-      fetchFriends(user._id);
+      fetchFriends(userDetails._id);
     }
-  }, []);
+    userData()
+  }, [name,userDetails?._id]);
   const ProfileRightbar = () => {
     const navigate = useNavigate();
     const handleFriends = (id) => {
-      if (id !== user._id) {
+      if (id !== userDetails?._id) {
         navigate("/userProfile?userId=" + id);
       } else {
         navigate("/profile");

@@ -10,12 +10,17 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Context } from "../context/Context";
-import moment from "moment" ;
+import moment from "moment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import commonApi from "../../api/common";
 import { useLocation } from "react-router-dom";
-export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFriends,unFollowFriend}) {
+export default function Profileleftbar({
+  post,
+  handleLogout,
+  fetchPosts,
+  fetchFriends,
+}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
   const { user, dispatch } = useContext(Context);
@@ -26,8 +31,8 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
       action: "getUser",
       parameters: [id],
       config: {
-        authToken: true
-      }
+        authToken: true,
+      },
     }).then(({ DATA }) => {
       setUserData(DATA);
       if (userData._id !== user._id) {
@@ -54,47 +59,76 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
       action: "followers",
       data: {
         query: {
-          _id: id
+          _id: id,
         },
         options: {
           pagination: false,
-          sort: { createdAt: -1 }
-        }
+          sort: { createdAt: -1 },
+        },
       },
       config: {
-        authToken: true
-      }
+        authToken: true,
+      },
     }).then(({ DATA = {} }) => {
       setFollowers(DATA.data);
     });
   };
   useEffect(() => {
-    
-      getUserData(name?name:user._id);
-    
+    getUserData(name ? name : user._id);
 
     if (userData) {
       fetchFollowers(userData._id);
     }
-  }, [userData._id,user.profilePicture,name,user.firstName,user.lastName,user.dob,user.followers,user.following]);
-  const ProfileProfileleftbar = ({fetchFriends}) => {
-    const followFriend = async (id) => {
+  }, [
+    userData._id,
+    user.profilePicture,
+    name,
+    user.firstName,
+    user.lastName,
+    user.dob,
+    user.followers,
+    user.following,
+  ]);
+  const ProfileProfileleftbar = ({ fetchFriends }) => {
+    const unFollowFriend = async (id) => {
       await commonApi({
-        action: "followFriend",
+        action: "unFollowFriend",
         data: {
-          followingId: id
+          followingId: id,
         },
         config: {
-          authToken: true
-        }
+          authToken: true,
+        },
       }).then(async ({ DATA = {} }) => {
-        fetchFriends(name?name:user._id)
+        fetchFriends(name ? name : user._id);
         await commonApi({
           action: "getUser",
           parameters: [user._id],
           config: {
-            authToken: true
-          }
+            authToken: true,
+          },
+        }).then(({ DATA = {} }) => {
+          dispatch({ type: "UPDATE_USER", payload: DATA });
+        });
+      });
+    };
+    const followFriend = async (id) => {
+      await commonApi({
+        action: "followFriend",
+        data: {
+          followingId: id,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(async ({ DATA = {} }) => {
+        fetchFriends(name ? name : user._id);
+        await commonApi({
+          action: "getUser",
+          parameters: [user._id],
+          config: {
+            authToken: true,
+          },
         }).then(({ DATA = {} }) => {
           dispatch({ type: "UPDATE_USER", payload: DATA });
         });
@@ -102,21 +136,20 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
     };
     const formik = useFormik({
       initialValues: {
-        firstName:  userData.firstName,
-        lastName:  userData.lastName,
-        dob: 
-           moment(userData.dob).format("yyyy-MM-DD")
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        dob: moment(userData.dob).format("yyyy-MM-DD"),
       },
       validationSchema: Yup.object({
         firstName: Yup.string().required("Required"),
         lastName: Yup.string().required("Required"),
-        dob: Yup.string().required("Required")
+        dob: Yup.string().required("Required"),
       }),
       onSubmit: async (values) => {
         await commonApi({
           action: "updateUser",
           parameters: user._id ? [user._id] : [],
-          data: values
+          data: values,
         })
           .then(({ DATA = {} }) => {
             dispatch({ type: "UPDATE_USER", payload: DATA });
@@ -127,7 +160,7 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
           .catch((error) => {
             console.error(error);
           });
-      }
+      },
     });
     return (
       <>
@@ -135,9 +168,7 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
           <div className="ProfileImages">
             <img src="assets/cover/1.jpg" alt="" />
             <img
-              src={
-                 userData.profilePicture || "assets/person/1.jpg"
-              }
+              src={userData.profilePicture || "assets/person/1.jpg"}
               alt=""
             />
           </div>
@@ -148,9 +179,7 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
             <hr />
             <div>
               <div className="follow">
-                <span>
-                  {userData.followers.length || 0}
-                </span>
+                <span>{userData.followers.length || 0}</span>
                 <span>Followers</span>
               </div>
               <div className="vline"></div>
@@ -160,9 +189,7 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
               </div>
               <div className="vline"></div>
               <div className="follow">
-                <span>
-                  {userData.following.length || 0}
-                </span>
+                <span>{userData.following.length || 0}</span>
                 <span>Following</span>
               </div>
             </div>
@@ -294,26 +321,28 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
                   </div>
                 </div>
 
-                {!user.following.includes(follower._id) && (user._id!==follower._id) &&(
-                  <button
-                    className="follow-button"
-                    onClick={() => {
-                      followFriend(follower._id);
-                    }}
-                  >
-                    Follow
-                  </button>
-                )}
-                {user.following.includes(follower._id) && (user._id!==follower._id) &&(
-                  <button
-                    className="follow-button"
-                    onClick={() => {
-                      unFollowFriend(follower._id);
-                    }}
-                  >
-                    UnFollow
-                  </button>
-                )}
+                {!user.following.includes(follower._id) &&
+                  user._id !== follower._id && (
+                    <button
+                      className="follow-button"
+                      onClick={() => {
+                        followFriend(follower._id);
+                      }}
+                    >
+                      Follow
+                    </button>
+                  )}
+                {user.following.includes(follower._id) &&
+                  user._id !== follower._id && (
+                    <button
+                      className="follow-button"
+                      onClick={() => {
+                        unFollowFriend(follower._id);
+                      }}
+                    >
+                      UnFollow
+                    </button>
+                  )}
               </div>
             );
           })}
@@ -350,7 +379,7 @@ export default function Profileleftbar({ post, handleLogout, fetchPosts ,fetchFr
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
-        <ProfileProfileleftbar fetchFriends={fetchFriends}/>
+        <ProfileProfileleftbar fetchFriends={fetchFriends} />
       </div>
     </div>
   );
