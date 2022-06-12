@@ -43,7 +43,7 @@ export default function Profileleftbar({
   };
 
   const [followers, setFollowers] = useState([]);
-  const [value, setValue] = useState(null);
+
 
   const [open, setOpen] = useState(false);
 
@@ -149,7 +149,7 @@ export default function Profileleftbar({
       onSubmit: async (values) => {
         await commonApi({
           action: "updateUser",
-          parameters: user._id ? [user._id] : [],
+          parameters: user._id ,
           data: values,
         })
           .then(({ DATA = {} }) => {

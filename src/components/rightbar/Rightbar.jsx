@@ -14,11 +14,10 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
 
-export default function Rightbar({friends,fetchFriends,userDetails,userData}) {
+export default function Rightbar({friends,fetchFriends,userDetails,userData,show}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
-  const { user } = useContext(Context);
-  
+  const { user ,dispatch} = useContext(Context);
   if(!name)
   {
     userDetails=user
@@ -38,19 +37,64 @@ export default function Rightbar({friends,fetchFriends,userDetails,userData}) {
   const ProfileRightbar = () => {
     const navigate = useNavigate();
     const handleFriends = (id) => {
-      if (id !== userDetails?._id) {
+      if (id !== user._id) {
         navigate("/userProfile?userId=" + id);
       } else {
         navigate("/profile");
       }
     };
-
+    const unFollowFriend = async (id) => {
+      await commonApi({
+        action: "unFollowFriend",
+        data: {
+          followingId: id,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(async ({ DATA = {} }) => {
+        fetchFriends(name ? name : user._id);
+        await commonApi({
+          action: "getUser",
+          parameters: [user._id],
+          config: {
+            authToken: true,
+          },
+        }).then(({ DATA = {} }) => {
+          dispatch({ type: "UPDATE_USER", payload: DATA });
+        });
+      });
+    };
+    const followFriend = async (id) => {
+      await commonApi({
+        action: "followFriend",
+        data: {
+          followingId: id,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(async ({ DATA = {} }) => {
+        fetchFriends(name ? name : user._id);
+        await commonApi({
+          action: "getUser",
+          parameters: [user._id],
+          config: {
+            authToken: true,
+          },
+        }).then(({ DATA = {} }) => {
+          dispatch({ type: "UPDATE_USER", payload: DATA });
+        });
+      });
+    };
     return (
       <>
-        {/* {((name && user._id!==name && !user.following.includes(name))) &&<button className="rightbarFollowButton">
+        {show &&  !user.following.includes(userDetails?._id) && <button className="rightbarFollowButton" onClick={()=>{followFriend(name)}}>
           Follow <PersonAdd sx={{ ml: 1 }} />
-        </button>} */}
-
+        </button>}
+        {show &&   user.following.includes(userDetails?._id) && <button className="rightbarFollowButton" onClick={()=>{unFollowFriend(name)}}>
+          UnFollow <PersonAdd sx={{ ml: 1 }} />
+        </button>}
         <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
           {friends.map((friend) => {

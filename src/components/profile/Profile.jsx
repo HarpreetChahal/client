@@ -19,16 +19,16 @@ export default function Profile({ handleLogout }) {
       action: "friends",
       data: {
         query: {
-          _id: id
+          _id: id,
         },
         options: {
           pagination: false,
-          sort: { createdAt: -1 }
-        }
+          sort: { createdAt: -1 },
+        },
       },
       config: {
-        authToken: true
-      }
+        authToken: true,
+      },
     }).then(({ DATA = {} }) => {
       setFriends(DATA.data);
     });
@@ -42,23 +42,23 @@ export default function Profile({ handleLogout }) {
           {
             path: "userId",
             model: "user",
-            select: ["_id", "fullName", "profilePicture"]
+            select: ["_id", "fullName", "profilePicture"],
           },
           {
             path: "comments.userId",
             model: "user",
-            select: ["_id", "fullName", "profilePicture"]
-          }
+            select: ["_id", "fullName", "profilePicture"],
+          },
         ],
-        sort: { createdAt: -1 }
-      }
+        sort: { createdAt: -1 },
+      },
     };
     await commonApi({
       action: "fetchPost",
       data: data,
       config: {
-        authToken: true
-      }
+        authToken: true,
+      },
     }).then(({ DATA }) => {
       setPosts(DATA.data);
     });
@@ -71,7 +71,7 @@ export default function Profile({ handleLogout }) {
     fileData.append("file", file);
     await commonApi({
       action: "upload",
-      data: fileData
+      data: fileData,
     });
     let pp = "http://localhost:5000/assets/" + fileName;
 
@@ -79,25 +79,23 @@ export default function Profile({ handleLogout }) {
       action: "updateUser",
       parameters: user._id ? [user._id] : [],
       data: {
-        profilePicture: pp
+        profilePicture: pp,
       },
       config: {
-        authToken: true
-      }
+        authToken: true,
+      },
     }).then(({ DATA = {} }) => {
       dispatch({ type: "UPDATE_USER", payload: DATA });
     });
   };
- 
+
   useEffect(() => {
     fetchPosts({ userId: user._id });
     if (file) {
       uploadImage();
     }
   }, [file]);
-  const userData = () => {
-   
-  };
+  const userData = () => {};
   return (
     <>
       <Topbar fetchPosts={fetchPosts} />
@@ -138,13 +136,19 @@ export default function Profile({ handleLogout }) {
               handleLogout={handleLogout}
               fetchPosts={fetchPosts}
               fetchFriends={fetchFriends}
-          show={true}
+              show={true}
             />
             <Feed
               posts={posts}
               fetchPosts={() => fetchPosts({ userId: user._id })}
             />
-            <Rightbar friends={friends} fetchFriends={fetchFriends} userData={userData}/>
+            <Rightbar
+              friends={friends}
+              fetchFriends={fetchFriends}
+              userDetails={user}
+              userData={userData}
+              show={false}
+            />
           </div>
         </div>
       </div>
