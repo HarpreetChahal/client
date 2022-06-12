@@ -76,7 +76,7 @@ export default function Leftbar({ fetchPosts, handleLogout }) {
                 <ListItemIcon>
                   <HomeIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Feed" />
               </ListItemButton>
             </ListItem>
             <Divider />

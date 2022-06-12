@@ -65,11 +65,32 @@
     margin-right: 10px;
     color: white;
   }
+
+  .home_button
+  {
+    /* align-items:flex-start; */
+    /* display: flex; */
+    justify-content: flex-start;
+    margin-right: 5px;
+    align-items: center;
+  }
+
+ .home_text
+ {
+  justify-content: space-between;
+  /* margin-right: 180px; */
+  text-align:justify;
+  font-size: 20px;
+  margin-right: 10px;
+  /* margin-top: 10px; */
+
+ }
+ 
   
   .helloUser
   {
     margin-right: 10px;
-    font-size: larger;
+    font-size:20px;
   }
   
   .topbarImg {

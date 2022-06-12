@@ -7,7 +7,7 @@
 import React from "react";
 import "./topbar.css";
 import { useContext } from "react";
-import { Search } from "@mui/icons-material";
+import { AccountBox, Home, Search, Feed } from "@mui/icons-material";
 import { Context } from "../../components/context/Context";
 import { useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
@@ -21,14 +21,14 @@ export default function Topbar({ fetchPosts }) {
   const { user } = useContext(Context);
   const navigate = useNavigate();
 
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
 
   return (
@@ -47,6 +47,7 @@ export default function Topbar({ fetchPosts }) {
         >
           LookMeUp
         </span>
+        
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
@@ -56,17 +57,25 @@ export default function Topbar({ fetchPosts }) {
       </div>
 
       <div className="topbarRight">
-        <span className="helloUser">Hello, {user.firstName}</span>
+        <Home className="home_button" fontSize="medium"/> 
+        <span className="home_text">Homepage</span>
+        <Feed className="home_button" fontSize="medium"/>
+        <span className="home_text">Timeline</span>
+
+        {/* <span className="helloUser">Hi, {user.firstName}</span> */}
+        <div>
         <img
           src={user?.profilePicture || "/assets/person/1.jpg"}
           alt=""
           className="topbarImg"
-          onClick={() => {
-            navigate("/profile");
+          onClick={(e) => {
+            //navigate("/profile");
+            handleClick(e)
           }}
-        >
+        />
 
-{/* <Menu
+
+<Menu sx={{mt:1}}
         anchorEl={anchorEl}
         id="account-menu"
         open={open}
@@ -74,23 +83,24 @@ export default function Topbar({ fetchPosts }) {
         onClick={handleClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+       
       >
        
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
+        <MenuItem  >
+          <ListItemIcon >
+            <AccountBox fontSize="small" />
           </ListItemIcon>
-          Settings
+          <span className="navbar">Profile</span>
         </MenuItem>
-        <MenuItem>
+        <MenuItem  >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
-      </Menu> */}
-
-          </img>
+      </Menu>
+      </div>
+         
         {/* <div className="logout">
                     <Button variant="contained" color="success" endIcon={<UploadFile />}>
                        Logout
