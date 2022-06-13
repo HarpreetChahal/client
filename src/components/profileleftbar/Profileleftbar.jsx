@@ -375,7 +375,7 @@ export default function Profileleftbar({
                           unFollowFriend(follower._id);
                         }}
                       >
-                        UnFollow
+                        Unfollow
                       </button>
                     )}
                 </div>
