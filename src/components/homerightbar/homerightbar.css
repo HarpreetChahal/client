@@ -81,3 +81,29 @@ box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
     border: 2px solid #1877f2;
 
 }
+
+.no-suggestions-found
+{
+    width: 100%;
+    text-align:center;
+    /* display:block; */
+    /* background-color: transparent; */
+    /* border: 1px solid transparent; */
+    /* margin-right: 10px; */
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    /* float:center; */
+    /* border-radius: 6px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
+}
+
+
+
+.no-suggestions-text
+{
+   font-size: 14px;
+   font-weight: 600;
+   margin-bottom: 20px;
+}
