@@ -58,7 +58,7 @@ export default function Home({ handleLogout }) {
         <Loader />
       ) : (
         <>
-          <Topbar fetchPosts={fetchPosts} />
+          <Topbar fetchPosts={fetchPosts} handleLogout={handleLogout} />
           <div className="homeContainer">
             <Leftbar fetchPosts={fetchPosts} handleLogout={handleLogout} />
             <Feed fetchPosts={fetchPosts} posts={posts} />

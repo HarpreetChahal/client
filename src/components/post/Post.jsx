@@ -28,9 +28,10 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
 import IconButton from "@mui/material/IconButton";
-
+import {useNavigate} from "react-router-dom"
 export default function Post(props) {
   const PF = "http://localhost:5000/assets/";
+  const navigate=useNavigate()
   const {
     desc,
     date,
@@ -129,11 +130,11 @@ export default function Post(props) {
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
-          <div className="postTopLeft">
+          <div className="postTopLeft" style={{"cursor":"pointer"}} onClick={()=>{(userData._id === user._id) ?navigate("/profile"):navigate("/userProfile?userId=" +userData._id) }}>
             <img
               className="postProfileImg"
               src={userData.profilePicture || "/assets/person/1.jpg"}
-              alt="/assets/person/1.jpg"
+              alt=""
             />
             <span className="postUsername">{userData.fullName}</span>
             <span className="postDate">{moment(date).fromNow()}</span>

@@ -13,11 +13,10 @@ import { useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 
-
-export default function Topbar({ fetchPosts }) {
+export default function Topbar({ fetchPosts ,handleLogout}) {
   const { user } = useContext(Context);
   const navigate = useNavigate();
 
@@ -30,7 +29,6 @@ export default function Topbar({ fetchPosts }) {
     setAnchorEl(null);
   };
 
-
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -41,13 +39,12 @@ export default function Topbar({ fetchPosts }) {
             navigate("/");
             window.scrollTo({
               top: 0,
-              behavior: "smooth"
+              behavior: "smooth",
             });
           }}
         >
           LookMeUp
         </span>
-        
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
@@ -57,27 +54,40 @@ export default function Topbar({ fetchPosts }) {
       </div>
 
       <div className="topbarRight">
-        <Home className="home_button" fontSize="medium"/> 
-        <span className="home_text">Home</span>
-        <Feed className="timeline_button" fontSize="medium"/>
-        <span className="timeline_text">Profile</span>
-        <Logout className="logout_button" fontSize="medium"/>
-        <span className="logout_text">Logout</span>
+        <Home className="home_button" fontSize="medium" />
+        <span
+          className="home_text"
+          onClick={() => {
+            fetchPosts();
+            navigate("/");
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          Home
+        </span>
+        <Feed className="timeline_button" fontSize="medium" />
+        <span className="timeline_text" onClick={() => {
+            navigate("/profile");
+          }}>Profile</span>
+        <Logout className="logout_button" fontSize="medium" />
+        <span className="logout_text" onClick={handleLogout}>Logout</span>
 
         {/* <span className="helloUser">Hi, {user.firstName}</span> */}
         <div>
-        <img
-          src={user?.profilePicture || "/assets/person/1.jpg"}
-          alt=""
-          className="topbarImg"
-          onClick={(e) => {
-            //navigate("/profile");
-            handleClick(e)
-          }}
-        />
+          <img
+            src={user?.profilePicture || "/assets/person/1.jpg"}
+            alt=""
+            className="topbarImg"
+            onClick={(e) => {
+              //navigate("/profile");
+              handleClick(e);
+            }}
+          />
+        </div>
 
-      </div>
-         
         {/* <div className="logout">
                     <Button variant="contained" color="success" endIcon={<UploadFile />}>
                        Logout
