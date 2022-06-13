@@ -34,7 +34,12 @@ export default function Profile({ handleLogout }) {
       setFriends(DATA.data);
     });
   };
-  const fetchPosts = async (query = {}) => {
+  const fetchPosts = async (query = {},search="") => {
+      query.desc={
+        $regex:search,
+        $options:"i"
+    }
+    query.userId=user._id
     let data = {
       query: query,
       options: {
@@ -91,7 +96,7 @@ export default function Profile({ handleLogout }) {
   };
 
   useEffect(() => {
-    fetchPosts({ userId: user._id });
+    fetchPosts({userId:user._id});
     if (file) {
       uploadImage();
     }
