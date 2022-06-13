@@ -2,10 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import commonApi from "../../api/common";
 import { Context } from "../context/Context";
 import "./homerightbar.css";
+import { Person } from "@mui/icons-material";
 
 export default function Homerightbar() {
   const { user, dispatch } = useContext(Context);
-  const token=JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const [friends, setFriends] = useState([]);
   const fetchSuggestions = async () => {
     await commonApi({
@@ -46,12 +47,11 @@ export default function Homerightbar() {
     });
   };
   useEffect(() => {
-    if(user?._id && token)
-    {
+    if (user?._id && token) {
       fetchSuggestions();
     }
-  
-  }, [user._id,token]);
+
+  }, [user._id, token]);
 
   return (
     <div className="rightbar">
@@ -84,7 +84,14 @@ export default function Homerightbar() {
               </div>
             );
           })}
-          {friends.length===0 && <div>no Suggestions Found</div>}
+          {friends.length === 0 && <div className="no-suggestions-found">
+            {/* <div className="no-post-icon"> */}
+            <Person fontSize="medium" sx={{ mt: 4, mb: 0 }} />
+            {/* </div> */}
+            <p className="no-suggestions-text">
+              No Suggestions Found
+            </p>
+          </div>}
         </div>
       </div>
     </div>

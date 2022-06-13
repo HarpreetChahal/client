@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import "./rightbar.css";
-import { Add, PersonAdd } from "@mui/icons-material";
+import { Add, PersonAdd,Search,People,PersonRemove } from "@mui/icons-material";
 import { Edit, Logout } from "@mui/icons-material";
 import commonApi from "../../api/common";
 import { useNavigate } from "react-router-dom";
@@ -93,6 +93,7 @@ export default function Rightbar({
     };
     return (
       <>
+       <div className="AddSearch" >
         {show && !user.following.includes(userDetails?._id) && (
           <button
             className="rightbarFollowButton"
@@ -110,9 +111,16 @@ export default function Rightbar({
               unFollowFriend(name);
             }}
           >
-            UnFollow <PersonAdd sx={{ ml: 1 }} />
+            Unfollow <PersonRemove sx={{ ml: 1 }} />
           </button>
         )}
+         <div className="Search">
+            <input type="text" placeholder="# Search friends"/>
+            <div className="s-icon">
+              <Search/>
+            </div>
+            </div>
+            </div>
         <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
           {friends.map((friend) => {
@@ -133,7 +141,14 @@ export default function Rightbar({
             );
           })}
 
-          {friends.length === 0 && <div>No Friend Found</div>}
+          {friends.length === 0 && <div className="no-friends-found">
+            {/* <div className="no-post-icon"> */}
+            <People fontSize="medium" sx={{ mt: 4, mb: 0 }} />
+            {/* </div> */}
+            <p className="no-friends-text">
+              No Friends Found
+            </p>
+          </div>}
         </div>
       </>
     );
