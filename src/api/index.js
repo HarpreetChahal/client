@@ -11,7 +11,8 @@ const PATCH = "PATCH";
 
 const getToken = () => {
   if (typeof localStorage !== "undefined") {
-    const token = JSON.parse(localStorage.getItem("token"));
+    let token = JSON.parse(localStorage.getItem("token"));
+
     if (token) {
       return token;
     }

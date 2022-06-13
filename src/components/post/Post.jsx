@@ -15,7 +15,7 @@ import {
   Send,
   FavoriteBorder,
   Edit,
-  Delete
+  Delete,
 } from "@mui/icons-material";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -28,10 +28,10 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
 import IconButton from "@mui/material/IconButton";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 export default function Post(props) {
   const PF = "http://localhost:5000/assets/";
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const {
     desc,
     date,
@@ -41,7 +41,7 @@ export default function Post(props) {
     images,
     likes,
     dislikes,
-    fetchPosts
+    fetchPosts,
   } = props;
   let imgPath = images[0];
   const { user } = useContext(Context);
@@ -59,11 +59,11 @@ export default function Post(props) {
         action: "likeDislike",
         data: {
           postId: postId,
-          action: true
+          action: 0,
         },
         config: {
-          authToken: true
-        }
+          authToken: true,
+        },
       }).then(({ MESSAGE }) => {
         fetchPosts();
         setIsLiked(!isLiked);
@@ -76,11 +76,45 @@ export default function Post(props) {
         action: "likeDislike",
         data: {
           postId: postId,
-          action: false
+          action: 1,
         },
         config: {
-          authToken: true
-        }
+          authToken: true,
+        },
+      }).then(({ MESSAGE }) => {
+        fetchPosts();
+        isDisLiked(!isDisLiked);
+      });
+    } catch (err) {}
+  };
+  const onlyLike = async () => {
+    try {
+      await commonApi({
+        action: "likeDislike",
+        data: {
+          postId: postId,
+          action: 3,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(({ MESSAGE }) => {
+        fetchPosts();
+        isDisLiked(!isDisLiked);
+      });
+    } catch (err) {}
+  };
+  const onlyDisLike = async () => {
+    try {
+      await commonApi({
+        action: "likeDislike",
+        data: {
+          postId: postId,
+          action: 4,
+        },
+        config: {
+          authToken: true,
+        },
       }).then(({ MESSAGE }) => {
         fetchPosts();
         isDisLiked(!isDisLiked);
@@ -94,11 +128,11 @@ export default function Post(props) {
       action: "createComment",
       data: {
         postId: postId,
-        comment: comment
+        comment: comment,
       },
       config: {
-        authToken: true
-      }
+        authToken: true,
+      },
     }).then(({ MESSAGE }) => {
       setComment("");
       Toast.success(MESSAGE);
@@ -130,7 +164,15 @@ export default function Post(props) {
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
-          <div className="postTopLeft" style={{"cursor":"pointer"}} onClick={()=>{(userData._id === user._id) ?navigate("/profile"):navigate("/userProfile?userId=" +userData._id) }}>
+          <div
+            className="postTopLeft"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              userData._id === user._id
+                ? navigate("/profile")
+                : navigate("/userProfile?userId=" + userData._id);
+            }}
+          >
             <img
               className="postProfileImg"
               src={userData.profilePicture || "/assets/person/1.jpg"}
@@ -183,7 +225,7 @@ export default function Post(props) {
               <FavoriteIcon
                 color={"error"}
                 cursor="pointer"
-                onClick={disLikeHandler}
+                onClick={onlyLike}
               />
             )}
             <span className="postLikeText">{likes.length} Like </span>
@@ -191,7 +233,7 @@ export default function Post(props) {
               <ThumbDownOffAlt cursor="pointer" onClick={disLikeHandler} />
             )}
             {isDisLiked && (
-              <ThumbDownIcon cursor="pointer" onClick={likeHandler} />
+              <ThumbDownIcon cursor="pointer" onClick={onlyDisLike} />
             )}
 
             <span className="postDislikeText">{dislikes.length} DisLike </span>
@@ -229,7 +271,7 @@ export default function Post(props) {
             <div className="sendButton">
               <Send
                 sx={{
-                  color: "#1877f2"
+                  color: "#1877f2",
                 }}
                 onClick={createComment}
               />

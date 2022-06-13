@@ -16,7 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
-export default function Topbar({ fetchPosts ,handleLogout}) {
+export default function Topbar({ fetchPosts, handleLogout }) {
   const { user } = useContext(Context);
   const navigate = useNavigate();
 
@@ -54,7 +54,18 @@ export default function Topbar({ fetchPosts ,handleLogout}) {
       </div>
 
       <div className="topbarRight">
-        <Home className="home_button" fontSize="medium" />
+        <Home
+          className="home_button"
+          fontSize="medium"
+          onClick={() => {
+            fetchPosts();
+            navigate("/");
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        />
         <span
           className="home_text"
           onClick={() => {
@@ -68,12 +79,29 @@ export default function Topbar({ fetchPosts ,handleLogout}) {
         >
           Home
         </span>
-        <Feed className="timeline_button" fontSize="medium" />
-        <span className="timeline_text" onClick={() => {
+        <Feed
+          className="timeline_button"
+          fontSize="medium"
+          onClick={() => {
             navigate("/profile");
-          }}>Profile</span>
-        <Logout className="logout_button" fontSize="medium" />
-        <span className="logout_text" onClick={handleLogout}>Logout</span>
+          }}
+        />
+        <span
+          className="timeline_text"
+          onClick={() => {
+            navigate("/profile");
+          }}
+        >
+          Profile
+        </span>
+        <Logout
+          className="logout_button"
+          fontSize="medium"
+          onClick={handleLogout}
+        />
+        <span className="logout_text" onClick={handleLogout}>
+          Logout
+        </span>
 
         {/* <span className="helloUser">Hi, {user.firstName}</span> */}
         <div>
@@ -81,9 +109,8 @@ export default function Topbar({ fetchPosts ,handleLogout}) {
             src={user?.profilePicture || "/assets/person/1.jpg"}
             alt=""
             className="topbarImg"
-            onClick={(e) => {
-              //navigate("/profile");
-              handleClick(e);
+            onClick={() => {
+              navigate("/profile");
             }}
           />
         </div>
