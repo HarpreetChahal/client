@@ -79,6 +79,7 @@ export default function Homerightbar() {
               </div>
             );
           })}
+          {friends.length===0 && <div>no Suggestions Found</div>}
         </div>
       </div>
     </div>

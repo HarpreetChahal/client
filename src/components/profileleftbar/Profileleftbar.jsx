@@ -365,6 +365,7 @@ export default function Profileleftbar({
               </div>
             );
           })}
+          {followers.length===0 && <div>No followers found</div>}
         </div>}
 
         {/* <h4 className="rightbarTitle"> User Information </h4>

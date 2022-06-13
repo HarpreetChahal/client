@@ -14,26 +14,30 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
 
-export default function Rightbar({friends,fetchFriends,userDetails,userData,show}) {
+export default function Rightbar({
+  friends,
+  fetchFriends,
+  userDetails,
+  userData,
+  show,
+}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
-  const { user ,dispatch} = useContext(Context);
-  if(!name)
-  {
-    userDetails=user
+  const { user, dispatch } = useContext(Context);
+  if (!name) {
+    userDetails = user;
   }
-  
-  
+
   // const [loggedInUser, setLoggedInUser] = useState(user._id!==name)
-  
+
   useEffect(() => {
     if (name) {
       fetchFriends(name);
     } else {
       fetchFriends(userDetails._id);
     }
-    userData()
-  }, [name,userDetails?._id]);
+    userData();
+  }, [name, userDetails?._id]);
   const ProfileRightbar = () => {
     const navigate = useNavigate();
     const handleFriends = (id) => {
@@ -89,12 +93,26 @@ export default function Rightbar({friends,fetchFriends,userDetails,userData,show
     };
     return (
       <>
-        {show &&  !user.following.includes(userDetails?._id) && <button className="rightbarFollowButton" onClick={()=>{followFriend(name)}}>
-          Follow <PersonAdd sx={{ ml: 1 }} />
-        </button>}
-        {show &&   user.following.includes(userDetails?._id) && <button className="rightbarFollowButton" onClick={()=>{unFollowFriend(name)}}>
-          UnFollow <PersonAdd sx={{ ml: 1 }} />
-        </button>}
+        {show && !user.following.includes(userDetails?._id) && (
+          <button
+            className="rightbarFollowButton"
+            onClick={() => {
+              followFriend(name);
+            }}
+          >
+            Follow <PersonAdd sx={{ ml: 1 }} />
+          </button>
+        )}
+        {show && user.following.includes(userDetails?._id) && (
+          <button
+            className="rightbarFollowButton"
+            onClick={() => {
+              unFollowFriend(name);
+            }}
+          >
+            UnFollow <PersonAdd sx={{ ml: 1 }} />
+          </button>
+        )}
         <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
           {friends.map((friend) => {
@@ -114,6 +132,8 @@ export default function Rightbar({friends,fetchFriends,userDetails,userData,show
               </div>
             );
           })}
+
+          {friends.length === 0 && <div>No Friend Found</div>}
         </div>
       </>
     );
