@@ -73,12 +73,14 @@
     justify-content: flex-start;
     margin-right: 3px;
     align-items: center;
+    cursor: pointer;
   }
 
  .home_text
  {
   margin-right: 10px;
   font-size: 17px;
+  cursor: pointer;
  }
 
  .timeline_button
@@ -88,12 +90,14 @@
    justify-content: flex-start;
    margin-right: 3px;
    align-items: center;
+   cursor: pointer;
  }
 
 .timeline_text
 {
  margin-right: 10px;
  font-size: 17px;
+ cursor: pointer;
 }
 
 
@@ -104,12 +108,14 @@
   justify-content: flex-start;
   margin-right: 3px;
   align-items: center;
+  cursor: pointer;
 }
 
 .logout_text
 {
 margin-right: 20px;
 font-size: 17px;
+cursor: pointer;
 }
 
  

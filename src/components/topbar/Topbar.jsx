@@ -60,7 +60,7 @@ export default function Topbar({ fetchPosts }) {
         <Home className="home_button" fontSize="medium"/> 
         <span className="home_text">Home</span>
         <Feed className="timeline_button" fontSize="medium"/>
-        <span className="timeline_text">Timeline</span>
+        <span className="timeline_text">Profile</span>
         <Logout className="logout_button" fontSize="medium"/>
         <span className="logout_text">Logout</span>
 
@@ -76,31 +76,6 @@ export default function Topbar({ fetchPosts }) {
           }}
         />
 
-
-<Menu sx={{mt:1}}
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-       
-      >
-       
-        <MenuItem  >
-          <ListItemIcon >
-            <AccountBox fontSize="small" />
-          </ListItemIcon>
-          <span className="navbar">Profile</span>
-        </MenuItem>
-        <MenuItem  >
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
       </div>
          
         {/* <div className="logout">

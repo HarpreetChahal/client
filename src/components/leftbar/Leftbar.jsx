@@ -97,18 +97,6 @@ export default function Leftbar({ fetchPosts, handleLogout }) {
           </List>
         </nav>
       </Box>
-
-      <Button
-        variant="contained"
-        onClick={handleLogout}
-        sx={{
-          position: "fixed",
-          bottom: 10,
-          left: "1%"
-        }}
-      >
-        Logout
-      </Button>
     </div>
   );
 }
