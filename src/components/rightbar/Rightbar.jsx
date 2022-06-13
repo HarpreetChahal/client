@@ -7,7 +7,13 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import "./rightbar.css";
-import { Add, PersonAdd,Search,People,PersonRemove } from "@mui/icons-material";
+import {
+  Add,
+  PersonAdd,
+  Search,
+  People,
+  PersonRemove,
+} from "@mui/icons-material";
 import { Edit, Logout } from "@mui/icons-material";
 import commonApi from "../../api/common";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +28,7 @@ export default function Rightbar({
   show,
 }) {
   const search = useLocation().search;
+  const [searchValue, setSearchValue] = useState("");
   const name = new URLSearchParams(search).get("userId");
   const { user, dispatch } = useContext(Context);
   if (!name) {
@@ -93,34 +100,41 @@ export default function Rightbar({
     };
     return (
       <>
-       <div className="AddSearch" >
-        {show && !user.following.includes(userDetails?._id) && (
-          <button
-            className="rightbarFollowButton"
-            onClick={() => {
-              followFriend(name);
-            }}
-          >
-            Follow <PersonAdd sx={{ ml: 1 }} />
-          </button>
-        )}
-        {show && user.following.includes(userDetails?._id) && (
-          <button
-            className="rightbarFollowButton"
-            onClick={() => {
-              unFollowFriend(name);
-            }}
-          >
-            Unfollow <PersonRemove sx={{ ml: 1 }} />
-          </button>
-        )}
-         <div className="Search">
-            <input type="text" placeholder="# Search friends"/>
+        <div className="AddSearch">
+          {show && !user.following.includes(userDetails?._id) && (
+            <button
+              className="rightbarFollowButton"
+              onClick={() => {
+                followFriend(name);
+              }}
+            >
+              Follow <PersonAdd sx={{ ml: 1 }} />
+            </button>
+          )}
+          {show && user.following.includes(userDetails?._id) && (
+            <button
+              className="rightbarFollowButton"
+              onClick={() => {
+                unFollowFriend(name);
+              }}
+            >
+              Unfollow <PersonRemove sx={{ ml: 1 }} />
+            </button>
+          )}
+          <div className="Search">
+            <input
+              type="text"
+              placeholder="# Search friends"
+              value={searchValue}
+               onChange={(e)=>{
+                setSearchValue(e.target.value)
+              }}
+            />
             <div className="s-icon">
-              <Search/>
+              <Search />
             </div>
-            </div>
-            </div>
+          </div>
+        </div>
         <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
           {friends.map((friend) => {
@@ -130,6 +144,7 @@ export default function Rightbar({
                 onClick={() => {
                   handleFriends(friend._id);
                 }}
+                key={friend._id}
               >
                 <img
                   src={friend.profilePicture || "assets/person/1.jpg"}
@@ -141,14 +156,14 @@ export default function Rightbar({
             );
           })}
 
-          {friends.length === 0 && <div className="no-friends-found">
-            {/* <div className="no-post-icon"> */}
-            <People fontSize="medium" sx={{ mt: 4, mb: 0 }} />
-            {/* </div> */}
-            <p className="no-friends-text">
-              No Friends Found
-            </p>
-          </div>}
+          {friends.length === 0 && (
+            <div className="no-friends-found">
+              {/* <div className="no-post-icon"> */}
+              <People fontSize="medium" sx={{ mt: 4, mb: 0 }} />
+              {/* </div> */}
+              <p className="no-friends-text">No Friends Found</p>
+            </div>
+          )}
         </div>
       </>
     );

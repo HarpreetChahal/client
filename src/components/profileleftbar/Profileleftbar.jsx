@@ -344,7 +344,7 @@ export default function Profileleftbar({
             <h3>Who is following you</h3>
             {followers.map((follower) => {
               return (
-                <div className="follower">
+                <div className="follower" key={follower._id}>
                   <div>
                     <img
                       src={follower.profilePicture || "assets/person/1.jpg"}

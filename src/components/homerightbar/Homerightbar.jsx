@@ -61,7 +61,7 @@ export default function Homerightbar() {
           <h5>Add Friends</h5>
           {friends.map((friend) => {
             return (
-              <div className="follower">
+              <div className="follower" key={friend._id}>
                 <div>
                   <img
                     src={friend.profilePicture || "assets/person/1.jpg"}
