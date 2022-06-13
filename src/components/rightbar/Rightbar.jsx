@@ -44,7 +44,7 @@ export default function Rightbar({
       fetchFriends(userDetails._id);
     }
     userData();
-  }, [name, userDetails?._id]);
+  }, [name, userDetails?._id,searchValue]);
   const ProfileRightbar = () => {
     const navigate = useNavigate();
     const handleFriends = (id) => {
