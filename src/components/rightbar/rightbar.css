@@ -132,7 +132,7 @@ box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
   vertical-align: top;
   display: inline-block;
   text-align: center;
-  width: 110px;
+  width: 100px;
   margin-top: 10px;
   margin-left: 12px;
   /* display: flex;
@@ -145,8 +145,8 @@ box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
 }
 .rightbarFollowing>img
 {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   border-radius: 6px;
   object-fit: cover;
   justify-content: space-between;

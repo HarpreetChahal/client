@@ -9,7 +9,7 @@ import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 import { useLocation } from "react-router-dom";
-export default function UserProfile() {
+export default function UserProfile({handleLogout}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
   const [user, setUser] = useState();
@@ -89,7 +89,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <Topbar fetchPosts={fetchPosts} />
+       <Topbar fetchPosts={fetchPosts} handleLogout={handleLogout} />
       <div className="profile">
         {/* <Leftbar /> */}
         <div className="profileRight">

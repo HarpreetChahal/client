@@ -99,7 +99,7 @@ export default function Profile({ handleLogout }) {
   const userData = () => {};
   return (
     <>
-      <Topbar fetchPosts={fetchPosts} />
+       <Topbar fetchPosts={fetchPosts} handleLogout={handleLogout} />
       <div className="profile">
         {/* <Leftbar /> */}
         <div className="profileRight">
