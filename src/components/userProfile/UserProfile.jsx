@@ -48,7 +48,17 @@ export default function UserProfile({handleLogout}) {
 
   const [posts, setPosts] = useState([]);
 
-  const fetchPosts = async (query = {}) => {
+  const fetchPosts = async (query = {},search="") => {
+    if(search)
+    {
+      query.desc={
+        $regex:search,
+        $options:"i"
+      }
+    }
+    if(user?._id)
+   { 
+    query.userId=user._id
     let data = {
       query: query,
       options: {
@@ -76,7 +86,7 @@ export default function UserProfile({handleLogout}) {
       }
     }).then(({ DATA }) => {
       setPosts(DATA.data);
-    });
+    });}
   };
 
 

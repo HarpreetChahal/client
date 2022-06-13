@@ -35,13 +35,17 @@ export default function Topbar({ fetchPosts, handleLogout }) {
     {
       fetchPosts({},searchValue)
     }
-    else
+    else if(pathName==="/")
     {  fetchPosts({
         desc:{
           $regex: searchValue,
           $options: 'i',
         }
       });
+    }
+    else
+    {
+      fetchPosts({},searchValue)
     }
   }, [searchValue]);
 
