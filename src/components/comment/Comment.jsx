@@ -50,7 +50,7 @@ export default function Comment({ user, comment, date }) {
           <div>
             <div
               style={{
-                fontSize: "10px",
+                fontSize: "12px",
                 color: "rgb(0, 0, 0)",
                 paddingTop: "7px"
               }}

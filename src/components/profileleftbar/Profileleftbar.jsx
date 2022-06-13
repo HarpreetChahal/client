@@ -9,6 +9,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import { Context } from "../context/Context";
 import moment from "moment";
 import { useFormik } from "formik";
@@ -250,6 +255,19 @@ export default function Profileleftbar({
                       onChange={formik.handleChange}
                       value={formik.values.dob}
                     />
+                    <FormControl>
+                                        <FormLabel id="demo-row-radio-buttons-group-label" sx={{mt:1}}>Account Type</FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-labelledby="demo-row-radio-buttons-group-label"
+                                            name="row-radio-buttons-group"
+                                            
+                                        >
+                                            <FormControlLabel size="small" value="public" control={<Radio />} label="Public" />
+                                            <FormControlLabel size="small" value="private" control={<Radio />} label="Private" />
+                                            
+                                        </RadioGroup>
+                                    </FormControl>
                   </DialogContent>
                   <DialogActions>
                     <Button variant="contained" onClick={handleClose}>
@@ -336,7 +354,7 @@ export default function Profileleftbar({
                 {user.following.includes(follower._id) &&
                   user._id !== follower._id && (
                     <button
-                      className="follow-button"
+                      className="unfollow-button"
                       onClick={() => {
                         unFollowFriend(follower._id);
                       }}

@@ -65,17 +65,72 @@
     margin-right: 10px;
     color: white;
   }
+
+  .home_button
+  {
+    align-items:flex-start;
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 3px;
+    align-items: center;
+    cursor: pointer;
+  }
+
+ .home_text
+ {
+  margin-right: 10px;
+  font-size: 17px;
+  cursor: pointer;
+ }
+
+ .timeline_button
+ {
+   align-items:flex-start;
+   display: flex;
+   justify-content: flex-start;
+   margin-right: 3px;
+   align-items: center;
+   cursor: pointer;
+ }
+
+.timeline_text
+{
+ margin-right: 10px;
+ font-size: 17px;
+ cursor: pointer;
+}
+
+
+.logout_button
+{
+  align-items:flex-start;
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 3px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logout_text
+{
+margin-right: 20px;
+font-size: 17px;
+cursor: pointer;
+}
+
+ 
   
   .helloUser
   {
     margin-right: 10px;
-    font-size: larger;
+    font-size:20px;
   }
   
   .topbarImg {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 2px solid white;
     align-items: flex-end;
     object-fit: cover;
     cursor: pointer;

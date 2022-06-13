@@ -5,6 +5,7 @@ import Leftbar from "../../components/leftbar/Leftbar";
 import Feed from "../../components/feed/Feed";
 import Profileleftbar from "../profileleftbar/Profileleftbar";
 import Rightbar from "../../components/rightbar/Rightbar";
+import { CameraAlt } from "@mui/icons-material";
 import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
@@ -115,6 +116,12 @@ export default function Profile({ handleLogout }) {
                 }
                 alt=""
               />
+
+ <CameraAlt fontSize="large"
+              sx={{color:"#1877f2"}}
+                className="changeImg"
+              />
+
               <input
                 className="changeUserImg"
                 // style={{ display: "none" }}

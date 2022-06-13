@@ -4,15 +4,33 @@
  * @date      02-06-2022
  * @brief     This is the topbar component page (navigation bar) for LookMeUp project.
  */
-
+import React from "react";
 import "./topbar.css";
 import { useContext } from "react";
-import { Search } from "@mui/icons-material";
+import { AccountBox, Home, Search, Feed } from "@mui/icons-material";
 import { Context } from "../../components/context/Context";
 import { useNavigate } from "react-router-dom";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
+
+
 export default function Topbar({ fetchPosts }) {
   const { user } = useContext(Context);
   const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -29,6 +47,7 @@ export default function Topbar({ fetchPosts }) {
         >
           LookMeUp
         </span>
+        
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
@@ -38,15 +57,27 @@ export default function Topbar({ fetchPosts }) {
       </div>
 
       <div className="topbarRight">
-        <span className="helloUser">Hello, {user.firstName}</span>
+        <Home className="home_button" fontSize="medium"/> 
+        <span className="home_text">Home</span>
+        <Feed className="timeline_button" fontSize="medium"/>
+        <span className="timeline_text">Profile</span>
+        <Logout className="logout_button" fontSize="medium"/>
+        <span className="logout_text">Logout</span>
+
+        {/* <span className="helloUser">Hi, {user.firstName}</span> */}
+        <div>
         <img
           src={user?.profilePicture || "/assets/person/1.jpg"}
           alt=""
           className="topbarImg"
-          onClick={() => {
-            navigate("/profile");
+          onClick={(e) => {
+            //navigate("/profile");
+            handleClick(e)
           }}
         />
+
+      </div>
+         
         {/* <div className="logout">
                     <Button variant="contained" color="success" endIcon={<UploadFile />}>
                        Logout

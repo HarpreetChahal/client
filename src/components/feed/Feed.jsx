@@ -8,6 +8,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import "./feed.css";
 import { useLocation } from "react-router-dom";
 export default function Feed({ posts, fetchPosts }) {
@@ -45,7 +46,16 @@ export default function Feed({ posts, fetchPosts }) {
             />
           );
         })}
-        {posts.length === 0 && <div> No Post Found</div>}
+        {posts.length === 0 &&
+          <div className="no-post-found">
+            {/* <div className="no-post-icon"> */}
+              <PhotoCameraIcon fontSize="large" sx={{mt:4,mb:0}}/>
+            {/* </div> */}
+            <p className="no-post-text">
+              No Posts Found
+            </p>
+          </div>
+        }
       </div>
     </div>
   );

@@ -76,7 +76,7 @@ export default function Leftbar({ fetchPosts, handleLogout }) {
                 <ListItemIcon>
                   <HomeIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Feed" />
               </ListItemButton>
             </ListItem>
             <Divider />
@@ -97,18 +97,6 @@ export default function Leftbar({ fetchPosts, handleLogout }) {
           </List>
         </nav>
       </Box>
-
-      <Button
-        variant="contained"
-        onClick={handleLogout}
-        sx={{
-          position: "fixed",
-          bottom: 10,
-          left: "1%"
-        }}
-      >
-        Logout
-      </Button>
     </div>
   );
 }

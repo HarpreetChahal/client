@@ -139,16 +139,17 @@
 
   .follow-button
   {
-    width: 4.1rem;
+    width: 5.0rem;
     height: 2rem ;
     margin-top: 10px;
     align-self:flex-start;
     align-items: center;
+    text-align: center;
     border: none;
     background-color: #1877f2;
     color: white;
     border-radius: 5px;
-    padding: 5px  10px;
+    padding: 5px  17px;
     display: flex;
     font-size: 16px;
     font-family: 500; 
@@ -163,6 +164,36 @@
 
   }
 
+
+  /* UnfollowButton */
+
+
+  .unfollow-button
+  {
+    width: 5.0rem;
+    height: 2rem ;
+    margin-top: 10px;
+    align-self:flex-start;
+    align-items: center;
+    text-align: center;
+    border: none;
+    background-color: #1877f2;
+    color: white;
+    border-radius: 5px;
+    /* padding: 5px  10px; */
+    display: flex;
+    font-size: 16px;
+    font-family: 500; 
+  }
+
+  .unfollow-button:hover
+  {
+      cursor: pointer;
+      color: #1877f2;
+      background: white;
+      border: 2px solid #1877f2;
+
+  }
   
 
 
@@ -196,6 +227,8 @@
   
   .ProfileImages>img:nth-of-type(2) {
     width: 6rem;
+    height: 6rem;
+    object-fit: cover;
     border-radius: 50%;
     position: absolute;
     bottom: -3rem;
