@@ -6,10 +6,10 @@
  */
 import React from "react";
 import "./topbar.css";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AccountBox, Home, Search, Feed } from "@mui/icons-material";
 import { Context } from "../../components/context/Context";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -19,8 +19,10 @@ import Logout from "@mui/icons-material/Logout";
 export default function Topbar({ fetchPosts, handleLogout }) {
   const { user } = useContext(Context);
   const navigate = useNavigate();
-
+  const [searchValue, setSearchValue] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const location=useLocation();
+  const pathName=location.pathname;
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +30,24 @@ export default function Topbar({ fetchPosts, handleLogout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  useEffect(() => {
+    if(pathName==="/profile")
+    {
+      fetchPosts({},searchValue)
+    }
+    else if(pathName==="/")
+    {  fetchPosts({
+        desc:{
+          $regex: searchValue,
+          $options: 'i',
+        }
+      });
+    }
+    else
+    {
+      fetchPosts({},searchValue)
+    }
+  }, [searchValue]);
 
   return (
     <div className="topbarContainer">
@@ -49,7 +69,9 @@ export default function Topbar({ fetchPosts, handleLogout }) {
       <div className="topbarCenter">
         <div className="searchbar">
           <Search className="searchIcon" />
-          <input placeholder="Search for anything" className="searchInput" />
+          <input placeholder="Search for anything" className="searchInput" value={searchValue} onChange={(e)=>{
+            setSearchValue(e.target.value)
+          }}/>
         </div>
       </div>
 

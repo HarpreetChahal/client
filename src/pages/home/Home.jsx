@@ -24,30 +24,31 @@ export default function Home({ handleLogout }) {
   const showLoader = () => {
     setLoader(true);
   };
-  const fetchPosts = async () => {
+  const fetchPosts = async (query = {}) => {
     await commonApi({
       action: "fetchPost",
       data: {
+        query: query,
         options: {
           pagination: false,
           populate: [
             {
               path: "userId",
               model: "user",
-              select: ["_id", "fullName", "profilePicture"]
+              select: ["_id", "fullName", "profilePicture"],
             },
             {
               path: "comments.userId",
               model: "user",
-              select: ["_id", "fullName", "profilePicture"]
-            }
+              select: ["_id", "fullName", "profilePicture"],
+            },
           ],
-          sort: { createdAt: -1 }
-        }
+          sort: { createdAt: -1 },
+        },
       },
       config: {
-        authToken: true
-      }
+        authToken: true,
+      },
     }).then(({ DATA }) => {
       setPosts(DATA.data);
     });

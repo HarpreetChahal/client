@@ -9,7 +9,7 @@ import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 import { useLocation } from "react-router-dom";
-export default function UserProfile() {
+export default function UserProfile({handleLogout}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
   const [user, setUser] = useState();
@@ -48,7 +48,17 @@ export default function UserProfile() {
 
   const [posts, setPosts] = useState([]);
 
-  const fetchPosts = async (query = {}) => {
+  const fetchPosts = async (query = {},search="") => {
+    if(search)
+    {
+      query.desc={
+        $regex:search,
+        $options:"i"
+      }
+    }
+    if(user?._id)
+   { 
+    query.userId=user._id
     let data = {
       query: query,
       options: {
@@ -76,7 +86,7 @@ export default function UserProfile() {
       }
     }).then(({ DATA }) => {
       setPosts(DATA.data);
-    });
+    });}
   };
 
 
@@ -89,7 +99,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <Topbar fetchPosts={fetchPosts} />
+       <Topbar fetchPosts={fetchPosts} handleLogout={handleLogout} />
       <div className="profile">
         {/* <Leftbar /> */}
         <div className="profileRight">
