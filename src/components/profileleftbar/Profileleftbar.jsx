@@ -9,11 +9,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 import { Context } from "../context/Context";
 import moment from "moment";
 import { useFormik } from "formik";
@@ -48,7 +48,6 @@ export default function Profileleftbar({
   };
 
   const [followers, setFollowers] = useState([]);
-
 
   const [open, setOpen] = useState(false);
 
@@ -145,6 +144,7 @@ export default function Profileleftbar({
         firstName: userData.firstName,
         lastName: userData.lastName,
         dob: moment(userData.dob).format("yyyy-MM-DD"),
+        accountType:userData.accountType ||"public"
       },
       validationSchema: Yup.object({
         firstName: Yup.string().required("Required"),
@@ -154,7 +154,7 @@ export default function Profileleftbar({
       onSubmit: async (values) => {
         await commonApi({
           action: "updateUser",
-          parameters: user._id ,
+          parameters: user._id,
           data: values,
         })
           .then(({ DATA = {} }) => {
@@ -256,18 +256,33 @@ export default function Profileleftbar({
                       value={formik.values.dob}
                     />
                     <FormControl>
-                                        <FormLabel id="demo-row-radio-buttons-group-label" sx={{mt:1}}>Account Type</FormLabel>
-                                        <RadioGroup
-                                            row
-                                            aria-labelledby="demo-row-radio-buttons-group-label"
-                                            name="row-radio-buttons-group"
-                                            
-                                        >
-                                            <FormControlLabel size="small" value="public" control={<Radio />} label="Public" />
-                                            <FormControlLabel size="small" value="private" control={<Radio />} label="Private" />
-                                            
-                                        </RadioGroup>
-                                    </FormControl>
+                      <FormLabel
+                        id="demo-row-radio-buttons-group-label"
+                        sx={{ mt: 1 }}
+                      >
+                        Account Type
+                      </FormLabel>
+                      <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="accountType"
+                        onChange={formik.handleChange}
+                        value={formik.values.accountType}
+                      >
+                        <FormControlLabel
+                          size="small"
+                          value="public"
+                          control={<Radio />}
+                          label="Public"
+                        />
+                        <FormControlLabel
+                          size="small"
+                          value="private"
+                          control={<Radio />}
+                          label="Private"
+                        />
+                      </RadioGroup>
+                    </FormControl>
                   </DialogContent>
                   <DialogActions>
                     <Button variant="contained" onClick={handleClose}>
@@ -324,48 +339,51 @@ export default function Profileleftbar({
           )}
         </div>
 
-        {show && <div className="FollowersCard">
-          <h3>Who is following you</h3>
-          {followers.map((follower) => {
-            return (
-              <div className="follower">
-                <div>
-                  <img
-                    src={follower.profilePicture || "assets/person/1.jpg"}
-                    alt=""
-                    className="followerImg"
-                  />
-                  <div className="name">
-                    <span>{follower.fullName}</span>
+        {show && (
+          <div className="FollowersCard">
+            <h3>Who is following you</h3>
+            {followers.map((follower) => {
+              return (
+                <div className="follower">
+                  <div>
+                    <img
+                      src={follower.profilePicture || "assets/person/1.jpg"}
+                      alt=""
+                      className="followerImg"
+                    />
+                    <div className="name">
+                      <span>{follower.fullName}</span>
+                    </div>
                   </div>
-                </div>
 
-                {!user.following.includes(follower._id) &&
-                  user._id !== follower._id && (
-                    <button
-                      className="follow-button"
-                      onClick={() => {
-                        followFriend(follower._id);
-                      }}
-                    >
-                      Follow
-                    </button>
-                  )}
-                {user.following.includes(follower._id) &&
-                  user._id !== follower._id && (
-                    <button
-                      className="unfollow-button"
-                      onClick={() => {
-                        unFollowFriend(follower._id);
-                      }}
-                    >
-                      UnFollow
-                    </button>
-                  )}
-              </div>
-            );
-          })}
-        </div>}
+                  {!user.following.includes(follower._id) &&
+                    user._id !== follower._id && (
+                      <button
+                        className="follow-button"
+                        onClick={() => {
+                          followFriend(follower._id);
+                        }}
+                      >
+                        Follow
+                      </button>
+                    )}
+                  {user.following.includes(follower._id) &&
+                    user._id !== follower._id && (
+                      <button
+                        className="unfollow-button"
+                        onClick={() => {
+                          unFollowFriend(follower._id);
+                        }}
+                      >
+                        UnFollow
+                      </button>
+                    )}
+                </div>
+              );
+            })}
+            {followers.length === 0 && <div>No followers found</div>}
+          </div>
+        )}
 
         {/* <h4 className="rightbarTitle"> User Information </h4>
             

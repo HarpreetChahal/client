@@ -117,8 +117,9 @@ export default function Profile({ handleLogout }) {
                 alt=""
               />
 
- <CameraAlt fontSize="large"
-              sx={{color:"#1877f2"}}
+              <CameraAlt
+                fontSize="large"
+                sx={{ color: "#1877f2" }}
                 className="changeImg"
               />
 
