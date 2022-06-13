@@ -81,10 +81,11 @@ export default function Topbar({ fetchPosts ,handleLogout}) {
             src={user?.profilePicture || "/assets/person/1.jpg"}
             alt=""
             className="topbarImg"
-            onClick={(e) => {
-              //navigate("/profile");
-              handleClick(e);
-            }}
+           
+              onClick={() => {
+                navigate("/profile");
+              }}
+           
           />
         </div>
 

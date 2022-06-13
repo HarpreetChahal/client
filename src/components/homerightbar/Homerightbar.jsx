@@ -5,6 +5,7 @@ import "./homerightbar.css";
 
 export default function Homerightbar() {
   const { user, dispatch } = useContext(Context);
+  const token=JSON.parse(localStorage.getItem("token"));
   const [friends, setFriends] = useState([]);
   const fetchSuggestions = async () => {
     await commonApi({
@@ -45,8 +46,12 @@ export default function Homerightbar() {
     });
   };
   useEffect(() => {
-    fetchSuggestions();
-  }, [user]);
+    if(user?._id && token)
+    {
+      fetchSuggestions();
+    }
+  
+  }, [user._id,token]);
 
   return (
     <div className="rightbar">

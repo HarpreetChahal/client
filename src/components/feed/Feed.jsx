@@ -14,17 +14,16 @@ import { useLocation } from "react-router-dom";
 export default function Feed({ posts, fetchPosts }) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
+  let token = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user")) !== null) {
+    if (JSON.parse(localStorage.getItem("user")) !== null && token) {
       if (name) {
         fetchPosts({ userId: name });
       } else {
         fetchPosts();
       }
-    } else {
-      window.location.href = "/";
     }
-  }, []);
+  }, [token]);
 
   return (
     <div className="feed">
