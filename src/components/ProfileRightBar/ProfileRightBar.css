@@ -1,7 +1,7 @@
 .rightbar {
   flex: 3;
   margin-left: 10px;
-  
+
 }
 
 .rightbarWrapper {
@@ -40,15 +40,14 @@
 
 
 
-.AddSearch
-{
+.AddSearch {
   display: flex;
   gap: 0.75rem;
   margin-bottom: 10px;
-  
+
 }
 
-.Search{
+.Search {
   display: flex;
   border-radius: 5px;
   margin-left: 12px;
@@ -62,16 +61,15 @@
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 }
 
-.Search>input{
+.Search>input {
   background-color: transparent;
   border: none;
   outline: none;
   margin-left: 15px;
-  
+
 }
 
-.s-icon
-{
+.s-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,25 +77,23 @@
   border-radius: 5px;
   padding: 2px;
   color: white;
-  
+
 }
 
-.s-icon:hover
-{
+.s-icon:hover {
   cursor: pointer;
 }
 
 /* Before Search  */
 
-.rightbarFollowButton
-{
+.rightbarFollowButton {
   margin-bottom: 1px;
   margin-left: 14px;
   border: none;
   background-color: #1877f2;
   color: white;
   border-radius: 5px;
-  padding: 5px  10px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -105,61 +101,57 @@
 
 }
 
-.InfoCardRight
-{
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    margin-left: 1%;
-    background-color: white;
-    border-radius: 10px;
+.InfoCardRight {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-left: 1%;
+  background-color: white;
+  border-radius: 10px;
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 }
 
-.infoHead
-{
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   margin-bottom: 10px;
+.infoHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 
 }
 
-.infoHead>div:hover
-{
-    cursor: pointer;
+.infoHead>div:hover {
+  cursor: pointer;
 
 }
 
-.info{
-    margin-bottom: 7px;
+.info {
+  margin-bottom: 7px;
 }
 
-.logout-button
-{
-    cursor: pointer;
-    width: 6rem;
-    height: 2rem ;
-    margin-top: 10px;
-    align-self:flex-start;
-    align-items: center;
-    border: none;
-    background-color: #1877f2;
-    color: white;
-    border-radius: 5px;
-    padding: 5px  10px;
-    display: flex;
-    font-size: 16px;
-    font-family: 500;
+.logout-button {
+  cursor: pointer;
+  width: 6rem;
+  height: 2rem;
+  margin-top: 10px;
+  align-self: flex-start;
+  align-items: center;
+  border: none;
+  background-color: #1877f2;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  font-size: 16px;
+  font-family: 500;
 
 }
 
 
 
 
-.rightbarTitle{
+.rightbarTitle {
   font-size: 18px;
   margin-top: 15px;
   margin-left: 14px;
@@ -168,25 +160,26 @@
 }
 
 
-.rightbarFollowings{
+.rightbarFollowings {
   /* margin-left: 1%; */
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+
   /* background-color: white;
   border-radius: 10px;
 -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
 }
 
-.rightbarFollowing{
+.rightbarFollowing {
   vertical-align: top;
   display: inline-block;
   text-align: center;
   width: 100px;
   margin-top: 10px;
   margin-left: 12px;
+  margin-right: 5px;
   /* display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -195,13 +188,14 @@ box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
   /* overflow: hidden; */
   /* float: center; */
 }
-.rightbarFollowing>img
-{
+
+.rightbarFollowing>img {
   width: 100px;
   height: 100px;
   border-radius: 6px;
   object-fit: cover;
   justify-content: space-between;
+
 
 }
 
@@ -212,8 +206,7 @@ box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
   border-radius: 5px ;
 } */
 
-.rightbarFollowingName
-{
+.rightbarFollowingName {
 
   display: block;
   font-size: 13px;
@@ -234,29 +227,27 @@ box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
 }
 
 
-.no-friends-found
-{
-    width: 100%;
-    text-align:center;
-    /* display:block; */
-    /* background-color: transparent; */
-    /* border: 1px solid transparent; */
-    /* margin-right: 10px; */
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-left: 15px;
+.no-friends-found {
+  width: 100%;
+  text-align: center;
+  /* display:block; */
+  /* background-color: transparent; */
+  /* border: 1px solid transparent; */
+  /* margin-right: 10px; */
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 15px;
 
-    /* float:center; */
-    border-radius: 8px;
-    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  /* float:center; */
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 }
 
 
 
-.no-friends-text
-{
-   font-size: 14px;
-   font-weight: 600;
-   margin-bottom: 40px;
+.no-friends-text {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 40px;
 }
