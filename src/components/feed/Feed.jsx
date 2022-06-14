@@ -11,7 +11,7 @@ import Post from "../post/Post";
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import "./feed.css";
 import { useLocation } from "react-router-dom";
-export default function Feed({ posts, fetchPosts }) {
+export default function Feed({ posts, fetchPosts ,show=true}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
   let token = JSON.parse(localStorage.getItem("token"));
@@ -27,7 +27,8 @@ export default function Feed({ posts, fetchPosts }) {
 
   return (
     <div className="feed">
-      <div className="feedWrapper">
+       {!show && <div className="no-friends-text">The account is private you need to follow it to see the post</div>}
+     {show && <div className="feedWrapper">
         {!name && <Share fetchPosts={fetchPosts} />}
         {posts.map((post) => {
           return (
@@ -55,7 +56,8 @@ export default function Feed({ posts, fetchPosts }) {
             </p>
           </div>
         }
-      </div>
+      </div>}
+     
     </div>
   );
 }

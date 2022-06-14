@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect, useContext } from "react";
-import "./rightbar.css";
+import "./ProfileRightBar.css";
 import {
   Add,
   PersonAdd,
@@ -20,9 +20,10 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
 
-export default function Rightbar({
+export default function ProfileRightbar({
   friends,
   fetchFriends,
+  fetchPosts,
   userDetails,
   userData,
   show,
@@ -39,68 +40,73 @@ export default function Rightbar({
 
   useEffect(() => {
     if (name) {
-      fetchFriends(name);
+      fetchFriends(name,searchValue);
     } else {
-      fetchFriends(userDetails._id);
+      fetchFriends(userDetails._id,searchValue);
     }
     userData();
-  }, [name, userDetails?._id,searchValue]);
-  const ProfileRightbar = () => {
-    const navigate = useNavigate();
-    const handleFriends = (id) => {
-      if (id !== user._id) {
-        navigate("/userProfile?userId=" + id);
-      } else {
-        navigate("/profile");
-      }
-    };
-    const unFollowFriend = async (id) => {
+  }, [name, userDetails?._id,searchValue,user.following,user.followers]);
+
+  const navigate = useNavigate();
+  const handleFriends = (id) => {
+    if (id !== user._id) {
+      navigate("/userProfile?userId=" + id);
+    } else {
+      navigate("/profile");
+    }
+  };
+  const unFollowFriend = async (id) => {
+    await commonApi({
+      action: "unFollowFriend",
+      data: {
+        followingId: id,
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(async ({ DATA = {} }) => {
+      
+      fetchFriends(name ? name : user._id,searchValue);
       await commonApi({
-        action: "unFollowFriend",
-        data: {
-          followingId: id,
-        },
+        action: "getUser",
+        parameters: [user._id],
         config: {
           authToken: true,
         },
-      }).then(async ({ DATA = {} }) => {
-        fetchFriends(name ? name : user._id);
-        await commonApi({
-          action: "getUser",
-          parameters: [user._id],
-          config: {
-            authToken: true,
-          },
-        }).then(({ DATA = {} }) => {
-          dispatch({ type: "UPDATE_USER", payload: DATA });
-        });
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
+        fetchPosts({ userId: name });
       });
-    };
-    const followFriend = async (id) => {
+    });
+  };
+  const followFriend = async (id) => {
+    await commonApi({
+      action: "followFriend",
+      data: {
+        followingId: id,
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(async ({ DATA = {} }) => {
+      fetchFriends(name ? name : user._id);
       await commonApi({
-        action: "followFriend",
-        data: {
-          followingId: id,
-        },
+        action: "getUser",
+        parameters: [user._id],
         config: {
           authToken: true,
         },
-      }).then(async ({ DATA = {} }) => {
-        fetchFriends(name ? name : user._id);
-        await commonApi({
-          action: "getUser",
-          parameters: [user._id],
-          config: {
-            authToken: true,
-          },
-        }).then(({ DATA = {} }) => {
-          dispatch({ type: "UPDATE_USER", payload: DATA });
-        });
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
+        fetchPosts({ userId: name });
       });
-    };
-    return (
-      <>
-        <div className="AddSearch">
+    });
+  };
+
+  return (
+    <div className="rightbar">
+      <div className="rightbarWrapper">
+      <div className="AddSearch">
           {show && !user.following.includes(userDetails?._id) && (
             <button
               className="rightbarFollowButton"
@@ -144,6 +150,7 @@ export default function Rightbar({
                 onClick={() => {
                   handleFriends(friend._id);
                 }}
+                style={{cursor:"pointer"}}
                 key={friend._id}
               >
                 <img
@@ -165,14 +172,6 @@ export default function Rightbar({
             </div>
           )}
         </div>
-      </>
-    );
-  };
-
-  return (
-    <div className="rightbar">
-      <div className="rightbarWrapper">
-        <ProfileRightbar />
       </div>
     </div>
   );

@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import Topbar from "../../components/topbar/Topbar";
-import Leftbar from "../../components/leftbar/Leftbar";
 import Feed from "../../components/feed/Feed";
 import Profileleftbar from "../profileleftbar/Profileleftbar";
-import Rightbar from "../../components/rightbar/Rightbar";
+import ProfileRightbar from "../ProfileRightBar/ProfileRightbar";
 import { CameraAlt } from "@mui/icons-material";
 import "./profile.css";
 import { Context } from "../context/Context";
@@ -155,7 +154,7 @@ export default function Profile({ handleLogout }) {
               posts={posts}
               fetchPosts={() => fetchPosts({ userId: user._id })}
             />
-            <Rightbar
+            <ProfileRightbar
               friends={friends}
               fetchFriends={fetchFriends}
               userDetails={user}

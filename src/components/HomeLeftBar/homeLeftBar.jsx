@@ -7,7 +7,7 @@
 
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "./leftbar.css";
+import "./HomeLeftBar.css";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -23,7 +23,7 @@ import Divider from "@mui/material/Divider";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router";
-import { Context } from "../../components/context/Context";
+import { Context } from "../context/Context";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;

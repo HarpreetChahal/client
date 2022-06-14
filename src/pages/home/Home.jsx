@@ -7,12 +7,12 @@
 
 import React, { useState } from "react";
 import Topbar from "../../components/topbar/Topbar";
-import Leftbar from "../../components/leftbar/Leftbar";
+import Leftbar from "../../components/HomeLeftBar/homeLeftBar"
 import Feed from "../../components/feed/Feed";
 import Loader from "../../components/Loader";
 import Homerightbar from "../../components/homerightbar/Homerightbar";
-import Rightbar from "../../components/rightbar/Rightbar";
-import Profile from "../../components/profile/Profile";
+// import Rightbar from "../../components/rightbar/Rightbar";
+// import Profile from "../../components/profile/Profile";
 import "./home.css";
 import commonApi from "../../api/common";
 export default function Home({ handleLogout }) {
@@ -25,6 +25,8 @@ export default function Home({ handleLogout }) {
     setLoader(true);
   };
   const fetchPosts = async (query = {}) => {
+    if (JSON.parse(localStorage.getItem("user")) !== null) {
+      query.showPosts=true
     await commonApi({
       action: "fetchPost",
       data: {
@@ -52,6 +54,7 @@ export default function Home({ handleLogout }) {
     }).then(({ DATA }) => {
       setPosts(DATA.data);
     });
+  }
   };
   return (
     <>
@@ -65,7 +68,7 @@ export default function Home({ handleLogout }) {
             <Feed fetchPosts={fetchPosts} posts={posts} />
             {/* <Rightbar/>    */}
 
-            <Homerightbar />
+            <Homerightbar fetchPosts={fetchPosts}/>
           </div>
         </>
       )}

@@ -265,6 +265,13 @@ export default function Post(props) {
             onChange={(e) => {
               setComment(e.target.value);
             }}
+            onKeyPress={(ev) => {
+              if (ev.key === "Enter") {
+                ev.preventDefault();
+                createComment(ev)
+              }
+            }}
+       
             className="commentInput"
           />
           {validateComment() && (
