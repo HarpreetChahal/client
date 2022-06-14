@@ -16,6 +16,7 @@ export default function Feed({ posts, fetchPosts }) {
   const name = new URLSearchParams(search).get("userId");
   let token = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
+    console.log("jjgg",token)
     if (JSON.parse(localStorage.getItem("user")) !== null && token) {
       if (name) {
         fetchPosts({ userId: name });

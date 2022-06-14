@@ -25,6 +25,7 @@ export default function Home({ handleLogout }) {
     setLoader(true);
   };
   const fetchPosts = async (query = {}) => {
+    if (JSON.parse(localStorage.getItem("user")) !== null) {
     await commonApi({
       action: "fetchPost",
       data: {
@@ -52,6 +53,7 @@ export default function Home({ handleLogout }) {
     }).then(({ DATA }) => {
       setPosts(DATA.data);
     });
+  }
   };
   return (
     <>
