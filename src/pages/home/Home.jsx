@@ -68,7 +68,7 @@ export default function Home({ handleLogout }) {
             <Feed fetchPosts={fetchPosts} posts={posts} />
             {/* <Rightbar/>    */}
 
-            <Homerightbar />
+            <Homerightbar fetchPosts={fetchPosts}/>
           </div>
         </>
       )}

@@ -21,8 +21,8 @@ export default function Topbar({ fetchPosts, handleLogout }) {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const location=useLocation();
-  const pathName=location.pathname;
+  const location = useLocation();
+  const pathName = location.pathname;
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -32,30 +32,26 @@ export default function Topbar({ fetchPosts, handleLogout }) {
   };
 
   const search = useLocation()?.search;
-  const userId = new URLSearchParams(search)?.get('userId');
+  const userId = new URLSearchParams(search)?.get("userId");
 
   useEffect(() => {
     if (userId) {
-      setSearchValue("")
+      setSearchValue("");
     }
-  }, [userId])
+  }, [userId]);
 
   useEffect(() => {
-    if(pathName==="/profile")
-    {
-      fetchPosts({},searchValue)
-    }
-    else if(pathName==="/")
-    {  fetchPosts({
-        desc:{
+    if (pathName === "/profile") {
+      fetchPosts({}, searchValue);
+    } else if (pathName === "/") {
+      fetchPosts({
+        desc: {
           $regex: searchValue,
-          $options: 'i',
-        }
+          $options: "i",
+        },
       });
-    }
-    else
-    {
-      fetchPosts({},searchValue)
+    } else {
+      fetchPosts({}, searchValue);
     }
   }, [searchValue]);
 
@@ -79,13 +75,22 @@ export default function Topbar({ fetchPosts, handleLogout }) {
       <div className="topbarCenter">
         <div className="searchbar">
           <Search className="searchIcon" />
-          <input placeholder="Search for anything" className="searchInput" value={searchValue} onChange={(e)=>{
-            setSearchValue(e.target.value)
-          }}/>
-          {searchValue!=="" &&   <Close onClick={()=>{
-            setSearchValue("")
-          }}/>}
-        
+          <input
+            placeholder="Search for anything"
+            className="searchInput"
+            value={searchValue}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
+          />
+          {searchValue !== "" && (
+            <Close
+            style={{cursor:"pointer"}}
+              onClick={() => {
+                setSearchValue("");
+              }}
+            />
+          )}
         </div>
       </div>
 
@@ -115,21 +120,23 @@ export default function Topbar({ fetchPosts, handleLogout }) {
         >
           Home
         </span>
-        <Feed
-          className="timeline_button"
-          fontSize="medium"
-          onClick={() => {
-            navigate("/profile");
-          }}
-        />
-        <span
+        {pathName !== "/profile" && 
+          <Feed
+            className="timeline_button"
+            fontSize="medium"
+            onClick={() => {
+              navigate("/profile");
+            }}
+          />}
+        
+        {pathName !== "/profile" &&   <span
           className="timeline_text"
           onClick={() => {
             navigate("/profile");
           }}
         >
           Profile
-        </span>
+        </span>}
         <Logout
           className="logout_button"
           fontSize="medium"

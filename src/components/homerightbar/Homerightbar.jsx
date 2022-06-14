@@ -5,7 +5,7 @@ import "./homerightbar.css";
 import { Person } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-export default function Homerightbar() {
+export default function Homerightbar({fetchPosts}) {
   const { user, dispatch } = useContext(Context);
   const token = JSON.parse(localStorage.getItem("token"));
   const [friends, setFriends] = useState([]);
@@ -24,6 +24,7 @@ export default function Homerightbar() {
       },
     }).then(({ DATA = {} }) => {
       setFriends(DATA.data);
+      fetchPosts()
     });
   };
   const followFriend = async (id) => {
