@@ -7,7 +7,7 @@
 import React from "react";
 import "./topbar.css";
 import { useContext, useState, useEffect } from "react";
-import { AccountBox, Home, Search, Feed } from "@mui/icons-material";
+import { AccountBox, Home, Search, Feed, Close } from "@mui/icons-material";
 import { Context } from "../../components/context/Context";
 import { useLocation, useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
@@ -82,6 +82,10 @@ export default function Topbar({ fetchPosts, handleLogout }) {
           <input placeholder="Search for anything" className="searchInput" value={searchValue} onChange={(e)=>{
             setSearchValue(e.target.value)
           }}/>
+          {searchValue!=="" &&   <Close onClick={()=>{
+            setSearchValue("")
+          }}/>}
+        
         </div>
       </div>
 

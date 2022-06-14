@@ -12,9 +12,9 @@ import { useLocation } from "react-router-dom";
 export default function UserProfile({handleLogout}) {
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("userId");
-  const [user, setUser] = useState();
+  const [userd, setUser] = useState();
   const [friends, setFriends] = useState([]);
-  const {dispatch}=useContext(Context)
+  const {user,dispatch}=useContext(Context)
   const fetchFriends = async (id,searchValue="") => {
     await commonApi({
       action: "friends",
@@ -57,9 +57,9 @@ export default function UserProfile({handleLogout}) {
         $options:"i"
       }
     }
-    if(user?._id)
+    if(userd?._id)
    { 
-    query.userId=user._id
+    query.userId=userd._id
     let data = {
       query: query,
       options: {
@@ -93,10 +93,10 @@ export default function UserProfile({handleLogout}) {
 
   useEffect(() => {
     userData();
-    if (user) {
-      fetchPosts({ userId: user._id });
+    if (userd) {
+      fetchPosts({ userId: userd._id });
     }
-  }, [user?._id]);
+  }, [userd?._id]);
 
   return (
     <>
@@ -110,19 +110,19 @@ export default function UserProfile({handleLogout}) {
 
               <img
                 className="profileUserImg"
-                src={user?.profilePicture || "assets/person/1.jpg"}
+                src={userd?.profilePicture || "assets/person/1.jpg"}
                 alt=""
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">{user?.fullName}</h4>
+              <h4 className="profileInfoName">{userd?.fullName}</h4>
               {/* <span className="profileInfoDesc">It's a good day..!</span> */}
             </div>
           </div>
           <div className="profileRightBottom">
             <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends} show={false}/>
-            <Feed posts={posts} fetchPosts={fetchPosts} />
-            <ProfileRightbar friends={friends} fetchFriends={fetchFriends} userDetails={user} userData={userData} show={true}/>
+           <Feed posts={posts} fetchPosts={fetchPosts} show={(userd?.accountType==="private") ?user.following.includes(userd?._id): true}/>
+            <ProfileRightbar fetchPosts={fetchPosts} friends={friends} fetchFriends={fetchFriends} userDetails={userd} userData={userData} show={true}/>
           </div>
         </div>
       </div>

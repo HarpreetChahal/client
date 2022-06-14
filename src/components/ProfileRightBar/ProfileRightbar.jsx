@@ -23,6 +23,7 @@ import { Context } from "../context/Context";
 export default function ProfileRightbar({
   friends,
   fetchFriends,
+  fetchPosts,
   userDetails,
   userData,
   show,
@@ -44,7 +45,7 @@ export default function ProfileRightbar({
       fetchFriends(userDetails._id,searchValue);
     }
     userData();
-  }, [name, userDetails?._id,searchValue]);
+  }, [name, userDetails?._id,searchValue,user.following,user.followers]);
 
   const navigate = useNavigate();
   const handleFriends = (id) => {
@@ -64,6 +65,7 @@ export default function ProfileRightbar({
         authToken: true,
       },
     }).then(async ({ DATA = {} }) => {
+      
       fetchFriends(name ? name : user._id,searchValue);
       await commonApi({
         action: "getUser",
@@ -73,6 +75,7 @@ export default function ProfileRightbar({
         },
       }).then(({ DATA = {} }) => {
         dispatch({ type: "UPDATE_USER", payload: DATA });
+        fetchPosts({ userId: name });
       });
     });
   };
@@ -95,6 +98,7 @@ export default function ProfileRightbar({
         },
       }).then(({ DATA = {} }) => {
         dispatch({ type: "UPDATE_USER", payload: DATA });
+        fetchPosts({ userId: name });
       });
     });
   };
@@ -146,6 +150,7 @@ export default function ProfileRightbar({
                 onClick={() => {
                   handleFriends(friend._id);
                 }}
+                style={{cursor:"pointer"}}
                 key={friend._id}
               >
                 <img

@@ -26,6 +26,7 @@ export default function Home({ handleLogout }) {
   };
   const fetchPosts = async (query = {}) => {
     if (JSON.parse(localStorage.getItem("user")) !== null) {
+      query.showPosts=true
     await commonApi({
       action: "fetchPost",
       data: {
