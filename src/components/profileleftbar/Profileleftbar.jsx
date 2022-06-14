@@ -19,7 +19,7 @@ import moment from "moment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import commonApi from "../../api/common";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 export default function Profileleftbar({
   post,
   handleLogout,
@@ -32,6 +32,14 @@ export default function Profileleftbar({
   const { user, dispatch } = useContext(Context);
   const [userData, setUserData] = useState(user);
   const [loggedInUser, setLoggedInUser] = useState(true);
+  const navigate=useNavigate()
+  const handleFriends = (id) => {
+    if (id !== user._id) {
+      navigate("/userProfile?userId=" + id);
+    } else {
+      navigate("/profile");
+    }
+  };
   const getUserData = (id) => {
     commonApi({
       action: "getUser",
@@ -341,11 +349,16 @@ export default function Profileleftbar({
 
          
           <div className="FollowersCard">
-            <h3>Who is following you</h3>
+            {show && <h3>Who is following you</h3>}
+            {!show && <h3>Followers</h3>}
             {followers.map((follower) => {
               return (
                 <div className="follower" key={follower._id}>
-                  <div>
+                  <div onClick={() => {
+                  handleFriends(follower._id);
+                }}
+                style={{"cursor":"pointer"}}
+               >
                     <img
                       src={follower.profilePicture || "assets/person/1.jpg"}
                       alt=""
