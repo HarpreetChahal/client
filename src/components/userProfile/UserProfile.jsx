@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import Topbar from "../topbar/Topbar";
-import Leftbar from "../leftbar/Leftbar";
+
 import Feed from "../feed/Feed";
 import Profileleftbar from "../profileleftbar/Profileleftbar";
-import Rightbar from "../rightbar/Rightbar";
-import "./profile.css";
+import ProfileRightbar from "../ProfileRightBar/ProfileRightbar";
+import "./UserProfile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
 import { useLocation } from "react-router-dom";
@@ -122,7 +122,7 @@ export default function UserProfile({handleLogout}) {
           <div className="profileRightBottom">
             <Profileleftbar post={posts.length || 0} fetchPosts={fetchPosts} fetchFriends={fetchFriends} show={false}/>
             <Feed posts={posts} fetchPosts={fetchPosts} />
-            <Rightbar friends={friends} fetchFriends={fetchFriends} userDetails={user} userData={userData} show={true}/>
+            <ProfileRightbar friends={friends} fetchFriends={fetchFriends} userDetails={user} userData={userData} show={true}/>
           </div>
         </div>
       </div>

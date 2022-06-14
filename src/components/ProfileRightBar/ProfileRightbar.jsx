@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect, useContext } from "react";
-import "./rightbar.css";
+import "./ProfileRightBar.css";
 import {
   Add,
   PersonAdd,
@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
 
-export default function Rightbar({
+export default function ProfileRightbar({
   friends,
   fetchFriends,
   userDetails,

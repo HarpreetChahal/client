@@ -7,12 +7,12 @@
 
 import React, { useState } from "react";
 import Topbar from "../../components/topbar/Topbar";
-import Leftbar from "../../components/leftbar/Leftbar";
+import Leftbar from "../../components/HomeLeftBar/homeLeftBar"
 import Feed from "../../components/feed/Feed";
 import Loader from "../../components/Loader";
 import Homerightbar from "../../components/homerightbar/Homerightbar";
-import Rightbar from "../../components/rightbar/Rightbar";
-import Profile from "../../components/profile/Profile";
+// import Rightbar from "../../components/rightbar/Rightbar";
+// import Profile from "../../components/profile/Profile";
 import "./home.css";
 import commonApi from "../../api/common";
 export default function Home({ handleLogout }) {

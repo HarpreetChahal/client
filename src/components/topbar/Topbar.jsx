@@ -30,6 +30,16 @@ export default function Topbar({ fetchPosts, handleLogout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const search = useLocation()?.search;
+  const userId = new URLSearchParams(search)?.get('userId');
+
+  useEffect(() => {
+    if (userId) {
+      setSearchValue("")
+    }
+  }, [userId])
+
   useEffect(() => {
     if(pathName==="/profile")
     {
