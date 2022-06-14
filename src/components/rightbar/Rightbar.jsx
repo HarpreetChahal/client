@@ -39,68 +39,70 @@ export default function Rightbar({
 
   useEffect(() => {
     if (name) {
-      fetchFriends(name);
+      fetchFriends(name,searchValue);
     } else {
-      fetchFriends(userDetails._id);
+      fetchFriends(userDetails._id,searchValue);
     }
     userData();
   }, [name, userDetails?._id,searchValue]);
-  const ProfileRightbar = () => {
-    const navigate = useNavigate();
-    const handleFriends = (id) => {
-      if (id !== user._id) {
-        navigate("/userProfile?userId=" + id);
-      } else {
-        navigate("/profile");
-      }
-    };
-    const unFollowFriend = async (id) => {
+
+  const navigate = useNavigate();
+  const handleFriends = (id) => {
+    if (id !== user._id) {
+      navigate("/userProfile?userId=" + id);
+    } else {
+      navigate("/profile");
+    }
+  };
+  const unFollowFriend = async (id) => {
+    await commonApi({
+      action: "unFollowFriend",
+      data: {
+        followingId: id,
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(async ({ DATA = {} }) => {
+      fetchFriends(name ? name : user._id,searchValue);
       await commonApi({
-        action: "unFollowFriend",
-        data: {
-          followingId: id,
-        },
+        action: "getUser",
+        parameters: [user._id],
         config: {
           authToken: true,
         },
-      }).then(async ({ DATA = {} }) => {
-        fetchFriends(name ? name : user._id);
-        await commonApi({
-          action: "getUser",
-          parameters: [user._id],
-          config: {
-            authToken: true,
-          },
-        }).then(({ DATA = {} }) => {
-          dispatch({ type: "UPDATE_USER", payload: DATA });
-        });
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
       });
-    };
-    const followFriend = async (id) => {
+    });
+  };
+  const followFriend = async (id) => {
+    await commonApi({
+      action: "followFriend",
+      data: {
+        followingId: id,
+      },
+      config: {
+        authToken: true,
+      },
+    }).then(async ({ DATA = {} }) => {
+      fetchFriends(name ? name : user._id);
       await commonApi({
-        action: "followFriend",
-        data: {
-          followingId: id,
-        },
+        action: "getUser",
+        parameters: [user._id],
         config: {
           authToken: true,
         },
-      }).then(async ({ DATA = {} }) => {
-        fetchFriends(name ? name : user._id);
-        await commonApi({
-          action: "getUser",
-          parameters: [user._id],
-          config: {
-            authToken: true,
-          },
-        }).then(({ DATA = {} }) => {
-          dispatch({ type: "UPDATE_USER", payload: DATA });
-        });
+      }).then(({ DATA = {} }) => {
+        dispatch({ type: "UPDATE_USER", payload: DATA });
       });
-    };
-    return (
-      <>
-        <div className="AddSearch">
+    });
+  };
+
+  return (
+    <div className="rightbar">
+      <div className="rightbarWrapper">
+      <div className="AddSearch">
           {show && !user.following.includes(userDetails?._id) && (
             <button
               className="rightbarFollowButton"
@@ -165,14 +167,6 @@ export default function Rightbar({
             </div>
           )}
         </div>
-      </>
-    );
-  };
-
-  return (
-    <div className="rightbar">
-      <div className="rightbarWrapper">
-        <ProfileRightbar />
       </div>
     </div>
   );

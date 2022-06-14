@@ -339,7 +339,7 @@ export default function Profileleftbar({
           )}
         </div>
 
-        {show && (
+         
           <div className="FollowersCard">
             <h3>Who is following you</h3>
             {followers.map((follower) => {
@@ -383,7 +383,7 @@ export default function Profileleftbar({
             })}
             {followers.length === 0 && <div>No followers found</div>}
           </div>
-        )}
+        
 
         {/* <h4 className="rightbarTitle"> User Information </h4>
             
