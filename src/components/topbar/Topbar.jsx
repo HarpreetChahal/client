@@ -76,7 +76,7 @@ export default function Topbar({ fetchPosts, handleLogout }) {
         <div className="searchbar">
           <Search className="searchIcon" />
           <input
-            placeholder="Search for anything"
+            placeholder="Search for posts"
             className="searchInput"
             value={searchValue}
             onChange={(e) => {
