@@ -1,13 +1,13 @@
 /*!
-* @file      Leftbar.jsx
-* @author    Dharmik Dholariya and Harpreet Singh 
-* @date      02-06-2022
-* @brief     This is the leftbar component page (side menu) for LookMeUp project.
-*/
-
+ * @file      Leftbar.jsx
+ * @author    Dharmik Dholariya and Harpreet Singh
+ * @date      02-06-2022
+ * @brief     This is the leftbar component page (side menu) for LookMeUp project.
+ */
 
 import React, { useContext } from "react";
-import "./leftbar.css";
+import { Link } from "react-router-dom";
+import "./HomeLeftBar.css";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -23,24 +23,17 @@ import Divider from "@mui/material/Divider";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router";
-import { Context } from "../../components/context/Context";
+import { Context } from "../context/Context";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Leftbar({fetchPosts}) {
+export default function Leftbar({ fetchPosts, handleLogout }) {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(Context);
 
-  const handleLogout = async (e) => {
-    localStorage.clear();
-    e.preventDefault();
-    setOpen(false);
-    dispatch({ type: "LOGOUT" });
-    navigate("/login");
-  };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -63,53 +56,47 @@ export default function Leftbar({fetchPosts}) {
           bgcolor: "background.paper",
           position: "fixed",
           top: 100,
-          left: "1%",
+          left: "1%"
         }}
       >
         <nav aria-label="main list">
           <List>
             <ListItem
               disablePadding
-              onClick={() =>{
-                fetchPosts()
+              onClick={() => {
+                navigate("/");
+                fetchPosts();
                 window.scrollTo({
                   top: 0,
-                  behavior: "smooth",
-                })
-              }
-              }
+                  behavior: "smooth"
+                });
+              }}
             >
               <ListItemButton>
                 <ListItemIcon>
                   <HomeIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Feed" />
               </ListItemButton>
             </ListItem>
             <Divider />
-            <ListItem disablePadding>
+            <ListItem
+              disablePadding
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   <PersonIcon color="primary" />
                 </ListItemIcon>
+
                 <ListItemText primary="Profile" />
               </ListItemButton>
             </ListItem>
           </List>
         </nav>
       </Box>
-
-      <Button
-        variant="contained"
-        onClick={handleLogout}
-        sx={{
-          position: "fixed",
-          bottom: 10,
-          left: "1%",
-        }}
-      >
-        Logout
-      </Button>
     </div>
   );
 }

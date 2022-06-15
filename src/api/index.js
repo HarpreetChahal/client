@@ -11,9 +11,10 @@ const PATCH = "PATCH";
 
 const getToken = () => {
   if (typeof localStorage !== "undefined") {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user ) {
-      return user.token;
+    let token = JSON.parse(localStorage.getItem("token"));
+
+    if (token) {
+      return token;
     }
   }
 
@@ -30,7 +31,7 @@ const ACTION_HANDLERS = {
     }
 
     return axios.get(baseUrl + queryUrl, {
-      headers,
+      headers
     });
   },
 
@@ -39,18 +40,18 @@ const ACTION_HANDLERS = {
 
   [POST]: (url, data, headers) =>
     axios.post(baseUrl + url, data, {
-      headers,
+      headers
     }),
 
   [PATCH]: (url, data, headers) =>
     axios.patch(baseUrl + url, data, {
-      headers,
+      headers
     }),
 
   [PUT]: (url, data, headers) =>
     axios.put(baseUrl + url, data, {
-      headers,
-    }),
+      headers
+    })
 };
 
 function setHeaders({ contentType, authToken }) {
@@ -73,7 +74,7 @@ function handleError(error) {
 
   return Promise.reject(error);
 }
-const fetchUrl = ({ type, url, data = {}, config = {}}) => {
+const fetchUrl = ({ type, url, data = {}, config = {} }) => {
   setHeaders(config);
   const handler = ACTION_HANDLERS[type.toUpperCase()];
 

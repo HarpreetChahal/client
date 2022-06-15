@@ -1,0 +1,293 @@
+.rightbar {
+    flex: 3;
+  }
+  
+  .rightbarWrapper {
+    padding: 0px 0px 20x 20px;
+  }
+  
+  /* .rightbarTitle
+  {
+      font-size: 20px;
+      font-family: 500;
+      margin-bottom: 20px;
+      
+  }
+  
+  .rightbarInfo
+  {
+      margin-bottom: 30px;
+  }
+  
+  .rightbarInfoItem
+  {
+      margin-bottom: 10px;
+  }
+  
+  .rightbarInfoKey
+  {
+      font-weight: 600;
+      margin-right: 15px;
+      color: #555;
+  }
+  
+  .rightbarInfoValue
+  {
+      font-weight: 300;
+  } */
+
+
+
+  .InfoCard
+  {
+      
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      margin-left: 1%;
+      background-color: white;
+      border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  }
+  
+  .infoHead
+  {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 10px;
+
+  }
+
+  .infoHead>div:hover
+  {
+      cursor: pointer;
+
+  }
+
+  .info{
+      margin-bottom: 7px;
+  }
+
+  .logout-button
+  {
+      cursor: pointer;
+      width: 6rem;
+      height: 2rem ;
+      margin-top: 10px;
+      align-self:flex-start;
+      align-items: center;
+      border: none;
+      background-color: #1877f2;
+      color: white;
+      border-radius: 5px;
+      padding: 5px  10px;
+      display: flex;
+      font-size: 16px;
+      font-family: 500;
+
+  }
+
+  .FollowersCard
+  {
+      margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+    margin-left: 1%;
+    background-color: white;
+    border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  }
+
+
+  .follower{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .follower>div{
+      display: flex;
+      gap: 10px;
+  }
+
+  .followerImg
+  {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      object-fit: cover;
+  }
+
+  .name
+  {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+  }
+
+  .name>span:nth-of-type(1)
+  {
+      
+      font-weight:bold;
+  }
+
+  .follow-button
+  {
+    width: 5.0rem;
+    height: 2rem ;
+    margin-top: 10px;
+    align-self:flex-start;
+    align-items: center;
+    text-align: center;
+    border: none;
+    background-color: #1877f2;
+    color: white;
+    border-radius: 5px;
+    padding: 5px  17px;
+    display: flex;
+    font-size: 16px;
+    font-family: 500; 
+  }
+
+  .follow-button:hover
+  {
+      cursor: pointer;
+      color: #1877f2;
+      background: white;
+      border: 2px solid #1877f2;
+
+  }
+
+
+  /* UnfollowButton */
+
+
+  .unfollow-button
+  {
+    width: 5.0rem;
+    height: 2rem ;
+    margin-top: 10px;
+    align-self:flex-start;
+    align-items: center;
+    text-align: center;
+    border: none;
+    background-color: #1877f2;
+    color: white;
+    border-radius: 5px;
+    /* padding: 5px  10px; */
+    display: flex;
+    font-size: 16px;
+    font-family: 500; 
+  }
+
+  .unfollow-button:hover
+  {
+      cursor: pointer;
+      color: #1877f2;
+      background: white;
+      border: 2px solid #1877f2;
+
+  }
+  
+
+
+  .ProfileCardData {
+    
+    direction: flex;
+    flex-direction: column;
+    margin-right: 1%;
+    margin-bottom: 30px;
+    padding: 1rem;
+    gap: 1rem;
+    margin-left: 10px;
+    background-color: white;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  }
+  
+  .ProfileImages {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  
+  .ProfileImages>img:nth-of-type(1) {
+    width: 100%;
+  }
+  
+  .ProfileImages>img:nth-of-type(2) {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -3rem;
+  }
+  
+  .ProfileName {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3.3rem;
+    gap: 10px;
+  
+  }
+  
+  .ProfileName>span:nth-last-of-type(1) {
+    font-weight: bold;
+  }
+  
+  .followStatus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  
+  }
+  
+  .followStatus>hr {
+    width: 100%;
+    border: 1px solid var(#1877f2);
+  }
+  
+  .followStatus>div {
+    display: flex;
+    gap: 1rem;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+  
+  
+  }
+  
+  .follow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .follow>span:nth-of-type(1) {
+    font-weight: bold;
+    color: #1877f2;
+  }
+  
+  .follow>span:nth-of-type(2) {
+    font-size: 13px;
+  }
+  
+  .vline {
+    width: 5px;
+  }

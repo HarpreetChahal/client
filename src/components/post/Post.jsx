@@ -14,6 +14,8 @@ import {
   MoreVertOutlined,
   Send,
   FavoriteBorder,
+  Edit,
+  Delete,
 } from "@mui/icons-material";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -21,13 +23,19 @@ import CommentIcon from "@mui/icons-material/Comment";
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
 import { Context } from "../context/Context";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
+import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router-dom";
 export default function Post(props) {
   const PF = "http://localhost:5000/assets/";
+  const navigate = useNavigate();
   const {
     desc,
     date,
-    userName,
+    userData,
     comments,
     postId,
     images,
@@ -35,10 +43,7 @@ export default function Post(props) {
     dislikes,
     fetchPosts,
   } = props;
-  let imgPath = "assets/post/2.jpg";
-  if (images.length !== 0) {
-    imgPath = PF + images[0];
-  }
+  let imgPath = images[0];
   const { user } = useContext(Context);
   const [comment, setComment] = useState("");
   const [isLiked, setIsLiked] = useState(false);
@@ -54,7 +59,7 @@ export default function Post(props) {
         action: "likeDislike",
         data: {
           postId: postId,
-          action: true,
+          action: 0,
         },
         config: {
           authToken: true,
@@ -71,7 +76,41 @@ export default function Post(props) {
         action: "likeDislike",
         data: {
           postId: postId,
-          action: false,
+          action: 1,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(({ MESSAGE }) => {
+        fetchPosts();
+        isDisLiked(!isDisLiked);
+      });
+    } catch (err) {}
+  };
+  const onlyLike = async () => {
+    try {
+      await commonApi({
+        action: "likeDislike",
+        data: {
+          postId: postId,
+          action: 3,
+        },
+        config: {
+          authToken: true,
+        },
+      }).then(({ MESSAGE }) => {
+        fetchPosts();
+        isDisLiked(!isDisLiked);
+      });
+    } catch (err) {}
+  };
+  const onlyDisLike = async () => {
+    try {
+      await commonApi({
+        action: "likeDislike",
+        data: {
+          postId: postId,
+          action: 4,
         },
         config: {
           authToken: true,
@@ -104,21 +143,73 @@ export default function Post(props) {
   const validateComment = () => {
     return comment !== "";
   };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDeletePost = async () => {
+    await commonApi({ action: "deletePost", parameters: [postId] }).then(() => {
+      fetchPosts();
+      handleClose();
+    });
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
-          <div className="postTopLeft">
+          <div
+            className="postTopLeft"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              userData._id === user._id
+                ? navigate("/profile")
+                : navigate("/userProfile?userId=" + userData._id);
+            }}
+          >
             <img
               className="postProfileImg"
-              src="/assets/person/1.jpg"
-              alt="/assets/person/1.jpg"
+              src={userData.profilePicture || "/assets/person/1.jpg"}
+              alt=""
             />
-            <span className="postUsername">{userName}</span>
+            <span className="postUsername">{userData.fullName}</span>
             <span className="postDate">{moment(date).fromNow()}</span>
           </div>
           <div className="postTopRight">
-            <MoreVertOutlined />
+            {userData._id === user._id && (
+              <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+                <MoreVertOutlined />
+              </IconButton>
+            )}
+            <Menu
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={open}
+              onClose={handleClose}
+              onClick={handleClose}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            >
+              {/* <MenuItem>
+                <ListItemIcon>
+                  <Edit fontSize="small" />
+                </ListItemIcon>
+                Edit
+              </MenuItem> */}
+
+              <MenuItem onClick={handleDeletePost}>
+                <ListItemIcon>
+                  <Delete fontSize="small" />
+                </ListItemIcon>
+                Delete
+              </MenuItem>
+            </Menu>
           </div>
         </div>
         <div className="postCenter">
@@ -134,7 +225,7 @@ export default function Post(props) {
               <FavoriteIcon
                 color={"error"}
                 cursor="pointer"
-                onClick={disLikeHandler}
+                onClick={onlyLike}
               />
             )}
             <span className="postLikeText">{likes.length} Like </span>
@@ -142,7 +233,7 @@ export default function Post(props) {
               <ThumbDownOffAlt cursor="pointer" onClick={disLikeHandler} />
             )}
             {isDisLiked && (
-              <ThumbDownIcon cursor="pointer" onClick={likeHandler} />
+              <ThumbDownIcon cursor="pointer" onClick={onlyDisLike} />
             )}
 
             <span className="postDislikeText">{dislikes.length} DisLike </span>
@@ -165,7 +256,7 @@ export default function Post(props) {
         <div className="writeComment">
           <img
             className="commentProfileImg"
-            src="/assets/person/1.jpg"
+            src={user?.profilePicture || "/assets/person/1.jpg"}
             alt=""
           />
           <input
@@ -174,6 +265,13 @@ export default function Post(props) {
             onChange={(e) => {
               setComment(e.target.value);
             }}
+            onKeyPress={(ev) => {
+              if (ev.key === "Enter") {
+                ev.preventDefault();
+                createComment(ev)
+              }
+            }}
+       
             className="commentInput"
           />
           {validateComment() && (
@@ -196,9 +294,11 @@ export default function Post(props) {
             }
           }}
         >
-          <span className="viewCommentsText">
-            {showComment ? "Hide All" : "View All"} Comments
-          </span>
+          {comments.length > 0 && (
+            <span className="viewCommentsText">
+              {showComment ? "Hide All" : "View All"} Comments
+            </span>
+          )}
         </div>
         {/* <div className="profileComment">
                 <img className="profilePommentProfileImg" src="/assets/person/1.jpg" alt=""/>
