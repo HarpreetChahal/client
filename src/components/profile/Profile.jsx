@@ -14,12 +14,13 @@ export default function Profile({ handleLogout }) {
   const { user, dispatch } = useContext(Context);
   const [posts, setPosts] = useState([]);
   const [friends, setFriends] = useState([]);
-  const fetchFriends = async (id) => {
+  const fetchFriends = async (id,searchValue="") => {
     await commonApi({
       action: "friends",
       data: {
         query: {
           _id: id,
+          searchValue:searchValue
         },
         options: {
           pagination: false,
