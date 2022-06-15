@@ -9,6 +9,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import LockIcon from '@mui/icons-material/Lock';
 import "./feed.css";
 import { useLocation } from "react-router-dom";
 export default function Feed({ posts, fetchPosts ,show=true}) {
@@ -27,7 +28,18 @@ export default function Feed({ posts, fetchPosts ,show=true}) {
 
   return (
     <div className="feed">
-       {!show && <div className="no-friends-text">The account is private you need to follow it to see the post</div>}
+       {!show &&<div className="user-private">
+            {/* <div className="no-post-icon"> */}
+              <LockIcon fontSize="large" sx={{mt:4,mb:0}}/>
+            {/* </div> */}
+            <p className="user-private-text">
+              This Account is Private
+            </p>
+            <p className="user-private-text2">
+              Follow this account to see their posts
+            </p>
+          </div>
+          }
      {show && <div className="feedWrapper">
         {!name && <Share fetchPosts={fetchPosts} />}
         {posts.map((post) => {
@@ -49,7 +61,7 @@ export default function Feed({ posts, fetchPosts ,show=true}) {
         {posts.length === 0 &&
           <div className="no-post-found">
             {/* <div className="no-post-icon"> */}
-              <PhotoCameraIcon fontSize="large" sx={{mt:4,mb:0}}/>
+              <PhotoCameraIcon fontSize="large" sx={{mt:6,mb:0}}/>
             {/* </div> */}
             <p className="no-post-text">
               No Posts Found
