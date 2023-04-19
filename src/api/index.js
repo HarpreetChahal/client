@@ -2,13 +2,13 @@ import axios from "axios";
 import qs from "qs";
 import Toast from "./toast";
 
- const baseUrl = "https://web-look-me-up-server.onrender.com";
+ const baseUrl = "https://web-look-me-up-server.onrender.com/";
 const GET = "GET";
 const DELETE = "DELETE";
 const POST = "POST";
 const PUT = "PUT";
 const PATCH = "PATCH";
-export const imageUrl = baseUrl+"/assets/";
+export const imageUrl = baseUrl+"assets/";
 
 const getToken = () => {
   if (typeof localStorage !== "undefined") {
