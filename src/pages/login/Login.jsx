@@ -97,7 +97,7 @@ export default function Login() {
         <Grid container style={{ minHeight: "100vh" }}>
           <Grid item xs={12} sm={6}>
             <img
-              src="/assets/signup.png"
+              src="/assets/Signup.png"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt="logo"
             />
