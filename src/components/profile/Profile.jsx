@@ -79,7 +79,7 @@ export default function Profile({ handleLogout }) {
       action: "upload",
       data: fileData,
     });
-    let pp = "http://localhost:5000/assets/" + fileName;
+    let pp = "https://web-look-me-up-server.onrender.com/assets/" + fileName;
 
     await commonApi({
       action: "updateUser",

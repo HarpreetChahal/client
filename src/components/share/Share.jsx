@@ -41,7 +41,7 @@ export default function Share({ fetchPosts }) {
         action: "upload",
         data: fileData
       });
-      data.images = ["http://localhost:5000/assets/" + fileName];
+      data.images = ["https://web-look-me-up-server.onrender.com/assets/" + fileName];
     }
     await commonApi({
       action: "createPost",
