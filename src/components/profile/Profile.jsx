@@ -8,7 +8,7 @@ import { CameraAlt } from "@mui/icons-material";
 import "./profile.css";
 import { Context } from "../context/Context";
 import commonApi from "../../api/common";
-
+import { imageUrl } from "../../api";
 export default function Profile({ handleLogout }) {
   const [file, setFile] = useState(null);
   const { user, dispatch } = useContext(Context);
@@ -79,7 +79,7 @@ export default function Profile({ handleLogout }) {
       action: "upload",
       data: fileData,
     });
-    let pp = "https://web-look-me-up-server.onrender.com/assets/" + fileName;
+    let pp = imageUrl+ fileName;
 
     await commonApi({
       action: "updateUser",

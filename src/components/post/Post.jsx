@@ -26,11 +26,11 @@ import { Context } from "../context/Context";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-
+import { imageUrl } from "../../api";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 export default function Post(props) {
-  const PF = "https://web-look-me-up-server.onrender.com/assets/";
+  const PF = imageUrl;
   const navigate = useNavigate();
   const {
     desc,

@@ -16,7 +16,7 @@ import { Cancel } from "@mui/icons-material";
 import commonApi from "../../api/common";
 import Toast from "../../api/toast";
 import { Context } from "../context/Context";
-
+import { imageUrl } from "../../api";
 const Input = styled("input")({
   display: "none"
 });
@@ -41,7 +41,7 @@ export default function Share({ fetchPosts }) {
         action: "upload",
         data: fileData
       });
-      data.images = ["https://web-look-me-up-server.onrender.com/assets/" + fileName];
+      data.images = [imageUrl + fileName];
     }
     await commonApi({
       action: "createPost",
