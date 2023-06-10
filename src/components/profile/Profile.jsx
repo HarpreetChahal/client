@@ -75,24 +75,29 @@ export default function Profile({ handleLogout }) {
     const fileName = Date.now() + file.name;
     fileData.append("name", fileName);
     fileData.append("file", file);
-    await commonApi({
+   const imageKey= await commonApi({
       action: "upload",
       data: fileData,
     });
-    let pp = imageUrl+ fileName;
+  console.log(imageKey)
 
-    await commonApi({
-      action: "updateUser",
-      parameters: user._id ? [user._id] : [],
-      data: {
-        profilePicture: pp,
-      },
-      config: {
-        authToken: true,
-      },
-    }).then(({ DATA = {} }) => {
-      dispatch({ type: "UPDATE_USER", payload: DATA });
-    });
+ if(imageKey.fileName)
+{
+  await commonApi({
+    action: "updateUser",
+    parameters: user._id ? [user._id] : [],
+    data: {
+      profilePicture: imageKey.fileName,
+    },
+    config: {
+      authToken: true,
+    },
+  }).then(({ DATA = {} }) => {
+    dispatch({ type: "UPDATE_USER", payload: DATA });
+  });
+
+}
+   
   };
 
   useEffect(() => {

@@ -70,6 +70,7 @@ export default function Login() {
           navigate("/");
         })
         .catch((error) => {
+          console.log("error",error)
           dispatch({ type: "LOGIN_FAILURE" });
           let { data } = error.response;
           if (data.DATA === "email") {
